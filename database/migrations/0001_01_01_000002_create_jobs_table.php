@@ -12,6 +12,7 @@ class CreateJobsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('title');
+            $table->string('slug')->unique()->nullable();
             $table->text('description');
             $table->string('thumb')->nullable();
             $table->decimal('salary', 10, 2)->nullable();

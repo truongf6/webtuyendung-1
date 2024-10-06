@@ -6,7 +6,7 @@
         "build": "vite build",
         "run": "php artisan serve",
         "Create Storage image": "php artisan storage:link",
-        "makeController": "php artisan make:controller HomeAdminController ",
+        "makeController": "php artisan make:controller AuthController ",
         "makeController Full Class": "php artisan make:controller HomeAdminController --resource",
         "makeModel-Controller-Migration": "php artisan make:model Job_Category  -mcr",
         "RunPHPCommand": " php artisan tinker ",
