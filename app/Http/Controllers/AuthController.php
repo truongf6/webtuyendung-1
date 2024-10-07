@@ -22,47 +22,43 @@ class AuthController extends Controller
     /**
      * Đăng ký tài khoản.
      * @param Request $request
-     * @param string $type (job_seeker hoặc company)
      */
-    public function register(Request $request, $type)
+    public function register(Request $request)
     {
-        // Xác định role_id dựa trên loại tài khoản
-        $role_id = $type === 'job_seeker' ? 2 : ($type === 'company' ? 3 : null);
-    
-        if (!$role_id) {
-            return back()->withErrors(['type' => 'Loại tài khoản không hợp lệ'])->withInput();
-        }
-    
-        // Xác thực dữ liệu đầu vào
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
         ], [
-            'name.required' => 'Vui lòng nhập tên !',
+            'name.required' => 'Vui lòng nhập tên của bạn !',
             'email.required' => 'Vui lòng nhập email !',
-            'email.email' => 'Email không hợp lệ !',
-            'email.unique' => 'Email đã được sử dụng !',
             'password.required' => 'Vui lòng nhập mật khẩu !',
-            'password.min' => 'Mật khẩu phải chứa ít nhất 8 ký tự !',
-            'password.confirmed' => 'Xác nhận mật khẩu không khớp !',
+            'email.email' => 'Email không hợp lệ',
+            'email.unique' => 'Email đã tồn tại'
         ]);
-    
-        // Kiểm tra nếu có lỗi
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
+        $confirmPass = $request->confirmPassword;
+        $pass = $request->password;
+        if ($confirmPass == $pass) {
+            // Kiểm tra xem email đã tồn tại chưa
+            $emailExists = User::where('email', $request->email)->exists();
+
+            if (!$emailExists) {
+                $user = User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => bcrypt($request->password),
+                    'role_id' => $request->type, 
+                ]);
+                Auth::login($user);
+            } else {
+                return back()->with('error', 'Email đã tồn tại');
+            }
+        } else {
+            return back()->with('error', 'Xác nhận lại mật khẩu !');
         }
-    
-        // Tạo tài khoản người dùng
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role_id' => $role_id,
-        ]);
-    
-        return redirect()->intended('home')->with('success', 'Đăng ký thành công');
+        return redirect('/'); // Điều hướng sau khi đăng ký
     }
+
     
     public function showLogin(){
         return view('auth.login',[
