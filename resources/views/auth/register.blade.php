@@ -19,30 +19,33 @@
         <div class="col-3"></div>
         <div class="col-lg-6 mb-5">
           <h2 class="mb-4 text-center font-weight-bold">Đăng ký </h2>
+          <div class="error">
+            @include('admin.error')
+        </div>  
           <form action="{{route('register')}}" method="post" class="p-4 border rounded">
             @csrf
             <div class="row form-group">
                 <div class="col-md-12 mb-3 mb-md-0">
                   <label class="text-black" for="fname">Full Name</label>
-                  <input type="text" id="fname" class="form-control" placeholder="Email address" name="name">
+                  <input type="text" class="form-control" placeholder="Email address" name="name">
                 </div>
               </div>
             <div class="row form-group">
               <div class="col-md-12 mb-3 mb-md-0">
                 <label class="text-black" for="fname">Email</label>
-                <input type="email" id="fname" class="form-control" placeholder="Email address" name="email">
+                <input type="email" class="form-control" placeholder="Email address" name="email">
               </div>
             </div>
             <div class="row form-group">
               <div class="col-md-12 mb-3 mb-md-0">
                 <label class="text-black" for="fname">Password</label>
-                <input type="password" id="fname" class="form-control" placeholder="Password" name="password">
+                <input type="password" class="form-control" placeholder="Password" name="password">
               </div>
             </div>
             <div class="row form-group">
               <div class="col-md-12 mb-3 mb-md-0">
                 <label class="text-black" for="fname">Re-Type Password</label>
-                <input type="password" id="fname" class="form-control" placeholder="Re-type Password">
+                <input type="password" class="form-control" placeholder="Re-type Password" name="confirmPassword">
               </div>
             </div>
             <div class="row form-group mb-4">
@@ -57,6 +60,10 @@
             <div class="row form-group">
               <div class="col-md-12">
                 <input type="submit" value="Đăng ký" class="btn px-4 btn-primary text-white">
+                <div>
+                  Đã có tài khoản?
+                  <a href="{{route('showLogin')}}" class="fw-bold text-info"> Đăng nhập</a>
+                </div>
               </div>
             </div>
 

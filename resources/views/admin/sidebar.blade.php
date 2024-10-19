@@ -38,42 +38,40 @@
             </a>
             <ul class='menu-sub'>
                 <li class='menu-item'>
-                    <a href='' class='menu-link'>
+                    <a href='{{route('adminUser')}}' class='menu-link'>
                         <div data-i18n='Without menu'>Tài khoản quản trị</div>
                     </a>
                 </li>
                 <li class='menu-item'>
-                    <a href='' class='menu-link'>
-                        <div data-i18n='Without menu'>Tài khoản người dùng</div>
+                    <a href='{{route('companyUser')}}' class='menu-link'>
+                        <div data-i18n='Without menu'>Tài khoản nhà tuyển dụng</div>
+                    </a>
+                </li>
+                <li class='menu-item'>
+                    <a href='{{route('employeeUser')}}' class='menu-link'>
+                        <div data-i18n='Without menu'>Tài khoản người tìm việc</div>
                     </a>
                 </li>
             </ul>
         </li>
         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Shop</span>
+            <span class="menu-header-text">JOBS</span>
         </li>
         <li class='menu-item'>
-            <a href='javascript:void(0);' class='menu-link menu-toggle'>
+            <a href='{{route('job_categories.index')}}' class='menu-link'>
                 <i class='menu-icon tf-icons bx bx-category-alt'></i>
-                <div data-i18n='Layouts'>Quản lý danh mục</div>
+                <div data-i18n='Layouts'>Quản lý danh mục jobs</div>
             </a>
-            <ul class='menu-sub'>
-                <li class='menu-item'>
-                    <a href='' class='menu-link'>
-                        <div data-i18n='Without menu'>Danh mục sản phẩm</div>
-                    </a>
-                </li>
-            </ul>
         </li>
         <li class='menu-item'>
             <a href='javascript:void(0);' class='menu-link menu-toggle'>
                 <i class='menu-icon tf-icons bx bx-store-alt'></i>
-                <div data-i18n='Layouts'>Quản lý sản phẩm</div>
+                <div data-i18n='Layouts'>Quản lý jobs</div>
             </a>
             <ul class='menu-sub'>
                 <li class='menu-item'>
                     <a href='' class='menu-link'>
-                        <div data-i18n='Without menu'>Danh sách sản phẩm</div>
+                        <div data-i18n='Without menu'>Danh sách jobs</div>
                     </a>
                 </li>
             </ul>
@@ -111,12 +109,12 @@
         <li class='menu-item'>
             <a href='javascript:void(0);' class='menu-link menu-toggle'>
                 <i class='menu-icon tf-icons bx bx-food-menu'></i>
-                <div data-i18n='Layouts'>Quản lý đơn hàng</div>
+                <div data-i18n='Layouts'>Quản lý ...</div>
             </a>
             <ul class='menu-sub'>
                 <li class='menu-item'>
                     <a href='' class='menu-link'>
-                        <div data-i18n='Without menu'>Danh sách đơn hàng</div>
+                        <div data-i18n='Without menu'>Danh sách ...</div>
                     </a>
                 </li>
 

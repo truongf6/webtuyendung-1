@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th10 07, 2024 lúc 01:44 PM
+-- Thời gian đã tạo: Th10 19, 2024 lúc 08:39 PM
 -- Phiên bản máy phục vụ: 8.0.30
 -- Phiên bản PHP: 8.2.23
 
@@ -24,40 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `applications`
---
-
-CREATE TABLE `applications` (
-  `id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED NOT NULL,
-  `job_id` bigint UNSIGNED NOT NULL,
-  `fileCv` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `resume` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `companies`
---
-
-CREATE TABLE `companies` (
-  `id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `location` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `website` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Cấu trúc bảng cho bảng `jobs`
 --
 
@@ -68,144 +34,30 @@ CREATE TABLE `jobs` (
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `thumb` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `salary` decimal(10,2) DEFAULT NULL,
+  `position` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `location` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `requirements` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` enum('full_time','part_time','internship') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `job_categories_id` bigint UNSIGNED NOT NULL,
+  `salary` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Experience` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Cấu trúc bảng cho bảng `job_categories`
+-- Đang đổ dữ liệu cho bảng `jobs`
 --
 
-CREATE TABLE `job_categories` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `desc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `parent_id` bigint UNSIGNED DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `migrations`
---
-
-CREATE TABLE `migrations` (
-  `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2024_10_05_142701_create_roles_table', 1),
-(2, '0001_01_01_000000_create_users_table', 2),
-(3, '2024_10_05_142939_create_job__categories_table', 3),
-(4, '0001_01_01_000002_create_jobs_table', 4),
-(5, '2024_10_05_142856_create_applications_table', 5),
-(6, '2024_10_05_142907_create_companies_table', 6);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `password_reset_tokens`
---
-
-CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `roles`
---
-
-CREATE TABLE `roles` (
-  `id` bigint UNSIGNED NOT NULL,
-  `role_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `desc` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `sessions`
---
-
-CREATE TABLE `sessions` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_activity` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `sessions`
---
-
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('A7bBUqavaSopEi2kdiLhI9MM3tAv6aETwp0CfAyD', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiYjN6cnJtaHE0Qmk0ZUlWbVJNYkh1bFhCZ0J1QUFpZmJPZHRaTXhvZCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly90dXllbmR1bmd2aW5oLnRlc3Q6ODA4MC9ob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1728152491),
-('GCp34sZN9f9NAmT4MNE54svhQQsDsaZh81eAajiA', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiV1N5UXlIT0h1bVdybUxJQzdnMnFUTG1iWEkxakMzbG5QREFhZHc4bCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6OTM6Imh0dHA6Ly90dXllbmR1bmd2aW5oLnRlc3Q6ODA4MC9zaG93UmVnaXN0ZXI/ZW1haWw9YWRtaW4lNDBnbWFpbC5jb20mcGFzc3dvcmQ9MTIzNDU2Nzg5JnR5cGU9MiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1728207037),
-('JpcFOXmNiojCm3OhQW5gf4ZcIOAaYiU3WJboHAr9', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVmo0ZVR4YTN6SUdveWtSNmUwTDlMck0yYTdHMlZDRHlyMUt6bWIwSyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly90dXllbmR1bmd2aW5oLnRlc3Q6ODA4MC9zaG93TG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1728186336),
-('Jrz07IyTqvKtay7RV4AC2oUXiFlPcPhDnCwDHf43', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZDFIT2p3akhqcWVpMHV5Y0JGZTluRGtxR2lHMkNlTjlkaWFTUWlCZSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly90dXllbmR1bmd2aW5oLnRlc3Q6ODA4MCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1728305806);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `users`
---
-
-CREATE TABLE `users` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `thumb` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role_id` bigint UNSIGNED NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `jobs` (`id`, `user_id`, `title`, `slug`, `thumb`, `description`, `position`, `location`, `requirements`, `type`, `job_categories_id`, `salary`, `Experience`, `gender`, `expires_at`, `created_at`, `updated_at`) VALUES
+(4, 3, 'công việc 1', 'cong-viec-1', 'cong-viec-1.jpg', '<h3 style=\"text-align:justify;\">\n<strong>Tiêu đề</strong>\n</h3>\n<p style=\"text-align:justify;\">Một số tiêu chuẩn cơ bản khi tạo tiêu đề cho <strong>bảng mô tả công việc</strong>:</p>\n<ul>\n<li>Thể hiện vai trò của vị trí ứng tuyển một cách rõ ràng, dễ hình dung</li>\n<li>Tiêu đề ngắn gọn</li>\n<li>Tiêu đề có từ khóa được tối ưu trên công cụ tìm kiếm để tăng khả năng tiếp cận</li>\n</ul>\n<h3 style=\"text-align:justify;\">\n<strong>Mô tả vị trí</strong>\n</h3>\n<p style=\"text-align:justify;\">Đây là phần nội dung giới thiệu tổng quan về doanh nghiệp và vị trí cần tuyển. Vì thế, bạn phải đảm bảo:</p>\n<ul>\n<li>Có tên công ty</li>\n<li>Giới thiệu ngắn gọn về sản phẩm, thị trường, môi trường làm việc</li>\n<li>Mục tiêu của vị trí đang tuyển dụng</li>\n<li>Một, hai điểm chính mà nhà tuyển dụng kỳ vọng ở ứng viên, thường nhắc về tính cách, kỹ năng đặc biệt</li>\n</ul>\n<h3 style=\"text-align:justify;\">\n<strong>Nhiệm vụ</strong>\n</h3>\n<p style=\"text-align:justify;\">Đây là nội dung quan trọng nhất trong <strong>bảng mô tả công việc</strong>. Do đó, ngoài việc càng chi tiết càng tốt, một số điều nhà tuyển dụng cần lưu ý là:</p>\n<ul>\n<li>Chi tiết và rõ ràng, không nên dài dòng hay quá phức tạp</li>\n<li>Phân rõ những nhiệm vụ mà vị trí này đảm nhiệm</li>\n<li>Với một số chức vụ cấp cao, phần nhiệm vụ có thể chia theo từng thời kỳ hay từng kỹ năng cụ thế. Điều này giúp ứng viên càng dễ hình dung và đo lường độ phù hợp</li>\n</ul>\n<p>\n<img src=\"https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri.jpg\" alt=\"nêu rõ các đề mục trách nhiệm của vị trí\" srcset=\"https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri.jpg 800w, https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri-300x218.jpg 300w, https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri-768x559.jpg 768w, https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri-16x12.jpg 16w\" sizes=\"100vw\" width=\"800\">\n</p>\n<p>\n<i>Bảng mô tả công việc cần nêu rõ các đề mục trách nhiệm của vị trí</i>\n</p>', 'Kỹ thuật viên', 'tòa nhà A', '<h3 style=\"text-align:justify;\">\n<strong>Yêu cầu</strong>\n</h3>\n<p style=\"text-align:justify;\">Dựa vào yêu cầu, ứng viên biết mình có đủ năng lực trước khi ứng tuyển vào vị trí hay không. Thông thường nội dung này sẽ bao gồm:</p>\n<ul>\n<li>Nhân khẩu học: giới tính, độ tuổi, học vấn nếu vị trí yêu cầu</li>\n<li>Số năm kinh nghiệm</li>\n<li>Yêu cầu về kiến thức, chuyên môn</li>\n<li>Yêu cầu về kỹ năng sử dụng công cụ hay nghiệp vụ cụ thể</li>\n<li>Yêu cầu về địa điểm làm việc, các thiết bị bổ trợ</li>\n<li>Yêu cầu về tố chất</li>\n</ul>\n<p style=\"text-align:justify;\">Đây là nội dung để nhà tuyển dụng thuyết phục ứng viên gia nhập tổ chức sau khi họ nhận thấy sự phù hợp từ phần nhiệm vụ và yêu cầu.</p>\n<ul>\n<li>Lương, thưởng và chế độ đãi ngộ dành cho vị trí</li>\n<li>Các phúc lợi đi kèm</li>\n<li>Thời gian làm việc, môi trường văn phòng</li>\n<li>Cơ hội khác về thăng tiến, rèn luyện, phát triển</li>\n</ul>', 'Full Time', 3, '2000k - 4000k VNĐ', '2-3 năm', 'Nam', '2024-10-17 17:00:00', '2024-10-19 07:27:45', '2024-10-19 07:27:45'),
+(6, 2, 'Tuyển nhân viên sửa máy tính', 'tuyen-nhan-vien-sua-may-tinh', 'tuyen-nhan-vien-sua-may-tinh.jpg', '<h3 style=\"text-align:justify;\">\n<strong>Tiêu đề</strong>\n</h3>\n<p style=\"text-align:justify;\">Một số tiêu chuẩn cơ bản khi tạo tiêu đề cho <strong>bảng mô tả công việc</strong>:</p>\n<ul>\n<li>Thể hiện vai trò của vị trí ứng tuyển một cách rõ ràng, dễ hình dung</li>\n<li>Tiêu đề ngắn gọn</li>\n<li>Tiêu đề có từ khóa được tối ưu trên công cụ tìm kiếm để tăng khả năng tiếp cận</li>\n</ul>\n<h3 style=\"text-align:justify;\">\n<strong>Mô tả vị trí</strong>\n</h3>\n<p style=\"text-align:justify;\">Đây là phần nội dung giới thiệu tổng quan về doanh nghiệp và vị trí cần tuyển. Vì thế, bạn phải đảm bảo:</p>\n<ul>\n<li>Có tên công ty</li>\n<li>Giới thiệu ngắn gọn về sản phẩm, thị trường, môi trường làm việc</li>\n<li>Mục tiêu của vị trí đang tuyển dụng</li>\n<li>Một, hai điểm chính mà nhà tuyển dụng kỳ vọng ở ứng viên, thường nhắc về tính cách, kỹ năng đặc biệt</li>\n</ul>\n<h3 style=\"text-align:justify;\">\n<strong>Nhiệm vụ</strong>\n</h3>\n<p style=\"text-align:justify;\">Đây là nội dung quan trọng nhất trong <strong>bảng mô tả công việc</strong>. Do đó, ngoài việc càng chi tiết càng tốt, một số điều nhà tuyển dụng cần lưu ý là:</p>\n<ul>\n<li>Chi tiết và rõ ràng, không nên dài dòng hay quá phức tạp</li>\n<li>Phân rõ những nhiệm vụ mà vị trí này đảm nhiệm</li>\n<li>Với một số chức vụ cấp cao, phần nhiệm vụ có thể chia theo từng thời kỳ hay từng kỹ năng cụ thế. Điều này giúp ứng viên càng dễ hình dung và đo lường độ phù hợp</li>\n</ul>\n<p>\n<img src=\"https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri.jpg\" alt=\"nêu rõ các đề mục trách nhiệm của vị trí\" srcset=\"https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri.jpg 800w, https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri-300x218.jpg 300w, https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri-768x559.jpg 768w, https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri-16x12.jpg 16w\" sizes=\"100vw\" width=\"800\">\n</p>\n<p>\n<i>Bảng mô tả công việc cần nêu rõ các đề mục trách nhiệm của vị trí</i>\n</p>', 'Kỹ thuật viên', 'tòa nhà A', '<h3 style=\"text-align:justify;\">\n<strong>Yêu cầu</strong>\n</h3>\n<p style=\"text-align:justify;\">Dựa vào yêu cầu, ứng viên biết mình có đủ năng lực trước khi ứng tuyển vào vị trí hay không. Thông thường nội dung này sẽ bao gồm:</p>\n<ul>\n<li>Nhân khẩu học: giới tính, độ tuổi, học vấn nếu vị trí yêu cầu</li>\n<li>Số năm kinh nghiệm</li>\n<li>Yêu cầu về kiến thức, chuyên môn</li>\n<li>Yêu cầu về kỹ năng sử dụng công cụ hay nghiệp vụ cụ thể</li>\n<li>Yêu cầu về địa điểm làm việc, các thiết bị bổ trợ</li>\n<li>Yêu cầu về tố chất</li>\n</ul>\n<p style=\"text-align:justify;\">Đây là nội dung để nhà tuyển dụng thuyết phục ứng viên gia nhập tổ chức sau khi họ nhận thấy sự phù hợp từ phần nhiệm vụ và yêu cầu.</p>\n<ul>\n<li>Lương, thưởng và chế độ đãi ngộ dành cho vị trí</li>\n<li>Các phúc lợi đi kèm</li>\n<li>Thời gian làm việc, môi trường văn phòng</li>\n<li>Cơ hội khác về thăng tiến, rèn luyện, phát triển</li>\n</ul>', 'Part Time', 3, '600k - 4000k vnđ', '2 - 3 năm', 'Nam', '2024-10-19 17:00:00', '2024-10-19 13:33:31', '2024-10-19 13:33:31');
 
 --
 -- Chỉ mục cho các bảng đã đổ
 --
-
---
--- Chỉ mục cho bảng `applications`
---
-ALTER TABLE `applications`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `applications_user_id_foreign` (`user_id`),
-  ADD KEY `applications_job_id_foreign` (`job_id`);
-
---
--- Chỉ mục cho bảng `companies`
---
-ALTER TABLE `companies`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `companies_user_id_foreign` (`user_id`);
 
 --
 -- Chỉ mục cho bảng `jobs`
@@ -216,108 +68,18 @@ ALTER TABLE `jobs`
   ADD KEY `jobs_job_categories_id_foreign` (`job_categories_id`);
 
 --
--- Chỉ mục cho bảng `job_categories`
---
-ALTER TABLE `job_categories`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `job_categories_parent_id_foreign` (`parent_id`);
-
---
--- Chỉ mục cho bảng `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `password_reset_tokens`
---
-ALTER TABLE `password_reset_tokens`
-  ADD PRIMARY KEY (`email`);
-
---
--- Chỉ mục cho bảng `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `sessions`
---
-ALTER TABLE `sessions`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `sessions_user_id_index` (`user_id`),
-  ADD KEY `sessions_last_activity_index` (`last_activity`);
-
---
--- Chỉ mục cho bảng `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`),
-  ADD KEY `users_role_id_foreign` (`role_id`);
-
---
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
-
---
--- AUTO_INCREMENT cho bảng `applications`
---
-ALTER TABLE `applications`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `companies`
---
-ALTER TABLE `companies`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `job_categories`
---
-ALTER TABLE `job_categories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT cho bảng `roles`
---
-ALTER TABLE `roles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
-
---
--- Các ràng buộc cho bảng `applications`
---
-ALTER TABLE `applications`
-  ADD CONSTRAINT `applications_job_id_foreign` FOREIGN KEY (`job_id`) REFERENCES `jobs` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `applications_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Các ràng buộc cho bảng `companies`
---
-ALTER TABLE `companies`
-  ADD CONSTRAINT `companies_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `jobs`
@@ -325,18 +87,6 @@ ALTER TABLE `companies`
 ALTER TABLE `jobs`
   ADD CONSTRAINT `jobs_job_categories_id_foreign` FOREIGN KEY (`job_categories_id`) REFERENCES `job_categories` (`id`),
   ADD CONSTRAINT `jobs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Các ràng buộc cho bảng `job_categories`
---
-ALTER TABLE `job_categories`
-  ADD CONSTRAINT `job_categories_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `job_categories` (`id`) ON DELETE CASCADE;
-
---
--- Các ràng buộc cho bảng `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `users_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -13,14 +13,14 @@ class CreateJobsTable extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('title');
             $table->string('slug')->unique()->nullable();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('thumb')->nullable();
-            $table->decimal('salary', 10, 2)->nullable();
-            $table->string('location');
-            $table->text('requirements');
-            $table->enum('type', ['full_time', 'part_time', 'internship']);
+            $table->string('position', 255)->nullable();
+            $table->string('location')->nullable();
+            $table->text('requirements')->nullable();
+            $table->string('type', 255)->nullable();
             $table->foreignId('job_categories_id')->constrained('job_categories');
-            $table->timestamp('expires_at')->nullable();
+            $table->string('salary', 255)->nullable();
             $table->timestamps();
         });
     }

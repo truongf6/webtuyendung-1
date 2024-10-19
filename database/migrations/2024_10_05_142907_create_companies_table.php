@@ -12,6 +12,8 @@ class CreateCompaniesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('name');
+            $table->string('thumb',255);
+            $table->string('phone_nummber',25);
             $table->text('description')->nullable();
             $table->string('location')->nullable();
             $table->string('website')->nullable();

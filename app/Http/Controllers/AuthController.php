@@ -25,16 +25,21 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
+       // Validate the request
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'confirmPassword' => 'required|same:password'
         ], [
-            'name.required' => 'Vui lòng nhập tên của bạn !',
-            'email.required' => 'Vui lòng nhập email !',
-            'password.required' => 'Vui lòng nhập mật khẩu !',
-            'email.email' => 'Email không hợp lệ',
-            'email.unique' => 'Email đã tồn tại'
+            'name.required' => 'Vui lòng nhập tên của bạn!',
+            'email.required' => 'Vui lòng nhập email!',
+            'email.email' => 'Email không hợp lệ!',
+            'email.unique' => 'Email đã tồn tại!',
+            'password.required' => 'Vui lòng nhập mật khẩu!',
+            'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự!',
+            'confirmPassword.required' => 'Vui lòng xác nhận mật khẩu!',
+            'confirmPassword.same' => 'Mật khẩu xác nhận không khớp!'
         ]);
         $confirmPass = $request->confirmPassword;
         $pass = $request->password;
@@ -43,12 +48,12 @@ class AuthController extends Controller
             $emailExists = User::where('email', $request->email)->exists();
 
             if (!$emailExists) {
-                $user = User::create([
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => bcrypt($request->password),
-                    'role_id' => $request->type, 
-                ]);
+                $user = new User;
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->password = bcrypt($request->password);
+                $user->role_id = $request->type;
+                $user->save();
                 Auth::login($user);
             } else {
                 return back()->with('error', 'Email đã tồn tại');
@@ -89,7 +94,7 @@ class AuthController extends Controller
          // Kiểm tra thông tin đăng nhập
          if (Auth::attempt($credentials)) {
              // Đăng nhập thành công
-             return redirect()->intended('home')->with('success', 'Đăng nhập thành công');
+             return redirect()->intended('/')->with('success', 'Đăng nhập thành công');
          }
      
          // Đăng nhập thất bại, trả về thông báo lỗi
@@ -104,5 +109,6 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('home');    }
+        return redirect()->route('showLogin');    
+    }
 }

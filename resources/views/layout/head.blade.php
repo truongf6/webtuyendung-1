@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="/temp/assets/fonts/line-icons/style.css">
 <link rel="stylesheet" href="/temp/assets/css/owl.carousel.min.css">
 <link rel="stylesheet" href="/temp/assets/css/animate.min.css">
+<link rel="stylesheet" href="/temp/assets/css/quill.snow.css">
+<script src="/temp/assets/js/jquery.min.js"></script>
 
 <!-- MAIN CSS -->
 <link rel="stylesheet" href="/temp/assets/css/style.css">   

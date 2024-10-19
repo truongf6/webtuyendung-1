@@ -6,7 +6,7 @@
         <div class="col-md-7">
           <h1 class="text-white font-weight-bold">Đăng nhập</h1>
           <div class="custom-breadcrumbs">
-            <a href="#">Home</a> <span class="mx-2 slash">/</span>
+            <a href="#">Trang chủ</a> <span class="mx-2 slash">/</span>
             <span class="text-white"><strong>Đăng nhập</strong></span>
           </div>
         </div>
@@ -19,8 +19,11 @@
         <div class="col-3"></div>
         <div class="col-lg-6">
           <h2 class="mb-4 text-center font-weight-bold">Đăng nhập</h2>
-          <form action="#" class="p-4 border rounded">
-
+          <div class="error">
+            @include('admin.error')
+        </div> 
+          <form action="{{route('login')}}" class="p-4 border rounded" method="post">
+            @csrf
             <div class="row form-group">
               <div class="col-md-12 mb-3 mb-md-0">
                 <label class="text-black" for="fname">Email</label>

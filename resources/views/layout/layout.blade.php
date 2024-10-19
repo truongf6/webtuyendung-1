@@ -19,7 +19,7 @@
                   <a href="job-listings.html">Job Listings</a>
                   <ul class="collapse" id="collapseItem0">
                     <li><a href="job-single.html">Job Single</a></li>
-                    <li><a href="post-job.html">Post a Job</a></li>
+                    <li><a href="{{route('postJobPage')}}">Post a Job</a></li>
                   </ul>
                 </li>
                 <li class="has-children"><span class="arrow-collapse collapsed" data-toggle="collapse" data-target="#collapseItem1"></span>
@@ -37,7 +37,7 @@
                 </li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li class="d-lg-none"><a href="post-job.html"><span class="mr-2">+</span> Post a Job</a></li>
+                <li class="d-lg-none"><a href="{{route('postJobPage')}}"><span class="mr-2">+</span> Post a Job</a></li>
                 <li class="d-lg-none"><a href="login.html">Log In</a></li>
               </ul></div>
       </div>
