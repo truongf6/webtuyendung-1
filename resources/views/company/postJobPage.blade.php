@@ -87,7 +87,7 @@
               </div>
 
               <div class="form-group">
-                <label for="company-Experience">Kinh nghiệm</label>
+                <label for="company-Experience">Kinh nghiệm</label>  
                 <input type="text" name="Experience" class="form-control input-field" id="Experience" data-require="Mời nhập kinh nghiệm" placeholder="VD : 2-3 năm...">
               </div>
 
@@ -201,7 +201,7 @@
             if (files) {
                 $.each(files, function(i, file) {
                     var reader = new FileReader();
-                    
+
                     reader.onload = function(e) {
                         // Tạo div chứa ảnh và nút xóa
                         var imageContainer = $('<div>', {
