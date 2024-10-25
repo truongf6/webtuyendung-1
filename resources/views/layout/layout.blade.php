@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="site-mobile-menu-body"><ul class="site-nav-wrap">
-                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="/" class="nav-link active">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li class="has-children"><span class="arrow-collapse collapsed" data-toggle="collapse" data-target="#collapseItem0"></span>
                   <a href="job-listings.html">Job Listings</a>

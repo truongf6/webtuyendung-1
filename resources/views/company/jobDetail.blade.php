@@ -7,7 +7,7 @@
       <div class="col-md-7">
         <h1 class="text-white font-weight-bold">{{$job->title}}</h1>
         <div class="custom-breadcrumbs">
-          <a href="#">Trang chủ</a> <span class="mx-2 slash">/</span>
+          <a href="/">Trang chủ</a> <span class="mx-2 slash">/</span>
           <a href="#">Công việc</a> <span class="mx-2 slash">/</span>
           <span class="text-white"><strong>{{$job->title}}</strong></span>
         </div>

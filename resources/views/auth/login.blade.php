@@ -6,7 +6,7 @@
         <div class="col-md-7">
           <h1 class="text-white font-weight-bold">Đăng nhập</h1>
           <div class="custom-breadcrumbs">
-            <a href="#">Trang chủ</a> <span class="mx-2 slash">/</span>
+            <a href="/">Trang chủ</a> <span class="mx-2 slash">/</span>
             <span class="text-white"><strong>Đăng nhập</strong></span>
           </div>
         </div>

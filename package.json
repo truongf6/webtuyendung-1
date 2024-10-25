@@ -19,7 +19,7 @@
         "makeFormRequest": "php artisan make:request Menu/CreateFormRequest",
         "list": "php artisan route:list",
         "storage": "php artisan storage:link",
-        "Package do mat khau": "php artisan make:middleware CheckAdmin",
+        "Package do mat khau": "php artisan make:middleware CheckEmployee",
         "Install Toast": "npm install toastr --save"
     },
     "devDependencies": {
