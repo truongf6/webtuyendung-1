@@ -34,7 +34,7 @@ class AdminJobController extends Controller
         $Jobs = $query->orderByDesc('id')->paginate($perPage)->appends($request->only('search_id', 'search_name'));
         $parent_ids = Job::all();
         return view('admin.Job.index', compact('Jobs','parent_ids'), [
-            'title' => 'Quản lý danh mục công việc'
+            'title' => 'Quản lý công việc'
         ]);
     }
 
