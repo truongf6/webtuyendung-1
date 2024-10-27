@@ -62,7 +62,7 @@
                   <div class="dropdown-menu" aria-labelledby="personalMenu">
                       <a class="dropdown-item" href="#">Thông tin cá nhân</a>
                       <a class="dropdown-item" href="#">Cài đặt tài khoản</a>
-                      <a class="dropdown-item" href="#">Công việc đã Đăng</a>
+                      <a class="dropdown-item" href="{{route('viewJobPage')}}">Công việc đã Đăng</a>
                       <form class="text-center" action="{{route('logout')}}" method="post">
                         @csrf
                         <button type="submit" class="border-0 bg-white">Đăng xuất</button>

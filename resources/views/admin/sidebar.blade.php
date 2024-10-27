@@ -70,7 +70,7 @@
             </a>
             <ul class='menu-sub'>
                 <li class='menu-item'>
-                    <a href='' class='menu-link'>
+                    <a href='{{route('jobs.index')}}' class='menu-link'>
                         <div data-i18n='Without menu'>Danh sách jobs</div>
                     </a>
                 </li>
