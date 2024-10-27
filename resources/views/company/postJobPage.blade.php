@@ -6,7 +6,7 @@
         <div class="col-md-7">
           <h1 class="text-white font-weight-bold">Đăng công việc</h1>
           <div class="custom-breadcrumbs">
-            <a href="#">Trang chủ</a> <span class="mx-2 slash">/</span>
+            <a href="/">Trang chủ</a> <span class="mx-2 slash">/</span>
             <a href="#">Công việc</a> <span class="mx-2 slash">/</span>
             <span class="text-white"><strong>Đăng công việc</strong></span>
           </div>
@@ -59,6 +59,7 @@
               <select class="selectpicker border rounded" name="type" id="job-time" data-require="Mời chọn loại làm việc" data-style="btn-black" data-width="100%" data-live-search="true" title="Chọn thời gian làm việc">
                 <option value="Part Time">Part Time</option>
                 <option value="Full Time">Full Time</option>
+                <option value="Freelance">Freelance</option>
               </select>
             </div>
 
