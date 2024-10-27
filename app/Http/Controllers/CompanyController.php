@@ -31,14 +31,6 @@ class CompanyController extends Controller
             'title' => 'Công việc đã đăng'
         ]);
     }
-
-    public function viewJobPageDetail($id)
-    {
-        $Jobs = Job::where('id', $id)->first();
-        return view('company.viewShowJobDetail', compact('Jobs'), [
-            'title' => 'Công việc đã đăng'
-        ]);
-    }
     // Đăng tin
     public function postJob(Request $request)
     {

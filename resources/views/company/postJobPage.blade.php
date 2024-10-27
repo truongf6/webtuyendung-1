@@ -59,6 +59,7 @@
               <select class="selectpicker border rounded" name="type" id="job-time" data-require="Mời chọn loại làm việc" data-style="btn-black" data-width="100%" data-live-search="true" title="Chọn thời gian làm việc">
                 <option value="Part Time">Part Time</option>
                 <option value="Full Time">Full Time</option>
+                <option value="Freelance">Freelance</option>
               </select>
             </div>
 

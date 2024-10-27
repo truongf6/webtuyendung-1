@@ -1,29 +1,76 @@
 @extends('admin.main')
 @section('contents')
+<style>
+    .modal-dialog{
+        max-width: 992px;
+    }
+    .modal-dialog .p{
+        text-wrap: auto;
+    }
+</style>
     <div class="container-fluid flex-grow-1 container-p-y">
         <h3 class="fw-bold text-primary py-3 mb-4">{{ $title }}</h3>
         <div>
-            <form class="form-search" method="GET" action="{{ route('job_categories.index') }}">
+            <form class="form-search" method="GET" action="{{ route('jobs.index') }}">
                 @csrf
                 <div class="d-flex align-items-center mb-4">
                     <h4 class="ten-game me-3 mb-0">Tìm kiếm</h4>
                 </div>
                 <div class="mb-3">
                     <div class="row">
+                        <!-- Tìm kiếm theo tên người đăng -->
                         <div class="col-lg-4 col-sm-6 col-12 mb-3">
-                            <input class="form-control shadow-none" type="text" id="searchInputNv" name="search_id"
-                                placeholder="Tìm theo mã số..." value="{{ request()->search_id }}">
+                            <input class="form-control shadow-none" type="text" name="search_poster"
+                                placeholder="Tìm theo tên người đăng" value="{{ request()->search_poster }}">
                         </div>
+            
+                        <!-- Tìm kiếm theo tên công ty -->
                         <div class="col-lg-4 col-sm-6 col-12 mb-3">
-                            <input class="form-control shadow-none" type="text" id="searchInputVk" name="search_name"
-                                placeholder="Tìm theo tên danh mục..." value="{{ request()->search_name }}">
+                            <input class="form-control shadow-none" type="text" name="search_company"
+                                placeholder="Tìm theo tên công ty" value="{{ request()->search_company }}">
                         </div>
+            
+                        <!-- Tìm kiếm theo tiêu đề công việc -->
+                        <div class="col-lg-4 col-sm-6 col-12 mb-3">
+                            <input class="form-control shadow-none" type="text" name="search_title"
+                                placeholder="Tìm theo tiêu đề công việc" value="{{ request()->search_title }}">
+                        </div>
+            
+                        <!-- Tìm kiếm theo vị trí -->
+                        <div class="col-lg-4 col-sm-6 col-12 mb-3">
+                            <input class="form-control shadow-none" type="text" name="search_position"
+                                placeholder="Tìm theo vị trí" value="{{ request()->search_position }}">
+                        </div>
+            
+                        <!-- Tìm kiếm theo địa chỉ -->
+                        <div class="col-lg-4 col-sm-6 col-12 mb-3">
+                            <input class="form-control shadow-none" type="text" name="search_location"
+                                placeholder="Tìm theo địa chỉ" value="{{ request()->search_location }}">
+                        </div>
+            
+                        <!-- Tìm kiếm theo kiểu làm việc -->
+                        <div class="col-lg-4 col-sm-6 col-12 mb-3">
+                            <select class="form-control shadow-none" name="search_type">
+                                <option value="">Chọn kiểu làm việc</option>
+                                <option value="Full-time" {{ request()->search_type == 'Full-time' ? 'selected' : '' }}>Full-time</option>
+                                <option value="Part-time" {{ request()->search_type == 'Part-time' ? 'selected' : '' }}>Part-time</option>
+                                <option value="Freelance" {{ request()->search_type == 'Freelance' ? 'selected' : '' }}>Freelance</option>
+                            </select>
+                        </div>
+            
+                        <!-- Tìm kiếm theo thu nhập -->
+                        <div class="col-lg-4 col-sm-6 col-12 mb-3">
+                            <input class="form-control shadow-none" type="text" name="search_salary"
+                                placeholder="Tìm theo thu nhập" value="{{ request()->search_salary }}">
+                        </div>
+            
+                        <!-- Nút tìm kiếm và xóa lọc -->
                         <div class="col-lg-4 col-sm-6 col-12 mb-3">
                             <div class="text-center text-nowrap">
                                 <button type="submit" class="btn btn-danger rounded-pill">
                                     <i class="fas fa-search me-2"></i>Tìm kiếm
                                 </button>
-                                <a href="{{ route('job_categories.index') }}" class="btn btn-secondary rounded-pill ms-2">
+                                <a href="{{ route('jobs.index') }}" class="btn btn-secondary rounded-pill ms-2">
                                     <i class="fas fa-times me-2"></i>Xóa lọc
                                 </a>
                             </div>
@@ -39,76 +86,43 @@
                     <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Tiêu đề công việc</th>
+                            <th>Người đăng</th>
                             <th>Hình ảnh</th>
+                            <th>Tiêu đề công việc</th>
                             <th>Vị trí</th>
                             <th>Địa chỉ</th>
-                            <th>Yêu cầu làm việc</th>
+                            <th>Kiểu làm việc</th>
+                            <th>Thu nhập</th>
+                            <th>Ngày đăng</th>
+                            <th>Tên công ty</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @foreach ($Jobs as $category)
-                            <tr data-id="{{ $category->id }}">
-                                <td> {{ $loop->iteration }}</td>
-                                <td>{{ $category->title }}</td>
-                                <td><img src="{{ asset("temp/images/job/$category->thumb") }}" alt="{{ $category->title }}"
-                                        srcset="{{ $category->title }}" width="90px" height="90px"></td>
-                                <td>{{ $category->position }}</td>
-                                <td>{{ $category->location ?? '' }}</td>
-                                <td>{{ $category->type }}</td>
-                                <td class="">
-                                    <button type="button" class="btn btn-danger btnDeleteAsk px-2 me-2 py-1 fw-bolder"
-                                        data-bs-toggle="modal" data-bs-target="#modalDetail{{ $category->id }}">Chi
-                                        tiết</button>
-                                </td>
-
-                                <!-- Modal Delete with Details -->
-                                <div class="modal fade" id="modalDetail{{ $category->id }}" tabindex="-1"
-                                    aria-labelledby="modalDetail{{ $category->id }}Label" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="modalDetail{{ $category->id }}Label">
-                                                    Chi Tiết Công Việc: {{ $category->title }}
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="d-flex align-items-start">
-                                                    <div class="job-details" style="margin-right:200px">
-                                                        <p><strong>Vị trí:</strong> {{ $category->position }}</p>
-                                                        <p><strong>Địa điểm:</strong> {{ $category->location ?? 'N/A' }}
-                                                        </p>
-                                                        <p><strong>Loại công việc:</strong> {{ $category->type }}</p>
-                                                        <p><strong>Lương:</strong> {{ $category->salary }}</p>
-                                                        <p><strong>Kinh nghiệm:</strong> {{ $category->Experience }}</p>
-                                                        <p><strong>giới tính:</strong> {{ $category->gender }}</p>
-                                                        <p><strong>thời hạn:</strong> {{ $category->expires_at }}</p>
-                                                    </div>
-                                                    <div class="ms-4">
-                                                        <img src="{{ asset("temp/images/job/$category->thumb") }}"
-                                                            alt="{{ $category->title }}" width="300px" height="300px">
-                                                    </div>
-                                                </div>
-                                                <div class="mt-4 w-100">
-                                                    <p><strong>{!! $category->requirements !!}</p>
-
-                                                    <p><strong>Mô tả công việc:</strong> {!! $category->description ?? 'Không có mô tả' !!}</p>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                             
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Đóng</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                        @if($Jobs->isEmpty())
+                            <tr>
+                                <td colspan="11" class="text-center">Không tìm thấy công việc nào phù hợp với từ khóa tìm kiếm.</td>
                             </tr>
-                        @endforeach
+                        @else
+                            @foreach ($Jobs as $job)
+                                <tr data-id="{{ $job->id }}">
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $job->User->name }}</td>
+                                    <td><img src="{{ asset("temp/images/job/$job->thumb") }}" alt="{{ $job->title }}"
+                                        width="90px" height="90px"></td>
+                                    <td>{{ $job->title }}</td>
+                                    <td>{{ $job->position }}</td>
+                                    <td>{{ $job->location ?? '' }}</td>
+                                    <td>{{ $job->type }}</td>
+                                    <td>{{ $job->salary }}</td>
+                                    <td>{{ $job->created_at }}</td>
+                                    <td>{{ $job->Company->name }}</td>
+                                    <td>
+                                        <a href="{{ route('jobDetail', $job->slug) }}" class="btn btn-info px-2 py-1 text-dark fw-bold" target="_blank">Chi tiết</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                     </tbody>
 
                 </table>

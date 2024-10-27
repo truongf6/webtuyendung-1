@@ -22,8 +22,16 @@ class Job extends Model
         'thumb',
         'thumb-company'
     ];
+    public function User()
+    {
+        return $this->belongsTo( User::class, 'user_id','id');
+    }
     public function Category()
     {
         return $this->belongsTo( Job_Category::class, 'job_categories_id','id');
+    }
+    public function Company()
+    {
+        return $this->belongsTo( Company::class, 'company_id','id');
     }
 }

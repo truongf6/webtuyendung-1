@@ -38,30 +38,30 @@
                                 <th>Hình ảnh</th>
                                 <th>Vị trí</th>
                                 <th>Địa chỉ</th>
-                                <th>Yêu cầu làm việc</th>
+                                <th>Thời gian làm việc</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            @foreach ($Jobs as $category)
-                                <tr data-id="{{ $category->id }}">
+                            @foreach ($Jobs as $job)
+                                <tr data-id="{{ $job->id }}">
                                     <td> {{ $loop->iteration }}</td>
-                                    <td>{{ $category->title }}</td>
-                                    <td><img src="{{ asset("temp/images/job/$category->thumb") }}"
-                                            alt="{{ $category->title }}" srcset="{{ $category->title }}" width="90px"
+                                    <td>{{ $job->title }}</td>
+                                    <td><img src="{{ asset("temp/images/job/$job->thumb") }}"
+                                            alt="{{ $job->title }}" srcset="{{ $job->title }}" width="90px"
                                             height="90px"></td>
-                                    <td>{{ $category->position }}</td>
-                                    <td>{{ $category->location ?? '' }}</td>
-                                    <td>{{ $category->type }}</td>
+                                    <td>{{ $job->position }}</td>
+                                    <td>{{ $job->location ?? '' }}</td>
+                                    <td>{{ $job->type }}</td>
                                     <td class="">
-                                        <a href="{{ route('viewJobPageDetail', $category->id) }}" type="button"
+                                        <a href="{{ route('jobDetail', $job->slug) }}" type="button"
                                             class="btn btn-danger btnDeleteAsk px-2 me-2 py-1 fw-bolder"
-                                            data-bs-toggle="modal" data-bs-target="#modalDetail{{ $category->id }}">Chi
+                                            data-bs-toggle="modal" data-bs-target="#modalDetail{{ $job->id }}">Chi
                                             tiết</a>
-                                        <a href="{{ route('viewJobPageEdit', $category->id) }}" type="button"
+                                        <a href="{{ route('viewJobPageEdit', $job->id) }}" type="button"
                                             class="btn btn-danger btnDeleteAsk px-2 me-2 py-1 fw-bolder"
                                             data-bs-toggle="modal"
-                                            data-bs-target="#modalDetail{{ $category->id }}">edit</a>
+                                            data-bs-target="#modalDetail{{ $job->id }}">edit</a>
                                     </td>
 
                                 </tr>

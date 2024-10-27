@@ -64,17 +64,10 @@
             </a>
         </li>
         <li class='menu-item'>
-            <a href='javascript:void(0);' class='menu-link menu-toggle'>
+            <a href='{{route('jobs.index')}}' class='menu-link'>
                 <i class='menu-icon tf-icons bx bx-store-alt'></i>
                 <div data-i18n='Layouts'>Quản lý jobs</div>
             </a>
-            <ul class='menu-sub'>
-                <li class='menu-item'>
-                    <a href='{{route('jobs.index')}}' class='menu-link'>
-                        <div data-i18n='Without menu'>Danh sách jobs</div>
-                    </a>
-                </li>
-            </ul>
         </li>
         <li class='menu-item'>
             <a href='javascript:void(0);' class='menu-link menu-toggle'>

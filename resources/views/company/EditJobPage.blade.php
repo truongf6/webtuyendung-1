@@ -71,6 +71,8 @@
                                 </option>
                                 <option value="Full Time" {{ $Jobs->type == 'Full Time' ? 'select' : '' }}>Full Time
                                 </option>
+                                <option value="Freelance" {{ $Jobs->type == 'Freelance' ? 'select' : '' }}>Freelance
+                                </option>
                             </select>
                         </div>
 
