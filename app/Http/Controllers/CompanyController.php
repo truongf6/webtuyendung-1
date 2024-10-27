@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Company;
+use Carbon\Carbon;
 use App\Models\Job;
+use App\Models\User;
+use App\Models\Company;
 use Illuminate\Support\Str;
 use App\Models\Job_Category;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -45,9 +46,6 @@ class CompanyController extends Controller
             'description' => 'required',
             'name' => 'required',
             'phone_number' => 'required|max:12',
-            'location-company' => 'required',
-            'thumb' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'thumb-company' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ], [
             'title.required' => 'Vui lòng nhập tiêu đề công việc.',
             'job_categories_id-select.required' => 'Vui lòng chọn danh mục công việc.',
@@ -59,10 +57,6 @@ class CompanyController extends Controller
             'location.required' => 'Vui lòng địa chỉ nơi làm việc.',
             'phone_number.required' => 'Vui lòng nhập số điện thoại.',
             'phone_number.max' => 'Số điện thoại không được vượt quá 12 ký tự.',
-            'thumb.mimes' => 'Ảnh công việc phải có định dạng: jpeg, png, jpg, hoặc gif.',
-            'thumb.max' => 'Ảnh công việc không được vượt quá 2MB.',
-            'thumb-company.mimes' => 'Logo công ty phải có định dạng: jpeg, png, jpg, hoặc gif.',
-            'thumb-company.max' => 'Logo công ty không được vượt quá 2MB.',
         ]);
 
         $categoryId = null;
@@ -84,8 +78,31 @@ class CompanyController extends Controller
         if (Job::where('slug', $slug)->exists()) {
             return response()->json(['error' => 'Tiêu đề đã tồn tại, vui lòng nhập tiêu đề khác.'], 422);
         }
-        // Lưu thông tin công việc vào DB
         $user_id = Auth::user()->id;
+        $company = new Company;
+        $company->user_id = $user_id;
+        $company->name = $request->input('name');
+        $company->phone_number = $request->input('phone_number');
+        $company->description = $request->input('descriptionCompanyContent');
+        $company->website = $request->input('website');
+        $company->save();
+
+        // Xử lý ảnh logo của user (tương ứng với ảnh công ty)
+        $image = $request->file('thumb-company'); // Lấy file ảnh từ file Upload
+
+        if ($image) {
+            // Tạo tên file theo slug của tên user (hoặc công ty) để đảm bảo tên file thân thiện
+            $fileName = Str::slug($company->name) . '.jpg';  // Sử dụng Slug để tạo tên file thân thiện
+
+            // Di chuyển ảnh vào thư mục lưu trữ (public/images/companys)
+            $image->move(public_path('temp/images/company'), $fileName);
+
+            // Cập nhật đường dẫn thumb (ảnh) trong bảng companys
+            $company->thumb = $fileName; // Lưu tên file ảnh vào cột thumb trong bảng companys
+            $company->save(); // Lưu lại thông tin user với đường dẫn ảnh mới
+        }
+
+        // Lưu thông tin công việc vào DB
         $job = new Job;
         $job->user_id = $user_id;
         $job->title = $request->input('title');  // Hoặc $request->title
@@ -108,43 +125,27 @@ class CompanyController extends Controller
         $job->description = $request->input('description');
         $job->requirements = $request->input('requirement');
         $job->expires_at = $request->input('expires');
+        $job->company_id = $company->id;
         $job->save();
-
-        $company = new Company;
-        $company->user_id = $user_id;
-        $company->name = $request->input('name');
-        $company->phone_number = $request->input('phone_number');
-        $company->location = $request->input('location-company');
-        $company->description = $request->input('descriptionCompanyContent');
-        $company->website = $request->input('website');
-        $company->save();
-
-        $user = User::find($user_id);
-        // Xử lý ảnh logo của user (tương ứng với ảnh công ty)
-        $image = $request->file('thumb-company'); // Lấy file ảnh từ file Upload
-
-        if ($image) {
-            // Tạo tên file theo slug của tên user (hoặc công ty) để đảm bảo tên file thân thiện
-            $fileName = Str::slug($company->name) . '.jpg';  // Sử dụng Slug để tạo tên file thân thiện
-
-            // Di chuyển ảnh vào thư mục lưu trữ (public/images/companys)
-            $image->move(public_path('temp/images/company'), $fileName);
-
-            // Cập nhật đường dẫn thumb (ảnh) trong bảng companys
-            $company->thumb = $fileName; // Lưu tên file ảnh vào cột thumb trong bảng companys
-            $company->save(); // Lưu lại thông tin user với đường dẫn ảnh mới
-        }
         return response()->json(['success' => 'Công việc đã được đăng thành công!', 'job' => $job], 200);
     }
-    public function viewJobPageEdit($id)
+    public function viewJobPageEdit($slug)
     {
-        $Jobs = Job::where('id', $id)->first();
+        $Jobs = Job::where('slug', $slug)->first();
+    
+        // Kiểm tra nếu $Jobs tồn tại và định dạng lại expires_at
+        if ($Jobs && $Jobs->expires_at) {
+            $Jobs->expires_at = Carbon::parse($Jobs->expires_at)->format('Y-m-d');
+        }
+    
         $job_categories = Job_Category::all();
+    
         return view('company.EditJobPage', compact('Jobs', 'job_categories'), [
             'title' => 'Công việc đã đăng'
         ]);
     }
-    public function PostJobPageEdit(Request $request, $id)
+    
+    public function PostJobPageEdit(Request $request, $slug)
     {
         // Validation dữ liệu
         $this->validate($request, [
@@ -157,9 +158,6 @@ class CompanyController extends Controller
             'description' => 'required',
             'name' => 'required',
             'phone_number' => 'required|max:12',
-            'location-company' => 'required',
-            'thumb' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'thumb-company' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ], [
             'title.required' => 'Vui lòng nhập tiêu đề công việc.',
             'job_categories_id-select.required' => 'Vui lòng chọn danh mục công việc.',
@@ -171,12 +169,8 @@ class CompanyController extends Controller
             'location.required' => 'Vui lòng địa chỉ nơi làm việc.',
             'phone_number.required' => 'Vui lòng nhập số điện thoại.',
             'phone_number.max' => 'Số điện thoại không được vượt quá 12 ký tự.',
-            'thumb.mimes' => 'Ảnh công việc phải có định dạng: jpeg, png, jpg, hoặc gif.',
-            'thumb.max' => 'Ảnh công việc không được vượt quá 2MB.',
-            'thumb-company.mimes' => 'Logo công ty phải có định dạng: jpeg, png, jpg, hoặc gif.',
-            'thumb-company.max' => 'Logo công ty không được vượt quá 2MB.',
         ]);
-        dd($request);
+    
         // Xử lý danh mục công việc
         $categoryId = $request->input('job_categories_id-select');
         if ($request->input('job_categories_id-new')) {
@@ -186,18 +180,39 @@ class CompanyController extends Controller
             ]);
             $categoryId = $newCategory->id;
         }
-
+    
         // Kiểm tra slug để tránh trùng lặp với các job khác
-        $slug = Str::slug($request->input('title'));
-        if (Job::where('slug', $slug)->where('id', '!=', $id)->exists()) {
+        $newSlug = Str::slug($request->input('title'));  // Tạo slug mới từ tiêu đề
+        if (Job::where('slug', $newSlug)->where('slug', '!=', $slug)->exists()) {
             return response()->json(['error' => 'Tiêu đề đã tồn tại, vui lòng nhập tiêu đề khác.'], 422);
         }
-        // Tìm job hiện có và cập nhật
-        $job = Job::findOrFail($id);
+    
+        // Tìm công việc theo slug từ URL
+        $job = Job::where('slug', $slug)->firstOrFail();
+    
+        // Lấy user_id hiện tại
         $user_id = Auth::user()->id;
+    
+        // Tìm công ty và cập nhật
+        $company = Company::where('id', $job->company_id)->firstOrFail();
+        $company->name = $request->input('name');
+        $company->phone_number = $request->input('phone_number');
+        $company->description = $request->input('descriptionCompanyContent');
+        $company->website = $request->input('website');
+    
+        // Cập nhật logo công ty nếu có
+        if ($request->hasFile('thumb-company')) {
+            $image = $request->file('thumb-company');
+            $fileName = Str::slug($company->name) . '.jpg';
+            $image->move(public_path('temp/images/company'), $fileName);
+            $company->thumb = $fileName;
+        }
+        $company->save();
+    
+        // Cập nhật thông tin công việc
         $job->user_id = $user_id;
         $job->title = $request->input('title');
-        $job->slug = $slug;
+        $job->slug = $newSlug;
         $job->job_categories_id = $categoryId;
         $job->type = $request->input('type');
         $job->position = $request->input('position');
@@ -208,7 +223,8 @@ class CompanyController extends Controller
         $job->description = $request->input('description');
         $job->requirements = $request->input('requirement');
         $job->expires_at = $request->input('expires');
-
+        $job->company_id = $company->id;
+    
         // Cập nhật ảnh công việc nếu có
         if ($request->hasFile('thumb')) {
             $image = $request->file('thumb');
@@ -217,25 +233,10 @@ class CompanyController extends Controller
             $job->thumb = $fileName;
         }
         $job->save();
-
-        // Tìm công ty theo user_id và cập nhật
-        $company = Company::where('user_id', $user_id)->firstOrFail();
-        $company->name = $request->input('name');
-        $company->phone_number = $request->input('phone_number');
-        $company->location = $request->input('location-company');
-        $company->description = $request->input('descriptionCompanyContent');
-        $company->website = $request->input('website');
-
-        // Cập nhật logo công ty nếu có
-        if ($request->hasFile('thumb-company')) {
-            $image = $request->file('thumb-company');
-            $fileName = Str::slug($company->name) . '.jpg';
-            $image->move(public_path('temp/images/company'), $fileName);
-            $company->thumb = $fileName;
-        }
-        $company->save();
+    
         return response()->json(['success' => 'Công việc đã được cập nhật thành công!', 'job' => $job], 200);
     }
+    
 
     // Xem preview Bài đăng
     public function jobDetail($slug)

@@ -58,7 +58,7 @@
                                             class="btn btn-danger btnDeleteAsk px-2 me-2 py-1 fw-bolder"
                                             data-bs-toggle="modal" data-bs-target="#modalDetail{{ $job->id }}">Chi
                                             tiết</a>
-                                        <a href="{{ route('viewJobPageEdit', $job->id) }}" type="button"
+                                        <a href="{{ route('viewJobPageEdit', $job->slug) }}" type="button"
                                             class="btn btn-danger btnDeleteAsk px-2 me-2 py-1 fw-bolder"
                                             data-bs-toggle="modal"
                                             data-bs-target="#modalDetail{{ $job->id }}">edit</a>

@@ -30,18 +30,13 @@
             </div>
             <div class="row mb-5">
                 <div class="col-lg-12">
-                    <form class="p-4 p-md-5 border rounded" id="form-postEdit_job" enctype="multipart/form-data"
-                        action="/viewJobPageEdit/ + {{ $Jobs->id }}" data-id="{{ $Jobs->id }}" method="post">
+                    <form class="p-4 p-md-5 border rounded" id="form-postEdit_job" data-slug={{ $Jobs->slug }} enctype="multipart/form-data" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-8">
                                 <h3 class="text-black mb-5 border-bottom pb-2">Chi tiết công việc</h3>
                             </div>
                             <div class="row col-4">
-                                <div class="col-6">
-                                    <a href="#" class="btn btn-block btn-light btn-md text-nowrap"><span
-                                            class="icon-open_in_new mr-2"></span>Xem trước</a>
-                                </div>
                                 <div class="col-6">
                                     <button type="submit" class="btn btn-block btn-primary btn-md">Lưu lại</button>
                                 </div>
@@ -67,11 +62,11 @@
                             <select class="selectpicker border rounded" name="type" id="job-time"
                                 data-require="Mời chọn loại làm việc" data-style="btn-black" data-width="100%"
                                 data-live-search="true" title="Chọn thời gian làm việc">
-                                <option value="Part Time" {{ $Jobs->type == 'Part Time' ? 'select' : '' }}>Part Time
+                                <option value="Part Time" {{ $Jobs->type == 'Part Time' ? 'selected' : '' }}>Part Time
                                 </option>
-                                <option value="Full Time" {{ $Jobs->type == 'Full Time' ? 'select' : '' }}>Full Time
+                                <option value="Full Time" {{ $Jobs->type == 'Full Time' ? 'selected' : '' }}>Full Time
                                 </option>
-                                <option value="Freelance" {{ $Jobs->type == 'Freelance' ? 'select' : '' }}>Freelance
+                                <option value="Freelance" {{ $Jobs->type == 'Freelance' ? 'selected' : '' }}>Freelance
                                 </option>
                             </select>
                         </div>
@@ -84,7 +79,7 @@
                                     data-live-search="true" title="Chọn danh mục công việc">
                                     @foreach ($job_categories as $category)
                                         <option value="{{ $category->id }}"
-                                            {{ $Jobs->job_categories_id == $category->id ? 'select' : '' }}>
+                                            {{ $Jobs->job_categories_id == $category->id ? 'selected' : '' }}>
                                             {{ $category->title }}</option>
                                     @endforeach
                                 </select>
@@ -116,12 +111,12 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="company-gender">Giới thiệu</label>
+                            <label for="company-gender">Giới tính</label>
                             <select class=" " data-require="Mời chọn giới tính" name="gender" id="job-cate"
                                 data-style="btn-black" data-width="100%" data-live-search="true" title="Chọn giới tính">
-                                <option value="Nam" {{ $Jobs->type == 'Nam' ? 'select' : '' }}>Nam</option>
-                                <option value="Nữ" {{ $Jobs->type == 'Nữ' ? 'select' : '' }}>Nữ</option>
-                                <option value="Bất kì" {{ $Jobs->type == 'Bất kì' ? 'select' : '' }}>Bất kì</option>
+                                <option value="Nam" {{ $Jobs->type == 'Nam' ? 'selected' : '' }}>Nam</option>
+                                <option value="Nữ" {{ $Jobs->type == 'Nữ' ? 'selected' : '' }}>Nữ</option>
+                                <option value="Bất kì" {{ $Jobs->type == 'Bất kì' ? 'selected' : '' }}>Bất kì</option>
                             </select>
                         </div>
 
@@ -134,17 +129,15 @@
 
                         <div class="form-group">
                             <label for="job-description">Mô tả công việc</label>
-                            <div class="editor description" data-require="Mời nhập mô tả công việc" id="editor-1"
-                                {!! $Jobs->description ?? '' !!}>
-                                <p>Viết mô tả công việc!</p>
+                            <div class="editor description" data-require="Mời nhập mô tả công việc" id="editor-1">
+                                {!! $Jobs->description ?? '' !!}
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="job-requirement">Yêu cầu tuyển dụng</label>
-                            <div class="editor requirement" data-require="Mời nhập yêu cầu" id="editor-3"
-                                {!! $Jobs->requirements ?? '' !!}>
-                                <p>Yêu cầu tuyển dụng 1</p>
+                            <div class="editor requirement" data-require="Mời nhập yêu cầu" id="editor-3">
+                                {!! $Jobs->requirements ?? '' !!}
                             </div>
                         </div>
 
@@ -165,39 +158,35 @@
                         <h3 class="text-black my-5 border-bottom pb-2">Chi tiết Công ty</h3>
                         <div class="form-group">
                             <label for="company-name">Tên công ty</label>
-                            <input type="text" name="name" class="form-control input-field"
+                            <input type="text" name="name" class="form-control input-field" value="{{ $Jobs->Company->name}}"
                                 data-require="Mời nhập tên công ty" id="company-name" placeholder="Nhập tên công ty">
                         </div>
 
                         <div class="form-group">
                             <label for="company-phone">Số điện thoại</label>
                             <input type="text" name="phone_number" class="form-control input-field"
+                                value="{{ $Jobs->Company->phone_number}}"
                                 data-require="Mời nhập số điện thoại" id="company-phone"
                                 placeholder="Nhập số điện thoại">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="company-location">Vị trí</label>
-                            <input type="text" name="location-company" class="form-control input-field"
-                                data-require="Mời nhập vị trí công ty" id="company-location" placeholder="Nhập vị trí">
                         </div>
 
                         <div class="form-group">
                             <label for="company-description">Mô tả công ty</label>
                             <div class="editor descriptionCompanyContent" data-require="Mời nhập mô tả công ty"
                                 id="editor-2">
-                                <p>Mô tả</p>
+                                {!! $Jobs->Company->description ?? '' !!}
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="company-website">Website</label>
                             <input type="text" name="website" class="form-control" id="company-website"
+                                value="{{ $Jobs->Company->website}}"
                                 placeholder="https://">
                         </div>
 
                         <div class="form-group">
                             <label class='form-label' for='file-input-thumb_company'>Logo</label>
-                            <input type="file" name="thumb-company" class="file-input" id="file-input-thumb_company"
+                            <input type="file" name="thumb-company" class="file-input" id="file-input-thumb_company" data-thumb={{ $Jobs->Company->thumb }}
                                 multiple onchange="previewImages(event, 'image-preview-thumb_company')">
                             <div class="image-preview" id="image-preview-thumb_company"></div>
                         </div>
@@ -205,11 +194,7 @@
                             <div class="col-lg-4 ml-auto">
                                 <div class="row">
                                     <div class="col-6">
-                                        <a href="#" class="btn btn-block btn-light btn-md"><span
-                                                class="icon-open_in_new mr-2"></span>Preview</a>
-                                    </div>
-                                    <div class="col-6">
-                                        <button type="submit" class="btn btn-block btn-primary btn-md">Save Job</button>
+                                        <button type="submit" class="btn btn-block btn-primary btn-md">Lưu lại</button>
                                     </div>
                                 </div>
                             </div>
@@ -242,51 +227,56 @@
             $('#file-input-thumb_company').on('change', function() {
                 previewImages(this, 'image-preview-thumb_company');
             });
-
-            $('#form-post_job').on('submit', function(e) {
-                e.preventDefault(); // Ngăn form submit truyền thống
-
-                // Tạo một đối tượng FormData để chứa tất cả dữ liệu
-                var formData = new FormData(this);
-
-                // Lấy nội dung của thẻ .description và .description-company
-                var description = $('.description').html();
-                var descriptionCompanyContent = $('.descriptionCompanyContent').html();
-                var requirement = $('.requirement').html();
-                // Thêm nội dung mô tả công việc và mô tả công ty vào formData
-                formData.append('description', description);
-                formData.append('descriptionCompanyContent', descriptionCompanyContent);
-                formData.append('requirement', requirement);
-
-                $.ajax({
-                    url: "{{ route('postJob') }}", // Đặt URL tới route của bạn
-                    method: 'POST',
-                    data: formData,
-                    contentType: false, // Điều này rất quan trọng để gửi dữ liệu dạng multipart/form-data
-                    processData: false, // Không xử lý dữ liệu vì chúng ta đang sử dụng FormData
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            alert('Công việc đã được đăng thành công!');
-                            // Bạn có thể xử lý thêm logic sau khi thành công, ví dụ như chuyển hướng
-                        }
-                    },
-                    error: function(xhr) {
-                        // Xử lý lỗi, hiển thị thông báo cho người dùng
-                        var errors = xhr.responseJSON.errors;
-                        $.each(errors, function(key, value) {
-                            alert(value[0]); // Hiển thị lỗi
-                        });
-                    }
-                });
-            });
         })
 
         $(document).ready(function() {
             previewImages(document.getElementById('file-input-form_product_store'),
                 'image-preview-form_product_store', '{{ asset("temp/images/job/$Jobs->thumb") }}');
+            const thumbCompany = $('#file-input-thumb_company').data('thumb');
+            // Sử dụng Blade để lấy URL gốc, sau đó nối thêm tên file
+            const thumbCompanyFull = `{{ asset('temp/images/company') }}/${thumbCompany}`;
+            previewImages(
+                document.getElementById('file-input-thumb_company'),
+                'image-preview-thumb_company',
+                thumbCompanyFull
+            );
+            
+        $('#form-postEdit_job').on('submit', function(e) {
+            e.preventDefault();
+
+            var formData = new FormData(this);
+            var slug = $(this).data('slug'); // Lấy id từ thuộc tính data-id của form
+            var description = $('.description').html();
+            var descriptionCompanyContent = $('.descriptionCompanyContent').html();
+            var requirement = $('.requirement').html();
+
+            // Thêm nội dung mô tả công việc và mô tả công ty vào formData
+            formData.append('description', description);
+            formData.append('descriptionCompanyContent', descriptionCompanyContent);
+            formData.append('requirement', requirement);
+
+            $.ajax({
+                url: "/PostJobPageEdit/" + slug,
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token
+                },
+                success: function(response) {
+                    if (response.success) {
+                        alert('Công việc đã được đăng thành công!');
+                    }
+                },
+                error: function(xhr) {
+                    var errors = xhr.responseJSON.errors;
+                    $.each(errors, function(key, value) {
+                        alert(value[0]);
+                    });
+                }
+            });
+        });
         });
 
         function previewImages(input, previewId, defaultImageUrl = null) {
@@ -364,41 +354,5 @@
                 previewContainer.append(imageContainer.append(imgElement));
             }
         }
-        // $('#form-postEdit_job').on('click', function(e) {
-        //     e.preventDefault();
-
-        //     var formData = new FormData(this);
-        //     var id = $(this).data('id'); // Lấy id từ thuộc tính data-id của form
-        //     var description = $('.description').html();
-        //     var descriptionCompanyContent = $('.descriptionCompanyContent').html();
-        //     var requirement = $('.requirement').html();
-
-        //     // Thêm nội dung mô tả công việc và mô tả công ty vào formData
-        //     formData.append('description', description);
-        //     formData.append('descriptionCompanyContent', descriptionCompanyContent);
-        //     formData.append('requirement', requirement);
-
-        //     $.ajax({
-        //         url: "/viewJobPageEdit/" + id,
-        //         method: 'POST',
-        //         data: formData,
-        //         contentType: false,
-        //         processData: false,
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token
-        //         },
-        //         success: function(response) {
-        //             if (response.success) {
-        //                 alert('Công việc đã được đăng thành công!');
-        //             }
-        //         },
-        //         error: function(xhr) {
-        //             var errors = xhr.responseJSON.errors;
-        //             $.each(errors, function(key, value) {
-        //                 alert(value[0]);
-        //             });
-        //         }
-        //     });
-        // });
     </script>
 @endsection

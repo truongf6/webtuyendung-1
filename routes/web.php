@@ -47,8 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/postJob', [CompanyController::class, 'postJob'])->name('postJob');
 
         Route::get('/viewJobPage', [CompanyController::class, 'viewJobPage'])->name('viewJobPage');
-        Route::get('/viewJobPageEdit/{id}', [CompanyController::class, 'viewJobPageEdit'])->name('viewJobPageEdit');
-        Route::post('/viewJobPageEdit/{id}', [CompanyController::class, 'PostJobPageEdit'])->name('PostJobPageEdit');
+        Route::get('/viewJobPageEdit/{slug}', [CompanyController::class, 'viewJobPageEdit'])->name('viewJobPageEdit');
+        Route::post('/PostJobPageEdit/{slug}', [CompanyController::class, 'PostJobPageEdit'])->name('PostJobPageEdit');
     });
 
     // EMPLOYEE

@@ -47,7 +47,7 @@
             </div>
           @else
             <div class="col-6">
-              <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Sửa</a>
+              <a href="{{ route('viewJobPageEdit', $job->slug) }}" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Sửa</a>
             </div>
           @endif
         </div>

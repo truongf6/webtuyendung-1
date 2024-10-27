@@ -93,7 +93,7 @@
               </div>
 
               <div class="form-group">
-                <label for="company-gender">Giới thiệu</label>
+                <label for="company-gender">Giới tính</label>
                 <select class=" " data-require="Mời chọn giới tính" name="gender" id="job-cate" data-style="btn-black" data-width="100%" data-live-search="true" title="Chọn giới tính">
                     <option value="Nam">Nam</option>
                     <option value="Nữ">Nữ</option>
@@ -139,13 +139,8 @@
             <div class="form-group">
                 <label for="company-phone">Số điện thoại</label>
                 <input type="text" name="phone_number" class="form-control input-field" data-require="Mời nhập số điện thoại" id="company-phone" placeholder="Nhập số điện thoại">
-              </div>
-
-            <div class="form-group">
-              <label for="company-location">Vị trí</label>
-              <input type="text" name="location-company" class="form-control input-field" data-require="Mời nhập vị trí công ty" id="company-location" placeholder="Nhập vị trí">
             </div>
-
+            
             <div class="form-group">
               <label for="company-description">Mô tả công ty</label>
               <div class="editor descriptionCompanyContent" data-require="Mời nhập mô tả công ty" id="editor-2">
