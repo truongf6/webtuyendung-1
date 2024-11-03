@@ -30,7 +30,7 @@ class CompanyController extends Controller
         $Jobs = Job::where('user_id', Auth::user()->id)->paginate(20);
         return view('company.viewShowJob', compact('Jobs'), [
             'title' => 'Công việc đã đăng'
-        ]);
+        ]); 
     }
     // Đăng tin
     public function postJob(Request $request)
@@ -238,15 +238,4 @@ class CompanyController extends Controller
     }
     
 
-    // Xem preview Bài đăng
-    public function jobDetail($slug)
-    {
-        $job = Job::where('slug', $slug)->first();
-        $user = User::find($job->user_id);
-        $company = Company::where('user_id', $user->id)->first();
-
-        return view('company.jobDetail', compact('job', 'user', 'company'), [
-            'title' => 'Xem bài đăng công việc'
-        ]);
-    }
 }

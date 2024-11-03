@@ -1,6 +1,14 @@
 @extends('layout.layout')
 @section('content')
 
+<style>
+  .modal-backdrop{
+    z-index: inherit;
+  }
+  .modal-dialog{
+    max-width: 1110px;
+  }
+</style>
 <section class="section-hero overlay inner-page bg-image" style="background-image: url('/temp/assets/images/hero_1.jpg');" id="home-section">
   <div class="container">
     <div class="row">
@@ -16,9 +24,8 @@
   </div>
 </section>
 
-
 <section class="site-section pb-0">
-  <div class="container">
+  <div class="container border-bottom">
     <div class="row align-items-center mb-5">
       <div class="col-lg-8 mb-4 mb-lg-0">
         <div class="d-flex align-items-center">
@@ -39,15 +46,90 @@
 
         <div class="row">
           @if( Auth::user()->role_id == 3 )
-            <div class="col-6">
-              <a href="#" class="btn btn-block btn-light btn-md text-nowrap"><span class="icon-heart-o mr-2 text-danger"></span>Lưu công việc</a>
-            </div>
-            <div class="col-6">
-              <a href="#" class="btn btn-block btn-primary btn-md">Nạp đơn ngay</a>
-            </div>
+            @if($hasApplyJob == true)
+              <h4 class="text-danger font-weight-bold">ĐÃ NẠP ĐƠN!</h4>
+            @else
+              <div class="row mb-5">
+                <div class="col-6">
+                  <a href="#" class="btn btn-block btn-light btn-md text-nowrap"><span class="icon-heart-o mr-2 text-danger"></span>Lưu công việc</a>
+                </div>
+                <div class="col-6">
+                  <button type="button" class="btn btn-block btn-primary btn-md" data-toggle="modal" data-target="#exampleModalCenter">
+                    Nạp đơn ngay
+                  </button>
+                </div>
+              </div>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <div class="d-block">
+                        <h5 class="modal-title font-weight-bold" id="exampleModalLongTitle">BẠN ĐANG NỘP ĐƠN CHO VỊ TRÍ</h5>
+                        <h4 class="font-weight-bold">
+                          <span class="text-danger">{{$job->position}}</span>
+                          <span>tại {{$job->Company->name}}</span>
+                        </h4>
+                      </div>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="error">
+                        @include('admin.error')
+                      </div>
+                      <form action="{{route('applyJob',$job->slug)}}" method="post" enctype="multipart/form-data" id="form_applyJob">
+                        @csrf
+                        <div class="body-content row">
+                          <h5 class="col-3 font-weight-bold text-black">Thông tin cơ bản</h5>
+                          <div class="col-9 row bg-light">
+                            <div class="form-group d-block col-4">
+                              <label for="inputFullname" class="col-form-label">Tên đầy đủ</label>
+                              <div class="">
+                                <input type="text" data-require="Vui lòng nhập tên đầy đủ!" value="{{$job->User->name}}" class="form-control input-field" name="name" id="inputFullname" placeholder="Fullname">
+                              </div>
+                            </div>
+                            <div class="form-group d-block col-4">
+                              <label for="inputPhoneNumber" class="col-form-label">Số điện thoại</label>
+                              <div class="">
+                                <input type="text" data-require="Vui lòng nhập số điện thoại!" value="{{$job->User->phone_number}}" class="form-control input-field" name="phone_number" id="inputPhoneNumber" placeholder="PhoneNumber">
+                              </div>
+                            </div>
+                            <div class="form-group d-block col-4">
+                              <label for="inputEmail" class="col-form-label">Email</label>
+                              <div class="">
+                                <input type="email" disabled value="{{$job->User->email}}" class="form-control input-field" name="email" id="inputEmail" placeholder="Email">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="body-content row mt-3">
+                          <h5 class="col-3 font-weight-bold text-black">CV của bạn</h5>
+                          <div class="col-9 row bg-light">
+                            <div class="form-group d-block col-4">
+                              <label for="inputFullname" class="col-form-label">Tải lên CV ( PDF  )</label>
+                              <div class="">
+                                <input data-require="Vui lòng tải lên CV!" class="input-field" type="file" name="cv">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                          
+                        <div class="modal-footer mt-3">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                          <button type="submit" class="btn btn-primary">Nạp đơn</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            @endif
           @else
             <div class="col-6">
-              <a href="{{ route('viewJobPageEdit', $job->slug) }}" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Sửa</a>
+              <a href="{{ route('viewJobPageEdit', $job->slug) }}" class="btn btn-block btn-light btn-md">Sửa</a>
             </div>
           @endif
         </div>
@@ -65,16 +147,6 @@
           {!! $job->requirements !!}
           
         </div>
-        @if(Auth::user()->role_id == 3)
-          <div class="row mb-5">
-            <div class="col-6">
-              <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Save Job</a>
-            </div>
-            <div class="col-6">
-              <a href="#" class="btn btn-block btn-primary btn-md">Apply Now</a>
-            </div>
-          </div>
-        @endif
 
       </div>
       <div class="col-lg-4">

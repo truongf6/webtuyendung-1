@@ -17,12 +17,8 @@
           <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
             <li><a href="/" class="nav-link active">Trang chủ</a></li>
             <li><a href="about.html">Giới thiệu</a></li>
-            <li class="has-children">
-              <a href="job-listings.html">Danh sách công việc</a>
-              <ul class="dropdown">
-                <li><a href="job-single.html">Job Single</a></li>
-                <li><a href="{{route('postJobPage')}}">Đăng công việc</a></li>
-              </ul>
+            <li class="">
+              <a href="{{route('jobList')}}">Danh sách công việc</a>
             </li>
             <li class="has-children">
               <a href="services.html">Trang đơn</a>
@@ -39,7 +35,7 @@
             </li>
             <li><a href="blog.html">Bài viết</a></li>
             <li><a href="contact.html">Liên hệ</a></li>
-            @if(Auth::check())
+            @if(Auth::check() && Auth::user()->role_id != 3)
             <li class="d-lg-none"><a href="{{route('postJobPage')}}"><span class="mr-2">+</span> Đăng công việc</a></li>
             @endif
             <li class="d-lg-none"><a href="{{route('showLogin')}}">Đăng nhập</a></li>
@@ -49,10 +45,11 @@
         <div class="right-cta-menu text-right d-flex align-items-center col-6">
           <div class="ml-auto d-flex align-items-center">
               @if(Auth::check())
-              <a href="{{route('postJobPage')}}" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block mr-3">
-                  <span class="mr-2 icon-add"></span>Đăng công việc
-              </a>
-      
+                @if(Auth::user()->role_id != 3)
+                <a href="{{route('postJobPage')}}" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block mr-3">
+                    <span class="mr-2 icon-add"></span>Đăng công việc
+                </a>
+                @endif
               <!-- Menu thả xuống cho 'Trang cá nhân' -->
               <div class="dropdown">
                   <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block mr-3 dropdown-toggle"
@@ -62,7 +59,11 @@
                   <div class="dropdown-menu" aria-labelledby="personalMenu">
                       <a class="dropdown-item" href="#">Thông tin cá nhân</a>
                       <a class="dropdown-item" href="#">Cài đặt tài khoản</a>
-                      <a class="dropdown-item" href="{{route('viewJobPage')}}">Công việc đã Đăng</a>
+                        @if(Auth::user()->role_id != 3)
+                        <a class="dropdown-item" href="{{route('viewJobPage')}}">Công việc đã Đăng</a>
+                        @else
+                        <a class="dropdown-item" href="{{route('CvApplied')}}">Đơn đã ứng tuyển</a>
+                        @endif
                       <form class="text-center" action="{{route('logout')}}" method="post">
                         @csrf
                         <button type="submit" class="border-0 bg-white">Đăng xuất</button>

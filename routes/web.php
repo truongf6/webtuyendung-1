@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\JobController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/showLogin', [AuthController::class, 'showLogin'])->name('showLogin');
@@ -20,7 +20,8 @@ Route::get('/showRegister', [AuthController::class, 'showRegister'])->name('show
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/jobDetail/{slug}', [CompanyController::class, 'jobDetail'])->name('jobDetail');
+Route::get('/jobDetail/{slug}', [JobController::class, 'jobDetail'])->name('jobDetail');
+Route::get('/jobList', [JobController::class, 'jobList'])->name('jobList');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::middleware(['auth', 'admin'])->group(function () {
@@ -53,6 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // EMPLOYEE
     Route::middleware(['auth', 'employee'])->group(function () {
-
+        Route::post('/applyJob/{slug}', [JobController::class, 'applyJob'])->name('applyJob');
+        Route::get('/CvApplied', [JobController::class, 'CvApplied'])->name('CvApplied');
     });
 });
