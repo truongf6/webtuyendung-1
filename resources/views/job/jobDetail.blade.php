@@ -51,10 +51,18 @@
             @else
               <div class="row mb-5">
                 <div class="col-6">
-                  <a href="#" class="btn btn-block btn-light btn-md text-nowrap"><span class="icon-heart-o mr-2 text-danger"></span>Lưu công việc</a>
+                  @if($favourite->job_id == $job->id)
+                    <a href="#" class="btn btn-light btn-md text-nowrap save-job-btn" data-job-id="{{ $job->id }}">
+                      <span class="icon-heart mr-2 text-danger"></span>Đã lưu
+                    </a>   
+                  @else
+                    <a href="#" class="btn btn-light btn-md text-nowrap save-job-btn" data-job-id="{{ $job->id }}">
+                      <span class="icon-heart-o mr-2 text-danger"></span>Lưu công việc
+                    </a>   
+                  @endif             
                 </div>
                 <div class="col-6">
-                  <button type="button" class="btn btn-block btn-primary btn-md" data-toggle="modal" data-target="#exampleModalCenter">
+                  <button type="button" class="btn text-nowrap btn-primary btn-md" data-toggle="modal" data-target="#exampleModalCenter">
                     Nạp đơn ngay
                   </button>
                 </div>
@@ -409,5 +417,37 @@
     </div>
   </div>
 </section>
+<script>
+  $(document).ready(function() {
+    $('.save-job-btn').on('click', function(e) {
+        e.preventDefault();
+        
+        let job_id = $(this).data('job-id');
 
+        $.ajax({
+            url: "{{ route('favourite.store') }}",
+            method: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                job_id: job_id
+            },
+            success: function(response) {
+                if(response.status === 'success') {
+                    alert(response.message);
+                    window.location.reload();
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr) {
+                if(xhr.status === 401) {
+                    alert("Bạn cần đăng nhập để lưu công việc");
+                } else {
+                    alert("Đã xảy ra lỗi, vui lòng thử lại sau");
+                }
+            }
+        });
+    });
+});
+</script>
 @endsection

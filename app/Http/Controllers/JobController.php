@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Job;
 use App\Models\Company;
 use App\Models\Application;
+use App\Models\Favourite;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User;
@@ -26,13 +27,14 @@ class JobController extends Controller
     // Xem preview Bài đăng
     public function jobDetail($slug)
     {
+        $favourite = Favourite::where('user_id', Auth::user()->id)->first();
         $job = Job::where('slug', $slug)->first();
         $user = User::find($job->user_id);
         $company = Company::where('user_id', $user->id)->first();
         $hasApplyJob = Application::where('user_id', Auth::id())
         ->where('job_id', $job->id)
         ->exists();
-        return view('job.jobDetail', compact('job', 'user', 'company','hasApplyJob'), [
+        return view('job.jobDetail', compact('job', 'user', 'company','hasApplyJob', 'favourite'), [
             'title' => $job->title
         ]);
     }

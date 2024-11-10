@@ -31,14 +31,14 @@
             $(this).parent().find('.helper').remove();  // Xóa thông báo lỗi cũ
 
             // Check if the field is an email input and validate the format
-            if (fieldType == 'email' && value !== '') {
-                  if (!isValidEmail(value)) {
-                     checkValid = false;
-                     $(this).addClass('input-error');
-                     let emailAlert = `<span class="helper text-danger" style="z-index: 999;margin-top: 75px;">Chưa nhập đúng kiểu email</span>`;
-                     $(this).parent().append(emailAlert);
-                  }
-            }
+            // if (fieldType == 'email' && value !== '') {
+            //       if (!isValidEmail(value)) {
+            //          checkValid = false;
+            //          $(this).addClass('input-error');
+            //          let emailAlert = `<span class="helper text-danger" style="z-index: 999;margin-top: 75px;">Chưa nhập đúng kiểu email</span>`;
+            //          $(this).parent().append(emailAlert);
+            //       }
+            // }
             if(value == null || value == '' || value == undefined) {
                   checkValid = false;
                   $(this).addClass('input-error');

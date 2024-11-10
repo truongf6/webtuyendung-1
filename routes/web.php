@@ -1,18 +1,21 @@
 <?php
 
-use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdminHomeController;
-use App\Http\Controllers\AdminJobCategoryController;
-use App\Http\Controllers\AdminJobController;
-use App\Http\Controllers\AdminUserController;
-use App\Http\Controllers\HomeAdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\AdminJobController;
+use App\Http\Controllers\AdminHomeController;
+use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\FavouriteController;
+use App\Http\Controllers\HomeAdminController;
+use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\AdminFeedbackController;
+use App\Http\Controllers\AdminJobCategoryController;
+use App\Http\Controllers\PageController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/showLogin', [AuthController::class, 'showLogin'])->name('showLogin');
@@ -22,6 +25,9 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/jobDetail/{slug}', [JobController::class, 'jobDetail'])->name('jobDetail');
 Route::get('/jobList', [JobController::class, 'jobList'])->name('jobList');
+Route::get('/about', [PageController::class, 'about'])->name('about');
+Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+Route::post('/postContact', [PageController::class, 'postContact'])->name('postContact');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::middleware(['auth', 'admin'])->group(function () {
@@ -38,6 +44,9 @@ Route::group(['middleware' => 'auth'], function () {
             // Quản lý Job_Category
             Route::resource('job_categories', AdminJobCategoryController::class);
             Route::resource('jobs', AdminJobController::class);
+
+            // Quản lý phản hồi
+            Route::resource('feedbacks', AdminFeedbackController::class);
 
         });
     });
@@ -56,5 +65,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::middleware(['auth', 'employee'])->group(function () {
         Route::post('/applyJob/{slug}', [JobController::class, 'applyJob'])->name('applyJob');
         Route::get('/CvApplied', [JobController::class, 'CvApplied'])->name('CvApplied');
+        Route::post('/favourite', [FavouriteController::class, 'store'])->name('favourite.store')->middleware('auth');
+        Route::get('/JobSaved', [FavouriteController::class, 'JobSaved'])->name('JobSaved');
+
     });
 });

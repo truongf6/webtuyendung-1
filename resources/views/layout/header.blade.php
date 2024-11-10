@@ -16,25 +16,12 @@
         <nav class="mx-auto site-navigation">
           <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
             <li><a href="/" class="nav-link active">Trang chủ</a></li>
-            <li><a href="about.html">Giới thiệu</a></li>
+            <li><a href="{{route('about')}}">Giới thiệu</a></li>
             <li class="">
               <a href="{{route('jobList')}}">Danh sách công việc</a>
             </li>
-            <li class="has-children">
-              <a href="services.html">Trang đơn</a>
-              <ul class="dropdown">
-                <li><a href="services.html">Dịch vụ</a></li>
-                <li><a href="service-single.html">Service Single</a></li>
-                <li><a href="blog-single.html">Blog Single</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="portfolio-single.html">Portfolio Single</a></li>
-                <li><a href="testimonials.html">Testimonials</a></li>
-                <li><a href="faq.html">Frequently Ask Questions</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-              </ul>
-            </li>
             <li><a href="blog.html">Bài viết</a></li>
-            <li><a href="contact.html">Liên hệ</a></li>
+            <li><a href="{{route('contact')}}">Liên hệ</a></li>
             @if(Auth::check() && Auth::user()->role_id != 3)
             <li class="d-lg-none"><a href="{{route('postJobPage')}}"><span class="mr-2">+</span> Đăng công việc</a></li>
             @endif
@@ -56,13 +43,14 @@
                      id="personalMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      <span class="icon-lock_outline"></span>Trang cá nhân
                   </a>
-                  <div class="dropdown-menu" aria-labelledby="personalMenu">
+                  <div class="dropdown-menu text-center" aria-labelledby="personalMenu">
                       <a class="dropdown-item" href="#">Thông tin cá nhân</a>
                       <a class="dropdown-item" href="#">Cài đặt tài khoản</a>
                         @if(Auth::user()->role_id != 3)
                         <a class="dropdown-item" href="{{route('viewJobPage')}}">Công việc đã Đăng</a>
                         @else
-                        <a class="dropdown-item" href="{{route('CvApplied')}}">Đơn đã ứng tuyển</a>
+                        <a class="dropdown-item" href="{{route('CvApplied')}}">Công việc đã ứng tuyển</a>
+                        <a class="dropdown-item" href="{{route('JobSaved')}}">Công việc đã lưu lại</a>
                         @endif
                       <form class="text-center" action="{{route('logout')}}" method="post">
                         @csrf

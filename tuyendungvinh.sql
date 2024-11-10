@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th10 27, 2024 lúc 11:17 AM
+-- Thời gian đã tạo: Th10 10, 2024 lúc 12:39 AM
 -- Phiên bản máy phục vụ: 8.0.30
 -- Phiên bản PHP: 8.2.23
 
@@ -38,6 +38,13 @@ CREATE TABLE `applications` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `applications`
+--
+
+INSERT INTO `applications` (`id`, `user_id`, `job_id`, `fileCv`, `resume`, `status`, `created_at`, `updated_at`) VALUES
+(1, 35, 7, 'Tho Mai Huy.pdf', NULL, NULL, '2024-11-02 09:24:56', '2024-11-02 09:24:56');
+
 -- --------------------------------------------------------
 
 --
@@ -66,7 +73,56 @@ INSERT INTO `companies` (`id`, `user_id`, `name`, `thumb`, `phone_number`, `desc
 (2, 3, 'công ty 1', NULL, '0904848855', '<div class=\"ql-editor\" data-gramm=\"false\" contenteditable=\"true\" data-placeholder=\"Compose an epic...\"><p>Mô tả công ty</p></div><div class=\"ql-clipboard\" contenteditable=\"true\" tabindex=\"-1\"></div><div class=\"ql-tooltip ql-hidden\"><a class=\"ql-preview\" target=\"_blank\" href=\"about:blank\"></a><input type=\"text\" data-formula=\"e=mc^2\" data-link=\"https://quilljs.com\" data-video=\"Embed URL\"><a class=\"ql-action\"></a><a class=\"ql-remove\"></a></div>', 'Sudo', NULL, '2024-10-19 03:46:44', '2024-10-19 03:46:44'),
 (3, 3, 'công ty 1', NULL, '0904848855', '<div class=\"ql-editor\" data-gramm=\"false\" contenteditable=\"true\" data-placeholder=\"Compose an epic...\"><p><span class=\"ql-cursor\">﻿</span>Mô tả</p></div><div class=\"ql-clipboard\" contenteditable=\"true\" tabindex=\"-1\"></div><div class=\"ql-tooltip ql-hidden\"><a class=\"ql-preview\" target=\"_blank\" href=\"about:blank\"></a><input type=\"text\" data-formula=\"e=mc^2\" data-link=\"https://quilljs.com\" data-video=\"Embed URL\"><a class=\"ql-action\"></a><a class=\"ql-remove\"></a></div>', 'Sudo', NULL, '2024-10-19 07:27:45', '2024-10-19 07:27:45'),
 (4, 2, 'công ty 1', 'cong-ty-1.jpg', '0904848855', '<div class=\"ql-editor\" data-gramm=\"false\" contenteditable=\"true\" data-placeholder=\"Compose an epic...\"><p><span class=\"ql-cursor\">﻿</span>Mô tả</p></div><div class=\"ql-clipboard\" contenteditable=\"true\" tabindex=\"-1\"></div><div class=\"ql-tooltip ql-hidden\"><a class=\"ql-preview\" target=\"_blank\" href=\"about:blank\"></a><input type=\"text\" data-formula=\"e=mc^2\" data-link=\"https://quilljs.com\" data-video=\"Embed URL\"><a class=\"ql-action\"></a><a class=\"ql-remove\"></a></div>', 'Sudo', NULL, '2024-10-19 13:31:13', '2024-10-19 13:31:13'),
-(5, 2, 'công ty 1', 'cong-ty-1.jpg', '0904848855', '<div class=\"ql-editor\" data-gramm=\"false\" contenteditable=\"true\" data-placeholder=\"Compose an epic...\"><p><span class=\"ql-cursor\">﻿</span>Mô tả</p></div><div class=\"ql-clipboard\" contenteditable=\"true\" tabindex=\"-1\"></div><div class=\"ql-tooltip ql-hidden\"><a class=\"ql-preview\" target=\"_blank\" href=\"about:blank\"></a><input type=\"text\" data-formula=\"e=mc^2\" data-link=\"https://quilljs.com\" data-video=\"Embed URL\"><a class=\"ql-action\"></a><a class=\"ql-remove\"></a></div>', 'Sudo', NULL, '2024-10-19 13:33:31', '2024-10-19 13:33:31');
+(5, 2, 'công ty 1', 'cong-ty-1.jpg', '0904848855', '<div class=\"ql-editor\" data-gramm=\"false\" contenteditable=\"true\" data-placeholder=\"Compose an epic...\"><p>﻿Mô tả</p></div><div class=\"ql-clipboard\" contenteditable=\"true\" tabindex=\"-1\"></div><div class=\"ql-tooltip ql-hidden\"><a class=\"ql-preview\" target=\"_blank\" href=\"about:blank\"></a><input type=\"text\" data-formula=\"e=mc^2\" data-link=\"https://quilljs.com\" data-video=\"Embed URL\"><a class=\"ql-action\"></a><a class=\"ql-remove\"></a></div>', 'Sudo', NULL, '2024-10-19 13:33:31', '2024-10-27 07:44:00'),
+(6, 2, 'công ty 1', NULL, '0904848855', '<div class=\"ql-editor\" data-gramm=\"false\" contenteditable=\"true\" data-placeholder=\"Compose an epic...\"><p><span class=\"ql-cursor\">﻿</span>Mô tả</p></div><div class=\"ql-clipboard\" contenteditable=\"true\" tabindex=\"-1\"></div><div class=\"ql-tooltip ql-hidden\"><a class=\"ql-preview\" target=\"_blank\" href=\"about:blank\"></a><input type=\"text\" data-formula=\"e=mc^2\" data-link=\"https://quilljs.com\" data-video=\"Embed URL\"><a class=\"ql-action\"></a><a class=\"ql-remove\"></a></div>', 'Sudo', NULL, '2024-10-27 06:24:55', '2024-10-27 06:24:55');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `favourites`
+--
+
+CREATE TABLE `favourites` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED DEFAULT NULL,
+  `job_id` bigint UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `favourites`
+--
+
+INSERT INTO `favourites` (`id`, `user_id`, `job_id`, `created_at`, `updated_at`) VALUES
+(1, 35, 6, '2024-11-03 10:01:55', '2024-11-03 10:01:55'),
+(2, 35, 4, '2024-11-08 08:42:21', '2024-11-08 08:42:21');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `feedbacks`
+--
+
+CREATE TABLE `feedbacks` (
+  `id` bigint UNSIGNED NOT NULL,
+  `fullname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone_number` varchar(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contents` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `feedbacks`
+--
+
+INSERT INTO `feedbacks` (`id`, `fullname`, `email`, `phone_number`, `title`, `contents`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Phan Duy Hào', 'haomrvuii@gmail.com', '0904848855', 'Slide header', NULL, NULL, '2024-11-08 10:26:06', '2024-11-08 10:26:06'),
+(2, 'Phan Duy Hào', 'haomrvuii@gmail.com', '0904848855', 'Slide header', 'tdhfgh', 1, '2024-11-09 02:32:16', '2024-11-09 03:12:01');
 
 -- --------------------------------------------------------
 
@@ -101,7 +157,8 @@ CREATE TABLE `jobs` (
 
 INSERT INTO `jobs` (`id`, `user_id`, `title`, `slug`, `thumb`, `description`, `position`, `location`, `requirements`, `type`, `job_categories_id`, `salary`, `Experience`, `gender`, `expires_at`, `created_at`, `updated_at`, `company_id`) VALUES
 (4, 3, 'công việc 1', 'cong-viec-1', 'cong-viec-1.jpg', '<h3 style=\"text-align:justify;\">\n<strong>Tiêu đề</strong>\n</h3>\n<p style=\"text-align:justify;\">Một số tiêu chuẩn cơ bản khi tạo tiêu đề cho <strong>bảng mô tả công việc</strong>:</p>\n<ul>\n<li>Thể hiện vai trò của vị trí ứng tuyển một cách rõ ràng, dễ hình dung</li>\n<li>Tiêu đề ngắn gọn</li>\n<li>Tiêu đề có từ khóa được tối ưu trên công cụ tìm kiếm để tăng khả năng tiếp cận</li>\n</ul>\n<h3 style=\"text-align:justify;\">\n<strong>Mô tả vị trí</strong>\n</h3>\n<p style=\"text-align:justify;\">Đây là phần nội dung giới thiệu tổng quan về doanh nghiệp và vị trí cần tuyển. Vì thế, bạn phải đảm bảo:</p>\n<ul>\n<li>Có tên công ty</li>\n<li>Giới thiệu ngắn gọn về sản phẩm, thị trường, môi trường làm việc</li>\n<li>Mục tiêu của vị trí đang tuyển dụng</li>\n<li>Một, hai điểm chính mà nhà tuyển dụng kỳ vọng ở ứng viên, thường nhắc về tính cách, kỹ năng đặc biệt</li>\n</ul>\n<h3 style=\"text-align:justify;\">\n<strong>Nhiệm vụ</strong>\n</h3>\n<p style=\"text-align:justify;\">Đây là nội dung quan trọng nhất trong <strong>bảng mô tả công việc</strong>. Do đó, ngoài việc càng chi tiết càng tốt, một số điều nhà tuyển dụng cần lưu ý là:</p>\n<ul>\n<li>Chi tiết và rõ ràng, không nên dài dòng hay quá phức tạp</li>\n<li>Phân rõ những nhiệm vụ mà vị trí này đảm nhiệm</li>\n<li>Với một số chức vụ cấp cao, phần nhiệm vụ có thể chia theo từng thời kỳ hay từng kỹ năng cụ thế. Điều này giúp ứng viên càng dễ hình dung và đo lường độ phù hợp</li>\n</ul>\n<p>\n<img src=\"https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri.jpg\" alt=\"nêu rõ các đề mục trách nhiệm của vị trí\" srcset=\"https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri.jpg 800w, https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri-300x218.jpg 300w, https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri-768x559.jpg 768w, https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri-16x12.jpg 16w\" sizes=\"100vw\" width=\"800\">\n</p>\n<p>\n<i>Bảng mô tả công việc cần nêu rõ các đề mục trách nhiệm của vị trí</i>\n</p>', 'Kỹ thuật viên', 'tòa nhà A', '<h3 style=\"text-align:justify;\">\n<strong>Yêu cầu</strong>\n</h3>\n<p style=\"text-align:justify;\">Dựa vào yêu cầu, ứng viên biết mình có đủ năng lực trước khi ứng tuyển vào vị trí hay không. Thông thường nội dung này sẽ bao gồm:</p>\n<ul>\n<li>Nhân khẩu học: giới tính, độ tuổi, học vấn nếu vị trí yêu cầu</li>\n<li>Số năm kinh nghiệm</li>\n<li>Yêu cầu về kiến thức, chuyên môn</li>\n<li>Yêu cầu về kỹ năng sử dụng công cụ hay nghiệp vụ cụ thể</li>\n<li>Yêu cầu về địa điểm làm việc, các thiết bị bổ trợ</li>\n<li>Yêu cầu về tố chất</li>\n</ul>\n<p style=\"text-align:justify;\">Đây là nội dung để nhà tuyển dụng thuyết phục ứng viên gia nhập tổ chức sau khi họ nhận thấy sự phù hợp từ phần nhiệm vụ và yêu cầu.</p>\n<ul>\n<li>Lương, thưởng và chế độ đãi ngộ dành cho vị trí</li>\n<li>Các phúc lợi đi kèm</li>\n<li>Thời gian làm việc, môi trường văn phòng</li>\n<li>Cơ hội khác về thăng tiến, rèn luyện, phát triển</li>\n</ul>', 'Full Time', 3, '2000k - 4000k VNĐ', '2-3 năm', 'Nam', '2024-10-17 17:00:00', '2024-10-19 07:27:45', '2024-10-19 07:27:45', 4),
-(6, 2, 'Tuyển nhân viên sửa máy tính', 'tuyen-nhan-vien-sua-may-tinh', 'tuyen-nhan-vien-sua-may-tinh.jpg', '<h3 style=\"text-align:justify;\">\n<strong>Tiêu đề</strong>\n</h3>\n<p style=\"text-align:justify;\">Một số tiêu chuẩn cơ bản khi tạo tiêu đề cho <strong>bảng mô tả công việc</strong>:</p>\n<ul>\n<li>Thể hiện vai trò của vị trí ứng tuyển một cách rõ ràng, dễ hình dung</li>\n<li>Tiêu đề ngắn gọn</li>\n<li>Tiêu đề có từ khóa được tối ưu trên công cụ tìm kiếm để tăng khả năng tiếp cận</li>\n</ul>\n<h3 style=\"text-align:justify;\">\n<strong>Mô tả vị trí</strong>\n</h3>\n<p style=\"text-align:justify;\">Đây là phần nội dung giới thiệu tổng quan về doanh nghiệp và vị trí cần tuyển. Vì thế, bạn phải đảm bảo:</p>\n<ul>\n<li>Có tên công ty</li>\n<li>Giới thiệu ngắn gọn về sản phẩm, thị trường, môi trường làm việc</li>\n<li>Mục tiêu của vị trí đang tuyển dụng</li>\n<li>Một, hai điểm chính mà nhà tuyển dụng kỳ vọng ở ứng viên, thường nhắc về tính cách, kỹ năng đặc biệt</li>\n</ul>\n<h3 style=\"text-align:justify;\">\n<strong>Nhiệm vụ</strong>\n</h3>\n<p style=\"text-align:justify;\">Đây là nội dung quan trọng nhất trong <strong>bảng mô tả công việc</strong>. Do đó, ngoài việc càng chi tiết càng tốt, một số điều nhà tuyển dụng cần lưu ý là:</p>\n<ul>\n<li>Chi tiết và rõ ràng, không nên dài dòng hay quá phức tạp</li>\n<li>Phân rõ những nhiệm vụ mà vị trí này đảm nhiệm</li>\n<li>Với một số chức vụ cấp cao, phần nhiệm vụ có thể chia theo từng thời kỳ hay từng kỹ năng cụ thế. Điều này giúp ứng viên càng dễ hình dung và đo lường độ phù hợp</li>\n</ul>\n<p>\n<img src=\"https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri.jpg\" alt=\"nêu rõ các đề mục trách nhiệm của vị trí\" srcset=\"https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri.jpg 800w, https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri-300x218.jpg 300w, https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri-768x559.jpg 768w, https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri-16x12.jpg 16w\" sizes=\"100vw\" width=\"800\">\n</p>\n<p>\n<i>Bảng mô tả công việc cần nêu rõ các đề mục trách nhiệm của vị trí</i>\n</p>', 'Kỹ thuật viên', 'tòa nhà A', '<h3 style=\"text-align:justify;\">\n<strong>Yêu cầu</strong>\n</h3>\n<p style=\"text-align:justify;\">Dựa vào yêu cầu, ứng viên biết mình có đủ năng lực trước khi ứng tuyển vào vị trí hay không. Thông thường nội dung này sẽ bao gồm:</p>\n<ul>\n<li>Nhân khẩu học: giới tính, độ tuổi, học vấn nếu vị trí yêu cầu</li>\n<li>Số năm kinh nghiệm</li>\n<li>Yêu cầu về kiến thức, chuyên môn</li>\n<li>Yêu cầu về kỹ năng sử dụng công cụ hay nghiệp vụ cụ thể</li>\n<li>Yêu cầu về địa điểm làm việc, các thiết bị bổ trợ</li>\n<li>Yêu cầu về tố chất</li>\n</ul>\n<p style=\"text-align:justify;\">Đây là nội dung để nhà tuyển dụng thuyết phục ứng viên gia nhập tổ chức sau khi họ nhận thấy sự phù hợp từ phần nhiệm vụ và yêu cầu.</p>\n<ul>\n<li>Lương, thưởng và chế độ đãi ngộ dành cho vị trí</li>\n<li>Các phúc lợi đi kèm</li>\n<li>Thời gian làm việc, môi trường văn phòng</li>\n<li>Cơ hội khác về thăng tiến, rèn luyện, phát triển</li>\n</ul>', 'Part Time', 3, '600k - 4000k vnđ', '2 - 3 năm', 'Nam', '2024-10-19 17:00:00', '2024-10-19 13:33:31', '2024-10-19 13:33:31', 5);
+(6, 2, 'Tuyển nhân viên sửa máy tính', 'tuyen-nhan-vien-sua-may-tinh', 'tuyen-nhan-vien-sua-may-tinh.jpg', '<h3 style=\"text-align:justify;\">\n<strong>Tiêu đề</strong>\n</h3>\n<p style=\"text-align:justify;\">Một số tiêu chuẩn cơ bản khi tạo tiêu đề cho <strong>bảng mô tả công việc</strong>:</p>\n<ul>\n<li>Thể hiện vai trò của vị trí ứng tuyển một cách rõ ràng, dễ hình dung</li>\n<li>Tiêu đề ngắn gọn</li>\n<li>Tiêu đề có từ khóa được tối ưu trên công cụ tìm kiếm để tăng khả năng tiếp cận</li>\n</ul>\n<h3 style=\"text-align:justify;\">\n<strong>Mô tả vị trí</strong>\n</h3>\n<p style=\"text-align:justify;\">Đây là phần nội dung giới thiệu tổng quan về doanh nghiệp và vị trí cần tuyển. Vì thế, bạn phải đảm bảo:</p>\n<ul>\n<li>Có tên công ty</li>\n<li>Giới thiệu ngắn gọn về sản phẩm, thị trường, môi trường làm việc</li>\n<li>Mục tiêu của vị trí đang tuyển dụng</li>\n<li>Một, hai điểm chính mà nhà tuyển dụng kỳ vọng ở ứng viên, thường nhắc về tính cách, kỹ năng đặc biệt</li>\n</ul>\n<h3 style=\"text-align:justify;\">\n<strong>Nhiệm vụ</strong>\n</h3>\n<p style=\"text-align:justify;\">Đây là nội dung quan trọng nhất trong <strong>bảng mô tả công việc</strong>. Do đó, ngoài việc càng chi tiết càng tốt, một số điều nhà tuyển dụng cần lưu ý là:</p>\n<ul>\n<li>Chi tiết và rõ ràng, không nên dài dòng hay quá phức tạp</li>\n<li>Phân rõ những nhiệm vụ mà vị trí này đảm nhiệm</li>\n<li>Với một số chức vụ cấp cao, phần nhiệm vụ có thể chia theo từng thời kỳ hay từng kỹ năng cụ thế. Điều này giúp ứng viên càng dễ hình dung và đo lường độ phù hợp</li>\n</ul>\n<p>\n<img src=\"https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri.jpg\" alt=\"nêu rõ các đề mục trách nhiệm của vị trí\" srcset=\"https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri.jpg 800w, https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri-300x218.jpg 300w, https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri-768x559.jpg 768w, https://coffeehr.com.vn/wp-content/uploads/2022/06/neu-ro-cac-de-muc-trach-nhiem-cua-vi-tri-16x12.jpg 16w\" sizes=\"100vw\" width=\"800\">\n</p>\n<p>\n<i>Bảng mô tả công việc cần nêu rõ các đề mục trách nhiệm của vị trí</i>\n</p>', 'Kỹ thuật viên', 'tòa nhà A', '<h3 style=\"text-align:justify;\">\n<strong>Yêu cầu</strong>\n</h3>\n<p style=\"text-align:justify;\">Dựa vào yêu cầu, ứng viên biết mình có đủ năng lực trước khi ứng tuyển vào vị trí hay không. Thông thường nội dung này sẽ bao gồm:</p>\n<ul>\n<li>Nhân khẩu học: giới tính, độ tuổi, học vấn nếu vị trí yêu cầu</li>\n<li>Số năm kinh nghiệm</li>\n<li>Yêu cầu về kiến thức, chuyên môn</li>\n<li>Yêu cầu về kỹ năng sử dụng công cụ hay nghiệp vụ cụ thể</li>\n<li>Yêu cầu về địa điểm làm việc, các thiết bị bổ trợ</li>\n<li>Yêu cầu về tố chất</li>\n</ul>\n<p style=\"text-align:justify;\">Đây là nội dung để nhà tuyển dụng thuyết phục ứng viên gia nhập tổ chức sau khi họ nhận thấy sự phù hợp từ phần nhiệm vụ và yêu cầu.</p>\n<ul>\n<li>Lương, thưởng và chế độ đãi ngộ dành cho vị trí</li>\n<li>Các phúc lợi đi kèm</li>\n<li>Thời gian làm việc, môi trường văn phòng</li>\n<li>Cơ hội khác về thăng tiến, rèn luyện, phát triển</li>\n</ul>', 'Part Time', 3, '600k - 4000k vnđ', '2 - 3 năm', 'Nam', '2024-10-19 17:00:00', '2024-10-19 13:33:31', '2024-10-19 13:33:31', 5),
+(7, 2, 'Tuyển nhân viên sửa máy tính2dgf', 'tuyen-nhan-vien-sua-may-tinh2dgf', 'tuyen-nhan-vien-sua-may-tinh2dgf.jpg', '<div class=\"ql-editor\" data-gramm=\"false\" contenteditable=\"true\" data-placeholder=\"Compose an epic...\"><p>Viết mô tả công việc!</p></div><div class=\"ql-clipboard\" contenteditable=\"true\" tabindex=\"-1\"></div><div class=\"ql-tooltip ql-hidden\"><a class=\"ql-preview\" target=\"_blank\" href=\"about:blank\"></a><input type=\"text\" data-formula=\"e=mc^2\" data-link=\"https://quilljs.com\" data-video=\"Embed URL\"><a class=\"ql-action\"></a><a class=\"ql-remove\"></a></div>', 'Kỹ thuật viên', 'tòa nhà A', '<div class=\"ql-editor\" data-gramm=\"false\" contenteditable=\"true\" data-placeholder=\"Compose an epic...\"><p>﻿Yêu cầu tuyển dụng 1</p></div><div class=\"ql-clipboard\" contenteditable=\"true\" tabindex=\"-1\"></div><div class=\"ql-tooltip ql-hidden\"><a class=\"ql-preview\" target=\"_blank\" href=\"about:blank\"></a><input type=\"text\" data-formula=\"e=mc^2\" data-link=\"https://quilljs.com\" data-video=\"Embed URL\"><a class=\"ql-action\"></a><a class=\"ql-remove\"></a></div>', 'Part Time', 2, '600k - 4000k vnđ', '2 - 3 năm', 'Nam', '2024-10-26 17:00:00', '2024-10-27 06:24:55', '2024-10-27 07:46:03', 5);
 
 -- --------------------------------------------------------
 
@@ -194,7 +251,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '0001_01_01_000002_create_jobs_table', 4),
 (5, '2024_10_05_142856_create_applications_table', 5),
 (6, '2024_10_05_142907_create_companies_table', 6),
-(7, '2024_10_27_033950_update_job', 7);
+(7, '2024_10_27_033950_update_job', 7),
+(8, '2024_11_03_163219_favourite', 8),
+(9, '2024_11_08_163846_create_feedback_table', 9);
 
 -- --------------------------------------------------------
 
@@ -251,14 +310,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('6xQdNYOdQpUflpcQg3maTPU46n33QdaqmY1YtkNi', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidGRQUzhoTWdUd3hISnFrV3FScVptUk9tckp3aWZ5ZWp2ZENkSGx0dSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjUxOiJodHRwOi8vdHV5ZW5kdW5ndmluaC50ZXN0OjgwODAvYWRtaW4vam9iX2NhdGVnb3JpZXMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1729370343),
-('7H8MbxPXTwrBKEYysP4JjpWRmCcPpZAcH9ll25j1', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 Edg/129.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoielBUd3RhTklXUFFCTVlNb0lCS2ZyZGxDbm1uTnQ0bVRGWVJURGVPTCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzY6Imh0dHA6Ly90dXllbmR1bmd2aW5oLnRlc3Q6ODA4MC9hZG1pbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1729370226),
-('A3RaF1hMIAGvBaSRPfVRF05Mwbo9VuSNyKB95ybN', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoid2w3bW5JV2dnZk9tVkJLYml0T2REQ3VOQ1JiMW01Y0JBODFUYXVLbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly90dXllbmR1bmd2aW5oLnRlc3Q6ODA4MC9zaG93TG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1729736612),
-('H7NMnoY8axESmglx892dcehJ5BKA0WemwXmFUiNT', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVVo1a3hQd1FMUFBrendUQkJyQXk0ZDBaYXZwdTd1T1BDYWloYWgzZCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly90dXllbmR1bmd2aW5oLnRlc3Q6ODA4MC9zaG93TG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1729393106),
-('JhlF88fey6y5dp8sG5tZEiCshJgaVB80Zo3KpXqi', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYU1Oem1pVGhsc3VIbkJ5dW9ob2lHTDFXWGR4em1ncTg1dVV4QlFGayI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzY6Imh0dHA6Ly90dXllbmR1bmd2aW5oLnRlc3Q6ODA4MC9hZG1pbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1729788500),
-('kAqVhdPUR1EBG8oYH4zKEWE00TVbV0U9Q4l69DFh', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiS2VXdkdVY09qNzNheXZLNk9QMVhNd2dsSkNJNmdFaEhVRGZsSTBLdiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly90dXllbmR1bmd2aW5oLnRlc3Q6ODA4MCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1730027812),
-('UijFaiugkM3li8oxZ41SlJr4CMm0T8jHDAFlVR67', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidFR0SlQ0bEN1ZGpsMXZRWGYyYUh3UlI0YnpFb0FBaWhpZHZtRWZXOCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly90dXllbmR1bmd2aW5oLnRlc3Q6ODA4MC9hZG1pbi9qb2JzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1729996278),
-('VtK7Y8Wr8IH3i00eoqZdpFz0tsGVqLvSnW1VJMnr', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiR2xyN29YeXNWQ2JFcjA0VGpRM0NjNzRHbXdlS3FzMkZMbUplOU92TiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly90dXllbmR1bmd2aW5oLnRlc3Q6ODA4MC9hZG1pbi9qb2JzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1729876975);
+('2aa7NdAPcWemc16JLjLrFLA61IepDQgw8iG39lvw', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 Edg/130.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiQjZaTUQ1SEJBdVVDV1NxYlNScEthMklyNlhjY1BHMUlKWngxYnFMNSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly90dXllbmR1bmd2aW5oLnRlc3Q6ODA4MC9hZG1pbi9mZWVkYmFja3MiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO30=', 1731147121);
 
 -- --------------------------------------------------------
 
@@ -271,6 +323,7 @@ CREATE TABLE `users` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `thumb` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone_number` varchar(12) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `role_id` bigint UNSIGNED NOT NULL,
@@ -283,40 +336,41 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `thumb`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Phan Duy Hào', NULL, 'admin@gmail.com', NULL, '$2y$12$o9jBqrkJpTKb4MeKDA3YyemTT2cZ9swswLYgjN2dP86Fado/tjrqq', 2, NULL, '2024-10-07 10:52:09', '2024-10-07 10:52:09'),
-(2, 'Tho Mai Huy', NULL, '19574802010116@vinhuni.edu.vn', NULL, '$2y$12$oGqGLdD1KGwgS1UH04BeQu.8vGrBf8rwA7HovzlVsxzVa5lxmjpfS', 1, NULL, '2024-10-08 09:41:49', '2024-10-08 09:41:49'),
-(3, 'Tho Mai Huy', 'tho-mai-huy.jpg', 'tho@vinhuni.edu.vn', NULL, '$2y$12$SVzZ9gwtByUxbtaD1y2qSOXFtUf8/b8QIFLKZdsvP1Rjry1X7f1xa', 3, NULL, '2024-10-08 09:46:44', '2024-10-19 03:39:05'),
-(4, 'User 1', NULL, 'user1@example.com', NULL, '$2y$12$/FXzeaHt755dzHXuN/Cfl.E9sowjcbSZcEHHd1MSspdSV.1JLpWim', 1, NULL, '2024-10-13 07:05:05', '2024-10-13 07:05:05'),
-(5, 'User 2', NULL, 'user2@example.com', NULL, '$2y$12$AT9AfTh03srBcEozobmdKeaTawITZPZ2oH4RwXmxZkufdac3Q9ayC', 1, NULL, '2024-10-13 07:05:06', '2024-10-13 07:05:06'),
-(6, 'User 3', NULL, 'user3@example.com', NULL, '$2y$12$vS5tj668c133aWScfI8Dn..R2iVZYdwUaE4qtI2LkGtE2yC.zuMua', 1, NULL, '2024-10-13 07:05:06', '2024-10-13 07:05:06'),
-(7, 'User 4', NULL, 'user4@example.com', NULL, '$2y$12$4QDZw5XR0HFlULh/MXX5D.QlKA4fs2hRip8/YrYQRNL9YlGnlD1Ky', 1, NULL, '2024-10-13 07:05:07', '2024-10-13 07:05:07'),
-(8, 'User 5', NULL, 'user5@example.com', NULL, '$2y$12$VL9J73HJAgXFHCD5dqJQ5em6n4yFYh9EpI.YptsFqm5jDapC9KrV.', 1, NULL, '2024-10-13 07:05:07', '2024-10-13 07:05:07'),
-(9, 'User 6', NULL, 'user6@example.com', NULL, '$2y$12$KpPwquhV1NrI9pki36.OD.wcaDKXGbYlfm9VtllaKD4uVxdBhN9Xa', 1, NULL, '2024-10-13 07:05:07', '2024-10-13 07:05:07'),
-(10, 'User 7', NULL, 'user7@example.com', NULL, '$2y$12$3uU0FwwDHXgIecJYFXZ1t.HvNGV48FQ4qrRcrwN7bpbGh5zlr5IgK', 1, NULL, '2024-10-13 07:05:07', '2024-10-13 07:05:07'),
-(11, 'User 8', NULL, 'user8@example.com', NULL, '$2y$12$jlabvSWxgJXDsbiLpvqOBe2KQd9K92mvmsfIWkKgLQrEi3ujyWv/a', 1, NULL, '2024-10-13 07:05:08', '2024-10-13 07:05:08'),
-(12, 'User 9qưe', NULL, 'user9@example.com', NULL, '$2y$12$2hT.POgzdAcQk3Vqfgm0a.6EqMC15xFrHbw1x.2gOp629da02truq', 1, NULL, '2024-10-13 07:05:08', '2024-10-16 09:41:05'),
-(13, 'User 10', NULL, 'user10@example.com', NULL, '$2y$12$dVOWx9HUw.83H6fRiGx3G.h9ku2OpEVA3ULcrmsfbQd2ElCOCHegy', 1, NULL, '2024-10-13 07:05:08', '2024-10-13 07:05:08'),
-(14, 'User 11', NULL, 'user11@example.com', NULL, '$2y$12$L.orU0kGZBz1LUgKghGaHu9WIPt4WzdGM8dcswf5INYrCXMfsYUBy', 2, NULL, '2024-10-13 07:05:09', '2024-10-13 07:05:09'),
-(15, 'User 12', NULL, 'user12@example.com', NULL, '$2y$12$WjkEl.Y7wR9sI7xq4ggXJ.Jva7IHrFTZvkznWTiE60wrvAFQ5pJSe', 2, NULL, '2024-10-13 07:05:09', '2024-10-13 07:05:09'),
-(16, 'User 13', NULL, 'user13@example.com', NULL, '$2y$12$zQcffO4SLi2kibfd1BOczuVb9LDF4Wsq5pLjJnM2c5KhtNHbAhtAu', 2, NULL, '2024-10-13 07:05:09', '2024-10-13 07:05:09'),
-(17, 'User 14', NULL, 'user14@example.com', NULL, '$2y$12$SlVquN0eoUwXrJTrCmz0OO8WgtIu8hIlkLn8AL9Ac0X7/Ruo2Sk8K', 2, NULL, '2024-10-13 07:05:09', '2024-10-13 07:05:09'),
-(18, 'User 15', NULL, 'user15@example.com', NULL, '$2y$12$EHMW2iBnNNL2LzSpIeJ5ZOSPX1hIctvxkbsRuSNRZk3n28TpwoEXO', 2, NULL, '2024-10-13 07:05:10', '2024-10-13 07:05:10'),
-(19, 'User 16', NULL, 'user16@example.com', NULL, '$2y$12$nSAy9AkamfSFQWU69XmnqOKbxEco3EJXeCk57L4ZHO5Z4qm/gDbLK', 2, NULL, '2024-10-13 07:05:10', '2024-10-13 07:05:10'),
-(20, 'User 17', NULL, 'user17@example.com', NULL, '$2y$12$6QmNbAtKajco2qI2bXjAR.58Y/HKb1s05Zlqh331WANicGHVeFmFS', 2, NULL, '2024-10-13 07:05:10', '2024-10-13 07:05:10'),
-(21, 'User 18', NULL, 'user18@example.com', NULL, '$2y$12$Y0zMlNxbo9/rEzxxWEa/6eLyj6yOeHkJj1wlVH7LTKIomwbsHuyL6', 2, NULL, '2024-10-13 07:05:11', '2024-10-13 07:05:11'),
-(22, 'User 19', NULL, 'user19@example.com', NULL, '$2y$12$4hbzNO6rbhYhLdASQZ94perPskYC6ajXp7oi1/.VxHr0ZcEuDCU0q', 2, NULL, '2024-10-13 07:05:11', '2024-10-13 07:05:11'),
-(23, 'User 20', NULL, 'user20@example.com', NULL, '$2y$12$UUxaQM5aCygq1fCepgY3a.w2jga2Cixl4ZcYpoyYSyYz0b59Nfw0G', 2, NULL, '2024-10-13 07:05:11', '2024-10-13 07:05:11'),
-(24, 'User 21', NULL, 'user21@example.com', NULL, '$2y$12$Mv/.2nIWRnJ0A7j1CkcpGO9g8.9SUgvm9s0l8MGKeW.KdzJjm/5Hi', 3, NULL, '2024-10-13 07:05:11', '2024-10-13 07:05:11'),
-(25, 'User 22', NULL, 'user22@example.com', NULL, '$2y$12$5V8bemug6R.ioX1yHfYrJOMAad3kYmVCbB0md1lkQau9SPG5nyf.O', 3, NULL, '2024-10-13 07:05:12', '2024-10-13 07:05:12'),
-(26, 'User 23', NULL, 'user23@example.com', NULL, '$2y$12$Jn4glgGLuoDPHPt0QhbvkONXZpSckfMiWu5fwWTnIwezMMIsFS4aq', 3, NULL, '2024-10-13 07:05:12', '2024-10-13 07:05:12'),
-(27, 'User 24', NULL, 'user24@example.com', NULL, '$2y$12$YI4aTfA.h2RSZ7tYEXDpiuC3LZZATaXCNuk2nxXHH63OaymEcoHcq', 3, NULL, '2024-10-13 07:05:13', '2024-10-13 07:05:13'),
-(28, 'User 25', NULL, 'user25@example.com', NULL, '$2y$12$j2VFl2gD26qSr04143lrQ.7VmBOnNRGft3btJlp4brwcrkScsJgiO', 3, NULL, '2024-10-13 07:05:13', '2024-10-13 07:05:13'),
-(29, 'User 26', NULL, 'user26@example.com', NULL, '$2y$12$3960lihLDxsTimzwlsIXfebePoT8zZ1NmW8QFVtUjFY.SQvv8/Gpa', 3, NULL, '2024-10-13 07:05:13', '2024-10-13 07:05:13'),
-(30, 'User 27', NULL, 'user27@example.com', NULL, '$2y$12$X4NwhFSUh6dKxIUiGz5jsufcChwsTZRa6uvdTnWpv8tB8p6rgkxyS', 3, NULL, '2024-10-13 07:05:13', '2024-10-13 07:05:13'),
-(31, 'User 28', NULL, 'user28@example.com', NULL, '$2y$12$JK8U9U9thIXbO29b6lYA..AindOOG1AdUyNvL8A6A5ElP/qFfE1Qi', 3, NULL, '2024-10-13 07:05:14', '2024-10-13 07:05:14'),
-(32, 'User 29', NULL, 'user29@example.com', NULL, '$2y$12$Uh.2UzpCSeUhhLDzJoeDaOg267cVJEoUJd2k8kNyTzIy1C8j7ZwzC', 3, NULL, '2024-10-13 07:05:14', '2024-10-13 07:05:14'),
-(33, 'User 30', NULL, 'user30@example.com', NULL, '$2y$12$tvuwvPSx7sFYSOt/iR7VqesXqzOL3V8/f21dPRa61ZWRDAfYaY47u', 3, NULL, '2024-10-13 07:05:14', '2024-10-13 07:05:14');
+INSERT INTO `users` (`id`, `name`, `thumb`, `email`, `phone_number`, `email_verified_at`, `password`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Phan Duy Hào', NULL, 'admin@gmail.com', NULL, NULL, '$2y$12$o9jBqrkJpTKb4MeKDA3YyemTT2cZ9swswLYgjN2dP86Fado/tjrqq', 2, NULL, '2024-10-07 10:52:09', '2024-10-07 10:52:09'),
+(2, 'Tho Mai Huy', NULL, '19574802010116@vinhuni.edu.vn', NULL, NULL, '$2y$12$oGqGLdD1KGwgS1UH04BeQu.8vGrBf8rwA7HovzlVsxzVa5lxmjpfS', 1, NULL, '2024-10-08 09:41:49', '2024-10-08 09:41:49'),
+(3, 'Tho Mai Huy', 'tho-mai-huy.jpg', 'tho@vinhuni.edu.vn', NULL, NULL, '$2y$12$SVzZ9gwtByUxbtaD1y2qSOXFtUf8/b8QIFLKZdsvP1Rjry1X7f1xa', 3, NULL, '2024-10-08 09:46:44', '2024-10-19 03:39:05'),
+(4, 'User 1', NULL, 'user1@example.com', NULL, NULL, '$2y$12$/FXzeaHt755dzHXuN/Cfl.E9sowjcbSZcEHHd1MSspdSV.1JLpWim', 1, NULL, '2024-10-13 07:05:05', '2024-10-13 07:05:05'),
+(5, 'User 2', NULL, 'user2@example.com', NULL, NULL, '$2y$12$AT9AfTh03srBcEozobmdKeaTawITZPZ2oH4RwXmxZkufdac3Q9ayC', 1, NULL, '2024-10-13 07:05:06', '2024-10-13 07:05:06'),
+(6, 'User 3', NULL, 'user3@example.com', NULL, NULL, '$2y$12$vS5tj668c133aWScfI8Dn..R2iVZYdwUaE4qtI2LkGtE2yC.zuMua', 1, NULL, '2024-10-13 07:05:06', '2024-10-13 07:05:06'),
+(7, 'User 4', NULL, 'user4@example.com', NULL, NULL, '$2y$12$4QDZw5XR0HFlULh/MXX5D.QlKA4fs2hRip8/YrYQRNL9YlGnlD1Ky', 1, NULL, '2024-10-13 07:05:07', '2024-10-13 07:05:07'),
+(8, 'User 5', NULL, 'user5@example.com', NULL, NULL, '$2y$12$VL9J73HJAgXFHCD5dqJQ5em6n4yFYh9EpI.YptsFqm5jDapC9KrV.', 1, NULL, '2024-10-13 07:05:07', '2024-10-13 07:05:07'),
+(9, 'User 6', NULL, 'user6@example.com', NULL, NULL, '$2y$12$KpPwquhV1NrI9pki36.OD.wcaDKXGbYlfm9VtllaKD4uVxdBhN9Xa', 1, NULL, '2024-10-13 07:05:07', '2024-10-13 07:05:07'),
+(10, 'User 7', NULL, 'user7@example.com', NULL, NULL, '$2y$12$3uU0FwwDHXgIecJYFXZ1t.HvNGV48FQ4qrRcrwN7bpbGh5zlr5IgK', 1, NULL, '2024-10-13 07:05:07', '2024-10-13 07:05:07'),
+(11, 'User 8', NULL, 'user8@example.com', NULL, NULL, '$2y$12$jlabvSWxgJXDsbiLpvqOBe2KQd9K92mvmsfIWkKgLQrEi3ujyWv/a', 1, NULL, '2024-10-13 07:05:08', '2024-10-13 07:05:08'),
+(12, 'User 9qưe', NULL, 'user9@example.com', NULL, NULL, '$2y$12$2hT.POgzdAcQk3Vqfgm0a.6EqMC15xFrHbw1x.2gOp629da02truq', 1, NULL, '2024-10-13 07:05:08', '2024-10-16 09:41:05'),
+(13, 'User 10', NULL, 'user10@example.com', NULL, NULL, '$2y$12$dVOWx9HUw.83H6fRiGx3G.h9ku2OpEVA3ULcrmsfbQd2ElCOCHegy', 1, NULL, '2024-10-13 07:05:08', '2024-10-13 07:05:08'),
+(14, 'User 11', NULL, 'user11@example.com', NULL, NULL, '$2y$12$L.orU0kGZBz1LUgKghGaHu9WIPt4WzdGM8dcswf5INYrCXMfsYUBy', 2, NULL, '2024-10-13 07:05:09', '2024-10-13 07:05:09'),
+(15, 'User 12', NULL, 'user12@example.com', NULL, NULL, '$2y$12$WjkEl.Y7wR9sI7xq4ggXJ.Jva7IHrFTZvkznWTiE60wrvAFQ5pJSe', 2, NULL, '2024-10-13 07:05:09', '2024-10-13 07:05:09'),
+(16, 'User 13', NULL, 'user13@example.com', NULL, NULL, '$2y$12$zQcffO4SLi2kibfd1BOczuVb9LDF4Wsq5pLjJnM2c5KhtNHbAhtAu', 2, NULL, '2024-10-13 07:05:09', '2024-10-13 07:05:09'),
+(17, 'User 14', NULL, 'user14@example.com', NULL, NULL, '$2y$12$SlVquN0eoUwXrJTrCmz0OO8WgtIu8hIlkLn8AL9Ac0X7/Ruo2Sk8K', 2, NULL, '2024-10-13 07:05:09', '2024-10-13 07:05:09'),
+(18, 'User 15', NULL, 'user15@example.com', NULL, NULL, '$2y$12$EHMW2iBnNNL2LzSpIeJ5ZOSPX1hIctvxkbsRuSNRZk3n28TpwoEXO', 2, NULL, '2024-10-13 07:05:10', '2024-10-13 07:05:10'),
+(19, 'User 16', NULL, 'user16@example.com', NULL, NULL, '$2y$12$nSAy9AkamfSFQWU69XmnqOKbxEco3EJXeCk57L4ZHO5Z4qm/gDbLK', 2, NULL, '2024-10-13 07:05:10', '2024-10-13 07:05:10'),
+(20, 'User 17', NULL, 'user17@example.com', NULL, NULL, '$2y$12$6QmNbAtKajco2qI2bXjAR.58Y/HKb1s05Zlqh331WANicGHVeFmFS', 2, NULL, '2024-10-13 07:05:10', '2024-10-13 07:05:10'),
+(21, 'User 18', NULL, 'user18@example.com', NULL, NULL, '$2y$12$Y0zMlNxbo9/rEzxxWEa/6eLyj6yOeHkJj1wlVH7LTKIomwbsHuyL6', 2, NULL, '2024-10-13 07:05:11', '2024-10-13 07:05:11'),
+(22, 'User 19', NULL, 'user19@example.com', NULL, NULL, '$2y$12$4hbzNO6rbhYhLdASQZ94perPskYC6ajXp7oi1/.VxHr0ZcEuDCU0q', 2, NULL, '2024-10-13 07:05:11', '2024-10-13 07:05:11'),
+(23, 'User 20', NULL, 'user20@example.com', NULL, NULL, '$2y$12$UUxaQM5aCygq1fCepgY3a.w2jga2Cixl4ZcYpoyYSyYz0b59Nfw0G', 2, NULL, '2024-10-13 07:05:11', '2024-10-13 07:05:11'),
+(24, 'User 21', NULL, 'user21@example.com', NULL, NULL, '$2y$12$Mv/.2nIWRnJ0A7j1CkcpGO9g8.9SUgvm9s0l8MGKeW.KdzJjm/5Hi', 3, NULL, '2024-10-13 07:05:11', '2024-10-13 07:05:11'),
+(25, 'User 22', NULL, 'user22@example.com', NULL, NULL, '$2y$12$5V8bemug6R.ioX1yHfYrJOMAad3kYmVCbB0md1lkQau9SPG5nyf.O', 3, NULL, '2024-10-13 07:05:12', '2024-10-13 07:05:12'),
+(26, 'User 23', NULL, 'user23@example.com', NULL, NULL, '$2y$12$Jn4glgGLuoDPHPt0QhbvkONXZpSckfMiWu5fwWTnIwezMMIsFS4aq', 3, NULL, '2024-10-13 07:05:12', '2024-10-13 07:05:12'),
+(27, 'User 24', NULL, 'user24@example.com', NULL, NULL, '$2y$12$YI4aTfA.h2RSZ7tYEXDpiuC3LZZATaXCNuk2nxXHH63OaymEcoHcq', 3, NULL, '2024-10-13 07:05:13', '2024-10-13 07:05:13'),
+(28, 'User 25', NULL, 'user25@example.com', NULL, NULL, '$2y$12$j2VFl2gD26qSr04143lrQ.7VmBOnNRGft3btJlp4brwcrkScsJgiO', 3, NULL, '2024-10-13 07:05:13', '2024-10-13 07:05:13'),
+(29, 'User 26', NULL, 'user26@example.com', NULL, NULL, '$2y$12$3960lihLDxsTimzwlsIXfebePoT8zZ1NmW8QFVtUjFY.SQvv8/Gpa', 3, NULL, '2024-10-13 07:05:13', '2024-10-13 07:05:13'),
+(30, 'User 27', NULL, 'user27@example.com', NULL, NULL, '$2y$12$X4NwhFSUh6dKxIUiGz5jsufcChwsTZRa6uvdTnWpv8tB8p6rgkxyS', 3, NULL, '2024-10-13 07:05:13', '2024-10-13 07:05:13'),
+(31, 'User 28', NULL, 'user28@example.com', NULL, NULL, '$2y$12$JK8U9U9thIXbO29b6lYA..AindOOG1AdUyNvL8A6A5ElP/qFfE1Qi', 3, NULL, '2024-10-13 07:05:14', '2024-10-13 07:05:14'),
+(32, 'User 29', NULL, 'user29@example.com', NULL, NULL, '$2y$12$Uh.2UzpCSeUhhLDzJoeDaOg267cVJEoUJd2k8kNyTzIy1C8j7ZwzC', 3, NULL, '2024-10-13 07:05:14', '2024-10-13 07:05:14'),
+(33, 'User 30', NULL, 'user30@example.com', NULL, NULL, '$2y$12$tvuwvPSx7sFYSOt/iR7VqesXqzOL3V8/f21dPRa61ZWRDAfYaY47u', 3, NULL, '2024-10-13 07:05:14', '2024-10-13 07:05:14'),
+(35, 'Tho Mai Huy', NULL, 'timviec@gmail.com', '0904848855', NULL, '$2y$12$l11nJc7UWpWCt17KhB3Pu.GWiGEELyVD.pbq7RTS1gunmxi03JYHa', 3, NULL, '2024-11-01 20:32:53', '2024-11-02 09:24:56');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -336,6 +390,20 @@ ALTER TABLE `applications`
 ALTER TABLE `companies`
   ADD PRIMARY KEY (`id`),
   ADD KEY `companies_user_id_foreign` (`user_id`);
+
+--
+-- Chỉ mục cho bảng `favourites`
+--
+ALTER TABLE `favourites`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `favourites_user_id_foreign` (`user_id`),
+  ADD KEY `favourites_job_id_foreign` (`job_id`);
+
+--
+-- Chỉ mục cho bảng `feedbacks`
+--
+ALTER TABLE `feedbacks`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `jobs`
@@ -395,19 +463,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `companies`
 --
 ALTER TABLE `companies`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT cho bảng `favourites`
+--
+ALTER TABLE `favourites`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT cho bảng `feedbacks`
+--
+ALTER TABLE `feedbacks`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `job_categories`
@@ -419,7 +499,7 @@ ALTER TABLE `job_categories`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`
@@ -431,7 +511,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -449,6 +529,13 @@ ALTER TABLE `applications`
 --
 ALTER TABLE `companies`
   ADD CONSTRAINT `companies_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `favourites`
+--
+ALTER TABLE `favourites`
+  ADD CONSTRAINT `favourites_job_id_foreign` FOREIGN KEY (`job_id`) REFERENCES `jobs` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `favourites_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `jobs`
