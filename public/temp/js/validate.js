@@ -1,3 +1,5 @@
+
+
 // Click để xóa các thông báo đỏ của check dữ liệu
 $('form .input-field').each(function () {
     $(this).click(function () {

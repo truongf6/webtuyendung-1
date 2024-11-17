@@ -1,6 +1,6 @@
 @extends('layout.layout')
 @section('content')
-<section class="section-hero home-section overlay inner-page bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
+<section class="section-hero home-section overlay inner-page bg-image" style="background-image: url('/temp/assets/images/hero_1.jpg');" id="home-section">
 
     <div class="container">
       <div class="row align-items-center justify-content-center">
@@ -9,26 +9,37 @@
             <h1 class="text-white font-weight-bold">Cách dễ nhất để có được công việc mơ ước</h1>
             <p>Chọn một công việc bạn yêu thích, và bạn sẽ không phải làm việc một ngày nào trong cuộc đời.</p>
           </div>
-          <form method="post" class="search-jobs-form">
+          <form method="GET" class="search-jobs-form" action="{{ route('jobList') }}">
             <div class="row mb-5">
-              <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                <input type="text" class="form-control form-control-lg" placeholder="Job title, Company...">
-              </div>
-              <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search"><span class="icon-search icon mr-2"></span>Search Job</button>
-              </div>
+                <!-- Tiêu đề công việc -->
+                <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                    <input type="text" name="title" class="form-control form-control-lg" placeholder="Tiêu đề công việc" value="{{ request()->title }}">
+                </div>
+                <!-- Tên công ty -->
+                <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                    <input type="text" name="company" class="form-control form-control-lg" placeholder="Tên công ty" value="{{ request()->company }}">
+                </div>
+                <!-- Địa chỉ -->
+                <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                    <input type="text" name="location" class="form-control form-control-lg" placeholder="Địa chỉ" value="{{ request()->location }}">
+                </div>
+                <!-- Danh mục công việc -->
+                <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                    <input type="text" name="category" class="form-control form-control-lg" placeholder="Danh mục công việc" value="{{ request()->category }}">
+                </div>
+                <!-- Loại hình công việc -->
+                <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                    <input type="text" name="type" class="form-control form-control-lg" placeholder="Loại hình công việc" value="{{ request()->type }}">
+                </div>
+                <!-- Nút tìm kiếm -->
+                <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search">
+                        <span class="icon-search icon mr-2"></span>Tìm kiếm
+                    </button>
+                </div>
             </div>
-            <div class="row">
-              <div class="col-md-12 popular-keywords">
-                <h3>Trending Keywords:</h3>
-                <ul class="keywords list-unstyled m-0 p-0">
-                  <li><a href="#" class="">UI Designer</a></li>
-                  <li><a href="#" class="">Python</a></li>
-                  <li><a href="#" class="">Developer</a></li>
-                </ul>
-              </div>
-            </div>
-          </form>
+        </form>
+        
         </div>
       </div>
     </div>
@@ -80,15 +91,12 @@
 
       <div class="row pagination-wrap">
         <div class="col-md-6 text-center text-md-right">
-          <div class="custom-pagination ml-auto">
-            <a href="#" class="prev">Prev</a>
-            <div class="d-inline-block">
-                {{ $Jobs->links() }}
+            <div class="custom-pagination ml-auto">
+                {{ $Jobs->appends(request()->input())->links() }}
             </div>
-            <a href="#" class="next">Next</a>
-          </div>
         </div>
-      </div>
+    </div>
+    
 
     </div>
   </section>

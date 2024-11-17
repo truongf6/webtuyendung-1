@@ -12,7 +12,7 @@
                 <div class="mb-3">
                     <div class="row">
                         <div class="col-lg-4 col-sm-6 col-12 mb-3">
-                            <input class="form-control shadow-none" 
+                            <input disabled class="form-control shadow-none" 
                                    type="text" 
                                    id="searchInputNv" 
                                    name="search_id" 
@@ -20,7 +20,7 @@
                                    value="{{ request()->search_id }}">
                         </div>
                         <div class="col-lg-4 col-sm-6 col-12 mb-3">
-                            <input class="form-control shadow-none" 
+                            <input disabled class="form-control shadow-none" 
                                    type="text" 
                                    id="searchInputVk" 
                                    name="search_name" 
@@ -47,7 +47,7 @@
                 <h5 class=" fw-bold">Danh sách phản hồi </h5>
             </div>
             <div class="table-responsive text-nowrap">
-                <table class="table">
+                <table class="table table-hover">
                     <thead>
                     <tr>
                         <th>STT</th>
@@ -101,9 +101,9 @@
                                             class='form-label'
                                             for='basic-default-fullname'
                                         >Tiêu đề</label>
-                                        <input
+                                        <input disabled
                                             type='text'
-                                            class='form-control title input-field '
+                                            class='form-control title  '
                                             id='title'
                                         />
                                     </div>
@@ -112,9 +112,9 @@
                                             class='form-label'
                                             for='basic-default-fullname'
                                         >Nội dung</label>
-                                        <input
+                                        <input disabled
                                             type='text'
-                                            class='form-control slug input-field '
+                                            class='form-control slug  '
                                             id='content'
                                         />
                                     </div>
@@ -123,7 +123,7 @@
                                             class='form-label'
                                             for='basic-default-fullname'
                                         >Tên người gửi</label>
-                                        <input
+                                        <input disabled
                                             type='text'
                                             class='form-control name'
                                             id='fullname'
@@ -134,7 +134,7 @@
                                             class='form-label'
                                             for='basic-default-fullname'
                                         >Email</label>
-                                        <input
+                                        <input disabled
                                             type='text'
                                             class='form-control name'
                                             id='email'
@@ -145,7 +145,7 @@
                                             class='form-label'
                                             for='basic-default-fullname'
                                         >Số điện thoại</label>
-                                        <input
+                                        <input disabled
                                             type='text'
                                             class='form-control name'
                                             id='phone'
@@ -156,7 +156,7 @@
                                             class='form-label'
                                             for='basic-default-fullname'
                                         >Thời gian gửi</label>
-                                        <input
+                                        <input disabled
                                             type='text'
                                             class='form-control name'
                                             id='time'

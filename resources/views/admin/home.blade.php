@@ -43,151 +43,213 @@
                 <div class='col-12 order-1'>
                     <h3>Thống kê</h3>
                     <div class='row'>
-                        <div class='col-lg-3 col-md-12 col-6 mb-4'>
-                            <div class='card'>
-                                <div class='card-body'>
-                                    <div
-                                        class='card-title d-flex align-items-start justify-content-between'
-                                    >
-                                        <div class='avatar flex-shrink-0'>
-                                            <img
-                                                src='/temp/admin/assets/img/icons/unicons/chart-success.png'
-                                                alt='chart success'
-                                                class='rounded'
-                                            />
-                                        </div>
-                                        <div class='dropdown'>
-                                            <button
-                                                class='btn p-0'
-                                                type='button'
-                                                id='cardOpt3'
-                                                data-bs-toggle='dropdown'
-                                                aria-haspopup='true'
-                                                aria-expanded='false'
-                                            >
-                                                <i
-                                                    class='bx bx-dots-vertical-rounded'
-                                                ></i>
-                                            </button>
-                                            <div
-                                                class='dropdown-menu dropdown-menu-end'
-                                                aria-labelledby='cardOpt3'
-                                            >
-                                                <a
-                                                    class='dropdown-item'
-                                                    href=''
-                                                >Xem</a>
+                        <div class="col-lg-4 col-md-12 col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                    <span class="fw-semibold d-block mb-1 fs-5">Tổng doanh thu</span>
 
-                                            </div>
-                                        </div>
+                                        <div class="avatar flex-shrink-0">
+                                            <img
+                                            src='/temp/admin/assets/img/icons/unicons/chart-success.png'
+                                            alt='chart success'
+                                            class='rounded'
+                                        />                                        </div>
                                     </div>
-                                    <span
-                                        class='fw-semibold d-block mb-1'
-                                    >Khách hàng </span>
-                                    <h3 class='card-title mb-2'></h3>
-                                    <small class='text-success fw-semibold'><i
-                                            class='bx bx-up-arrow-alt'
-                                        ></i></small>
+                                    <h3 class="card-title mb-2">{{ number_format((float)str_replace(',', '', $tongdoanhthu), 0, ',', '.') }} đ</h3>
                                 </div>
                             </div>
                         </div>
-                        <div class='col-lg-3 col-md-12 col-6 mb-4'>
-                            <div class='card'>
-                                <div class='card-body'>
-                                    <div
-                                        class='card-title d-flex align-items-start justify-content-between'
-                                    >
-                                        <div class='avatar flex-shrink-0'>
-                                            <img
-                                                src='/temp/admin/assets/img/icons/unicons/wallet-info.png'
-                                                alt='Credit Card'
-                                                class='rounded'
-                                            />
-                                        </div>
-                                        <div class='dropdown'>
-                                            <button
-                                                class='btn p-0'
-                                                type='button'
-                                                id='cardOpt6'
-                                                data-bs-toggle='dropdown'
-                                                aria-haspopup='true'
-                                                aria-expanded='false'
-                                            >
-                                                <i
-                                                    class='bx bx-dots-vertical-rounded'
-                                                ></i>
-                                            </button>
-                                            <div
-                                                class='dropdown-menu dropdown-menu-end'
-                                                aria-labelledby='cardOpt6'
-                                            >
-                                                <a
-                                                    class='dropdown-item'
-                                                    href=''
-                                                >Xem</a>
+                        <div class="col-lg-4 col-md-12 col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                    <span class="fw-semibold d-block mb-1 fs-5">Doanh thu tháng này</span>
 
-                                            </div>
-                                        </div>
+                                        <div class="avatar flex-shrink-0">
+                                            <img
+                                            src='/temp/admin/assets/img/icons/unicons/chart-success.png'
+                                            alt='chart success'
+                                            class='rounded'
+                                        />                                        </div>
                                     </div>
-                                    <span>Sản phẩm</span>
-                                    <h3
-                                        class='card-title text-nowrap mb-1'
-                                    ></h3>
-                                    <small class='text-success fw-semibold'><i
-                                            class='bx bx-up-arrow-alt'
-                                        ></i></small>
+                                    <h3 class="card-title mb-2">{{ number_format((float)str_replace(',', '', $tongdoanhthuThangNay), 0, ',', '.') }} đ</h3>
                                 </div>
                             </div>
                         </div>
-                        <div class='col-lg-3 col-md-12 col-6 mb-4'>
-                            <div class='card'>
-                                <div class='card-body'>
-                                    <div
-                                        class='card-title d-flex align-items-start justify-content-between'
-                                    >
-                                        <div class='avatar flex-shrink-0'>
-                                            <img
-                                                src='/temp/admin/assets/img/icons/unicons/wallet-info.png'
-                                                alt='Credit Card'
-                                                class='rounded'
-                                            />
-                                        </div>
-                                        <div class='dropdown'>
-                                            <button
-                                                class='btn p-0'
-                                                type='button'
-                                                id='cardOpt6'
-                                                data-bs-toggle='dropdown'
-                                                aria-haspopup='true'
-                                                aria-expanded='false'
-                                            >
-                                                <i
-                                                    class='bx bx-dots-vertical-rounded'
-                                                ></i>
-                                            </button>
-                                            <div
-                                                class='dropdown-menu dropdown-menu-end'
-                                                aria-labelledby='cardOpt6'
-                                            >
-                                                <a
-                                                    class='dropdown-item'
-                                                    href=''
-                                                >Xem</a>
+                        <div class="col-lg-4 col-md-12 col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                    <span class="fw-semibold d-block mb-1 fs-5">Doanh thu hôm nay</span>
 
-                                            </div>
-                                        </div>
+                                        <div class="avatar flex-shrink-0">
+                                            <img
+                                            src='/temp/admin/assets/img/icons/unicons/chart-success.png'
+                                            alt='chart success'
+                                            class='rounded'
+                                        />                                        </div>
                                     </div>
-                                    <span>Bài viết</span>
-                                    <h3
-                                        class='card-title text-nowrap mb-1'
-                                    ></h3>
-                                    <small class='text-success fw-semibold'><i
-                                            class='bx bx-up-arrow-alt'
-                                        ></i></small>
+                                    <h3 class="card-title mb-2">{{ number_format((float)str_replace(',', '', $tongdoanhthuHomNay), 0, ',', '.') }} đ</h3>
                                 </div>
                             </div>
                         </div>
 
+
+
+                        <div class="col-lg-3 col-md-12 col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                    <span class="fw-semibold d-block mb-1 fs-5">Tài khoản quản trị</span>
+
+                                        <div class="avatar flex-shrink-0">
+                                            <img
+                                            src='/temp/admin/assets/img/icons/unicons/chart-success.png'
+                                            alt='chart success'
+                                            class='rounded'
+                                        />                                        </div>
+                                    </div>
+                                    <h3 class="card-title mb-2">{{$count_userAdmin}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12 col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                    <span class="fw-semibold d-block mb-1 fs-5">Tài khoản công ty</span>
+
+                                        <div class="avatar flex-shrink-0">
+                                            <img
+                                            src='/temp/admin/assets/img/icons/unicons/chart-success.png'
+                                            alt='chart success'
+                                            class='rounded'
+                                        />                                        </div>
+                                    </div>
+                                    <h3 class="card-title mb-2">{{$count_company}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12 col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                    <span class="fw-semibold d-block mb-1 fs-5">Tài khoản tìm việc</span>
+
+                                        <div class="avatar flex-shrink-0">
+                                            <img
+                                            src='/temp/admin/assets/img/icons/unicons/chart-success.png'
+                                            alt='chart success'
+                                            class='rounded'
+                                        />                                        </div>
+                                    </div>
+                                    <h3 class="card-title mb-2">{{$count_employee}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12 col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                    <span class="fw-semibold d-block mb-1 fs-5">Danh mục công việc</span>
+
+                                        <div class="avatar flex-shrink-0">
+                                            <img
+                                            src='/temp/admin/assets/img/icons/unicons/chart-success.png'
+                                            alt='chart success'
+                                            class='rounded'
+                                        />                                        </div>
+                                    </div>
+                                    <h3 class="card-title mb-2">{{$job_cate}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12 col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                    <span class="fw-semibold d-block mb-1 fs-5">Công việc đã đăng</span>
+
+                                        <div class="avatar flex-shrink-0">
+                                            <img
+                                            src='/temp/admin/assets/img/icons/unicons/chart-success.png'
+                                            alt='chart success'
+                                            class='rounded'
+                                        />                                        </div>
+                                    </div>
+                                    <h3 class="card-title mb-2">{{$job}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12 col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                    <span class="fw-semibold d-block mb-1 fs-5">Công ty đăng tuyển</span>
+
+                                        <div class="avatar flex-shrink-0">
+                                            <img
+                                            src='/temp/admin/assets/img/icons/unicons/chart-success.png'
+                                            alt='chart success'
+                                            class='rounded'
+                                        />                                        </div>
+                                    </div>
+                                    <h3 class="card-title mb-2">{{$company}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12 col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                    <span class="fw-semibold d-block mb-1 fs-5">CV đã ứng tuyển</span>
+
+                                        <div class="avatar flex-shrink-0">
+                                            <img
+                                            src='/temp/admin/assets/img/icons/unicons/chart-success.png'
+                                            alt='chart success'
+                                            class='rounded'
+                                        />                                        </div>
+                                    </div>
+                                    <h3 class="card-title mb-2">{{$applied}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12 col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                    <span class="fw-semibold d-block mb-1 fs-5">Bài viết </span>
+
+                                        <div class="avatar flex-shrink-0">
+                                            <img
+                                            src='/temp/admin/assets/img/icons/unicons/chart-success.png'
+                                            alt='chart success'
+                                            class='rounded'
+                                        />                                        </div>
+                                    </div>
+                                    <h3 class="card-title mb-2">{{$post}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-12 col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                    <span class="fw-semibold d-block mb-1 fs-5">Phản hồi </span>
+
+                                        <div class="avatar flex-shrink-0">
+                                            <img
+                                            src='/temp/admin/assets/img/icons/unicons/chart-success.png'
+                                            alt='chart success'
+                                            class='rounded'
+                                        />                                        </div>
+                                    </div>
+                                    <h3 class="card-title mb-2">{{$feedback}}</h3>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Total Revenue -->

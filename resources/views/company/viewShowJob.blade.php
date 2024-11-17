@@ -30,7 +30,7 @@
             </div>
             <div class="row mb-5">
                 <div class="col-lg-12">
-                    <table class="table">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th>STT</th>
@@ -62,6 +62,8 @@
                                             class="btn btn-danger btnDeleteAsk px-2 me-2 py-1 fw-bolder"
                                             data-bs-toggle="modal"
                                             data-bs-target="#modalDetail{{ $job->id }}">edit</a>
+                                            <a href="{{ route('jobApplications', $job->id) }}" class="btn btn-info px-2 py-1">Đơn được nạp</a>
+
                                     </td>
 
                                 </tr>

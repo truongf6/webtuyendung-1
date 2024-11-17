@@ -5,7 +5,7 @@
 >
     <div class='app-brand demo'>
         <a href='/admin' class='app-brand-link'>
-            <img src='/temp/images/general/logo.png' width='200' alt='' />
+            <img src='/temp/assets/images/general/logo.png' width='200' alt='' />
         </a>
 
         <a
@@ -70,17 +70,16 @@
             </a>
         </li>
         <li class='menu-item'>
-            <a href='javascript:void(0);' class='menu-link menu-toggle'>
+            <a href='{{route('applications.index')}}' class='menu-link'>
+                <i class='menu-icon tf-icons bx bx-news'></i>
+                <div data-i18n='Layouts'>Quản lý đơn đã ứng tuyển</div>
+            </a>
+        </li>
+        <li class='menu-item'>
+            <a href='{{route('posts.index')}}' class='menu-link'>
                 <i class='menu-icon tf-icons bx bx-news'></i>
                 <div data-i18n='Layouts'>Quản lý bài viết</div>
             </a>
-            <ul class='menu-sub'>
-                <li class='menu-item'>
-                    <a href='' class='menu-link'>
-                        <div data-i18n='Without menu'>Danh sách bài viết</div>
-                    </a>
-                </li>
-            </ul>
         </li>
         
         <li class="menu-header small text-uppercase">
@@ -107,19 +106,16 @@
             </ul>
         </li>
         <li class='menu-item'>
-            <a href='javascript:void(0);' class='menu-link menu-toggle'>
+            <a href='{{route('doanhthu.index')}}' class='menu-link'>
                 <i class='menu-icon tf-icons bx bx-food-menu'></i>
-                <div data-i18n='Layouts'>Quản lý ...</div>
+                <div data-i18n='Layouts'>Lịch sử doanh thu</div>
             </a>
-            <ul class='menu-sub'>
-                <li class='menu-item'>
-                    <a href='' class='menu-link'>
-                        <div data-i18n='Without menu'>Danh sách ...</div>
-                    </a>
-                </li>
-
-            </ul>
         </li>
-
+        <li class='menu-item'>
+            <a href='{{route('settings.index')}}' class='menu-link'>
+                <i class="menu-icon tf-icons bx bx-cog"></i>
+                <div data-i18n='Layouts'>Thiết lập</div>
+            </a>
+        </li>
     </ul>
 </aside>

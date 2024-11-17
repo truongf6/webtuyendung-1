@@ -12,6 +12,23 @@
    <script src="/temp/assets/js/custom.js"></script>
    <script src="/temp/assets/js/quill.min.js"></script>
    <script>
+      $('#form-pay__money').submit(function (e) {
+         e.preventDefault(); // Ngăn chặn hành động mặc định
+
+         const $amount_money = $('#input-amount__money').val();
+
+         if (!$amount_money) {
+            alert('Bạn chưa nhập số tiền.');
+         } else {
+            if (parseInt($amount_money) < 10000) {
+                  alert('Số tiền không được nhỏ hơn 10.000đ.');
+            } else {
+                  // Sử dụng `unbind` để bỏ sự kiện submit trước khi gửi form
+                  $(this).off('submit').submit();
+            }
+         }
+      });
+
       $(' form button[type="submit"]').on('click', function(e){
          e.preventDefault();
          let form = $(this).closest('form');

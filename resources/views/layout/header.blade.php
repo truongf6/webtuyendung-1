@@ -20,7 +20,7 @@
             <li class="">
               <a href="{{route('jobList')}}">Danh sách công việc</a>
             </li>
-            <li><a href="blog.html">Bài viết</a></li>
+            <li><a href="{{route('listPost')}}">Bài viết</a></li>
             <li><a href="{{route('contact')}}">Liên hệ</a></li>
             @if(Auth::check() && Auth::user()->role_id != 3)
             <li class="d-lg-none"><a href="{{route('postJobPage')}}"><span class="mr-2">+</span> Đăng công việc</a></li>
@@ -33,19 +33,67 @@
           <div class="ml-auto d-flex align-items-center">
               @if(Auth::check())
                 @if(Auth::user()->role_id != 3)
+                <div class="ms-auto me-4 payment-contain">
+                  @auth
+                  <button type="button" class="btn btn-info mr-3" data-toggle="modal" data-target="#exampleModal">
+                    Nạp tiền
+                  </button>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Nạp tiền vào tài khoản - ( Số dư: @if(Auth::user()->money === null) 0đ @else <span class="money">{{ number_format(Auth::user()->money, 0, ',', '.') }} đ</span> @endif )</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form id="form-pay__money" action="{{route('checkout.payment.vnpay')}}" method="post">
+                            @csrf
+                            <div class="form-group d-flex align-items-center text-nowrap">
+                              <label for="" class="me-3 mb-0 fw-bold"> <i class="fa-solid fa-circle-right"></i> Nhập số tiền( VD: 10000 ):</label>
+                              <div class="input-group text-black ml-2">
+                                  <input id="input-amount__money" type="float" name="amount_money" class="form-control" placeholder="Nhập số tiền > 5000đ">
+                                  <span class="input-group-text">VNĐ</span>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-primary">Nạp</button>
+                          </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>  
+                  @else
+                      <a href="{{route('login')}}" class="btn btn-info fw-bold">
+                          Nạp tiền
+                      </a>
+                  @endauth
+              </div>
                 <a href="{{route('postJobPage')}}" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block mr-3">
                     <span class="mr-2 icon-add"></span>Đăng công việc
                 </a>
                 @endif
               <!-- Menu thả xuống cho 'Trang cá nhân' -->
               <div class="dropdown">
-                  <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block mr-3 dropdown-toggle"
-                     id="personalMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     <span class="icon-lock_outline"></span>Trang cá nhân
+                @if(Auth::user()->role_id === 3)
+                    <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block mr-3 dropdown-toggle"
+                    id="personalMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{Auth::user()->name}}
                   </a>
+                @else
+                  <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block mr-3 dropdown-toggle"
+                      id="personalMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{Auth::user()->name}} - @if(Auth::user()->money === null) 0đ @else <span class="money">{{ number_format(Auth::user()->money, 0, ',', '.') }} đ</span> @endif
+                    </a>
+                @endif
                   <div class="dropdown-menu text-center" aria-labelledby="personalMenu">
-                      <a class="dropdown-item" href="#">Thông tin cá nhân</a>
-                      <a class="dropdown-item" href="#">Cài đặt tài khoản</a>
+                      <a class="dropdown-item" href="{{route('profile')}}">Thông tin cá nhân</a>
+                      <a class="dropdown-item" href="{{route('changePassword')}}">Đổi mật khẩu</a>
                         @if(Auth::user()->role_id != 3)
                         <a class="dropdown-item" href="{{route('viewJobPage')}}">Công việc đã Đăng</a>
                         @else

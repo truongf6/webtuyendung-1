@@ -22,14 +22,30 @@
         <div class="col-lg-8 mb-4 mb-lg-0">
           <div class="d-flex align-items-center">
             <div>
-              <h2>Đăng công việc</h2>
+              <h2>Đăng công việc  - ( Phí mỗi bài đăng : @if($money === null) 0đ @else <span class="money">{{ number_format((float)str_replace(',', '', $money), 0, ',', '.') }} đ</span> )@endif</h2> 
             </div>
           </div>
         </div>
       </div>
       <div class="row mb-5">
         <div class="col-lg-12">
-          <form class="p-4 p-md-5 border rounded" id="form-post_job" enctype="multipart/form-data" action="" method="post">
+          @if($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
+
+          @if(session('success'))
+              <div class="alert alert-success">
+                  {{ session('success') }}
+              </div>
+          @endif
+
+          <form class="p-4 p-md-5 border rounded" id="form-post_job" enctype="multipart/form-data" action="" data-money_user="{{Auth::user()->money}}" data-money_post="{{$money}}" method="post">
             @csrf
             <div class="row">
                 <div class="col-8">
@@ -37,10 +53,9 @@
                 </div>
                 <div class="row col-4">
                     <div class="col-6">
-                    <a href="#" class="btn btn-block btn-light btn-md text-nowrap"><span class="icon-open_in_new mr-2"></span>Xem trước</a>
                     </div>
                     <div class="col-6">
-                    <button type="submit" class="btn btn-block btn-primary btn-md">Lưu lại</button>
+                    <button type="submit" class="btn btn-block btn-primary btn-md">Đăng bài</button>
                     </div>
                 </div>
             </div>
@@ -161,10 +176,9 @@
                 <div class="col-lg-4 ml-auto">
                   <div class="row">
                     <div class="col-6">
-                      <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-open_in_new mr-2"></span>Preview</a>
                     </div>
                     <div class="col-6">
-                      <button type="submit" class="btn btn-block btn-primary btn-md">Save Job</button>
+                      <button type="submit" class="btn btn-block btn-primary btn-md">Đăng bài</button>
                     </div>
                   </div>
                 </div>
@@ -255,9 +269,13 @@
 
         $('#form-post_job').on('submit', function(e) {
             e.preventDefault();  // Ngăn form submit truyền thống
-
+            const money_user = $(this).data('money_user');
+            const money_post = $(this).data('money_post');
             // Tạo một đối tượng FormData để chứa tất cả dữ liệu
-            var formData = new FormData(this);
+            if(money_user < money_post){
+              alert('Số tiền trong tài khoản không đủ! Vui lòng nạp thêm tiền!');
+            }else{
+              var formData = new FormData(this);
 
             // Lấy nội dung của thẻ .description và .description-company
             var description = $('.description').html();
@@ -280,6 +298,7 @@
                 success: function(response) {
                     if(response.success) {
                         alert('Công việc đã được đăng thành công!');
+                        window.location.reload()
                         // Bạn có thể xử lý thêm logic sau khi thành công, ví dụ như chuyển hướng
                     }
                 },
@@ -291,6 +310,7 @@
                     });
                 }
             });
+            }
         });
     })
 </script>

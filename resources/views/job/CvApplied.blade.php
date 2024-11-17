@@ -29,7 +29,7 @@
             </div>
             <div class="row mb-5">
                 <div class="col-lg-12">
-                    <table class="table table-dark">
+                    <table class="table table-dark table-hover">
                         <thead>
                             <tr class="text-nowrap">
                                 <th>STT</th>
@@ -55,16 +55,27 @@
                                     <td>{{ $application->Job->Company->name }}</td>
                                     <td>{{ $application->Job->location ?? '' }}</td>
                                     <td>{{ $application->Job->type }}</td>
-                                    @if($application->status == null)
+                                    <td>
+                                        @if($application->status === null)
+                                            <span class="badge bg-warning text-dark p-2">Chưa duyệt</span>
+                                        @else
+                                            @if ($application->status === 0)
+                                                <span class="badge bg-danger text-white p-2 ">Đã từ chối</span>
+                                            @elseif ($application->status === 1)
+                                                <span class="badge bg-success p-2 ">Đã duyệt</span>
+                                            @endif
+                                        @endif
+                                    </td>
+                                    {{-- @if($application->status == null)
                                         <td class="text-warning text-wrap font-weight-bold">Đang chờ duyệt</td>
                                     @elseif($application->status == 0)
                                         <td class="text-danger text-wrap font-weight-bold" font-weight-bold>Không được duyệt</td>
                                     @else
                                         <td class="text-success text-wrap font-weight-bold">Đã duyệt</td>
-                                    @endif
+                                    @endif --}}
                                     <td class="">
                                         <a href="{{ route('jobDetail', $application->Job->slug) }}" type="button"
-                                            class="btn btn-danger btnDeleteAsk px-2 me-2 py-1 fw-bolder"
+                                            class="btn btn-info btnDeleteAsk px-2 me-2 py-1 fw-bolder"
                                             data-bs-toggle="modal" data-bs-target="#modalDetail{{ $application->Job->id }}">Chi
                                             tiết
                                         </a>

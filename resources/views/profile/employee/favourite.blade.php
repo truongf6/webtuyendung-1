@@ -56,9 +56,11 @@
                                     <td>{{ $favourite->Job->type }}</td>
                                     <td class="">
                                         <a href="{{ route('jobDetail', $favourite->Job->slug) }}" type="button"
-                                            class="btn btn-danger btnDeleteAsk px-2 me-2 py-1 fw-bolder"
+                                            class="btn btn-info btnDeleteAsk px-2 me-2 py-1 fw-bolder"
                                             data-bs-toggle="modal" data-bs-target="#modalDetail{{ $favourite->Job->id }}">Chi
                                             tiết
+                                        </a>
+                                        <a href="#" type="button" class="btn btn-danger remove-job-btn px-2 me-2 py-1 fw-bolder" data-job-id="{{ $favourite->Job->id }}">Bỏ lưu
                                         </a>
                                     </td>
 
@@ -74,4 +76,35 @@
             </div>
         </div>
     </section>
+    <script>
+        $('.remove-job-btn').on('click', function(e) {
+            e.preventDefault();
+            
+            let job_id = $(this).data('job-id');
+
+            $.ajax({
+                url: "{{ route('favourite.destroy') }}",
+                method: "DELETE",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    job_id: job_id
+                },
+                success: function(response) {
+                    if(response.status === 'success') {
+                        alert(response.message);
+                        window.location.reload();
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function(xhr) {
+                    if(xhr.status === 401) {
+                        alert("Bạn cần đăng nhập để bỏ lưu công việc");
+                    } else {
+                        alert("Đã xảy ra lỗi, vui lòng thử lại sau");
+                    }
+                }
+            });
+        });
+    </script>
 @endsection

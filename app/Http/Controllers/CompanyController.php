@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdmminMoney;
 use Carbon\Carbon;
 use App\Models\Job;
 use App\Models\User;
 use App\Models\Company;
+use App\Models\setting;
+use App\Models\Application;
 use Illuminate\Support\Str;
 use App\Models\Job_Category;
 use Illuminate\Http\Request;
@@ -19,8 +22,9 @@ class CompanyController extends Controller
     public function postJobPage()
     {
         $job_categories = Job_Category::all();
+        $money = setting::where('key', 'money')->pluck('value')->first();
 
-        return view('company.postJobPage', compact('job_categories'), [
+        return view('company.postJobPage', compact('job_categories','money'), [
             'title' => 'Đăng tin tuyển dụng'
         ]);
     }
@@ -35,7 +39,9 @@ class CompanyController extends Controller
     // Đăng tin
     public function postJob(Request $request)
     {
-        // Validation dữ liệu
+        $money_user = Auth::user()->money;
+        $money_post =  setting::where('key', 'money')->pluck('value')->first();
+            // Validation dữ liệu
         $this->validate($request, [
             'title' => 'required',
             'job_categories_id-select' => 'required',
@@ -74,10 +80,6 @@ class CompanyController extends Controller
         // Tạo slug từ tiêu đề
         $slug = Str::slug($request->input('title'));
 
-        // Kiểm tra slug đã tồn tại chưa
-        if (Job::where('slug', $slug)->exists()) {
-            return response()->json(['error' => 'Tiêu đề đã tồn tại, vui lòng nhập tiêu đề khác.'], 422);
-        }
         $user_id = Auth::user()->id;
         $company = new Company;
         $company->user_id = $user_id;
@@ -106,7 +108,7 @@ class CompanyController extends Controller
         $job = new Job;
         $job->user_id = $user_id;
         $job->title = $request->input('title');  // Hoặc $request->title
-        $job->slug = $slug;  // Tạo slug từ tiêu đề
+        $job->slug = $slug . $job->id;  // Tạo slug từ tiêu đề
         $image = $request->file('thumb'); // Lấy file ảnh từ file Upload
         if ($image) {
             $fileName = $job->slug . '.jpg'; // Tên ảnh theo Slug Title
@@ -127,6 +129,16 @@ class CompanyController extends Controller
         $job->expires_at = $request->input('expires');
         $job->company_id = $company->id;
         $job->save();
+
+        $user = User::find(Auth::user()->id);
+        $user->money -= $money_post;
+        $user->save();
+
+        $admin_money = new AdmminMoney;
+        $admin_money->amount = $money_post;
+        $admin_money->description = "Chi phí đăng bài của công ty ". $company->name;
+        $admin_money->user_id = Auth::user()->id;
+        $admin_money->save();
         return response()->json(['success' => 'Công việc đã được đăng thành công!', 'job' => $job], 200);
     }
     public function viewJobPageEdit($slug)
@@ -238,4 +250,37 @@ class CompanyController extends Controller
     }
     
 
+    public function listApplications($id)
+    {
+        // Lấy thông tin công việc
+        $job = Job::findOrFail($id);
+
+        // Lấy danh sách các đơn ứng tuyển cho công việc này
+        $applications = Application::where('job_id', $id)->with('user')->get();
+
+        // Trả về view hiển thị danh sách
+        return view('company.listCvApplied', compact('job', 'applications'),[
+            'title' => 'Danh sách CV đã ứng tuyển'
+        ]);
+    }
+
+     // Duyệt đơn ứng tuyển
+     public function approve($id)
+     {
+         $application = Application::findOrFail($id);
+         $application->status = 1; // 1 = Đã duyệt
+         $application->save();
+ 
+         return response()->json(['success' => true, 'message' => 'Đơn ứng tuyển đã được duyệt!']);
+     }
+ 
+     // Hủy đơn ứng tuyển
+     public function reject($id)
+     {
+         $application = Application::findOrFail($id);
+         $application->status = 0; // 0 = Đã từ chối
+         $application->save();
+ 
+         return response()->json(['success' => true, 'message' => 'Đơn ứng tuyển đã bị hủy!']);
+     }
 }

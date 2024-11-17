@@ -211,7 +211,7 @@ jQuery(function($) {
 	    margin:0,
 	    nav:true,
 	    autoplay: true,
-	    items:1,
+	    items:4,
 	    nav: false,
 	    smartSpeed: 1000
 		});

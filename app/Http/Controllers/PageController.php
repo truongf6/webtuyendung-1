@@ -2,14 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Feedback;
-use Illuminate\Http\Request;
+use App\Models\Job;
+use App\Models\User;
 use ValidatesRequests;
+use App\Models\Company;
+use App\Models\Feedback;
+use App\Models\Application;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
     public function about(){
-        return view('pages.about',[
+        $count_job = Job::count();
+        $count_employee= User::where('role_id',3)->count();
+        $company= Company::count();
+        $applied= Application::count();
+        return view('pages.about',compact('count_job','count_employee','company','applied'),[
             'title' => 'Giới thiệu'
         ]);
     }

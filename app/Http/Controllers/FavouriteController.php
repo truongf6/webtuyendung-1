@@ -41,4 +41,27 @@ class FavouriteController extends Controller
 
         return response()->json(['status' => 'success', 'message' => 'Công việc đã được lưu thành công']);
     }
+
+    public function destroy(Request $request)
+    {
+        // Kiểm tra xem người dùng đã đăng nhập chưa
+        if (!Auth::check()) {
+            return response()->json(['status' => 'error', 'message' => 'Bạn cần đăng nhập để thực hiện hành động này'], 401);
+        }
+
+        $user_id = Auth::id();
+        $job_id = $request->input('job_id');
+
+        // Kiểm tra và xóa bản ghi trong favourites
+        $existingFavourite = Favourite::where('user_id', $user_id)->where('job_id', $job_id)->first();
+
+        if (!$existingFavourite) {
+            return response()->json(['status' => 'error', 'message' => 'Công việc này chưa được lưu']);
+        }
+
+        $existingFavourite->delete();
+
+        return response()->json(['status' => 'success', 'message' => 'Đã bỏ lưu công việc']);
+    }
+
 }

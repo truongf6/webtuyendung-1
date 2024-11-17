@@ -121,7 +121,7 @@
                 </div>
             </div>
             <div class="table-responsive text-nowrap">
-                <table class="table">
+                <table class="table table-hover">
                     <thead>
                     <tr>
                         <th>STT</th>

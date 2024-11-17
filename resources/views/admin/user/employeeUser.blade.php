@@ -34,7 +34,7 @@
                 <h5 class=" fw-bold">Tài khoản người tìm việc </h5>
             </div>
             <div class="table-responsive text-nowrap">
-                <table class="table">
+                <table class="table table-hover">
                     <thead>
                     <tr>
                         <th>STT</th>

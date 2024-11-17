@@ -45,22 +45,30 @@
       <div class="col-lg-4">
 
         <div class="row">
-          @if( Auth::user()->role_id == 3 )
-            @if($hasApplyJob == true)
-              <h4 class="text-danger font-weight-bold">ĐÃ NẠP ĐƠN!</h4>
+          @if( Auth::check() && Auth::user()->role_id == 3 )
+            @if($hasApplyJob)
+                @if($hasApplyJob->status === null)
+                <h4 class="text-danger font-weight-bold d-flex align-items-center">ĐÃ NẠP ĐƠN!<span class="badge bg-warning ml-3 text-dark">Chưa duyệt</span></h4>
+            @else
+                @if ($hasApplyJob->status === 0)
+                <h4 class="text-danger font-weight-bold d-flex align-items-center">ĐÃ NẠP ĐƠN!<span class="badge bg-danger ml-3 text-white">Đã từ chối</span></h4>
+                @elseif ($hasApplyJob->status === 1)
+                <h4 class="text-danger font-weight-bold d-flex align-items-center">ĐÃ NẠP ĐƠN!<span class="badge bg-success ml-3 text-dark">Đã duyệt</span></h4>
+                @endif
+            @endif
             @else
               <div class="row mb-5">
                 <div class="col-6">
-                  @if($favourite->job_id == $job->id)
-                    <a href="#" class="btn btn-light btn-md text-nowrap save-job-btn" data-job-id="{{ $job->id }}">
-                      <span class="icon-heart mr-2 text-danger"></span>Đã lưu
-                    </a>   
+                  @if($favourite)
+                      <a href="#" class="btn btn-light btn-md text-nowrap remove-job-btn" data-job-id="{{ $job->id }}">
+                          <span class="icon-heart mr-2 text-danger"></span>Bỏ lưu
+                      </a>
                   @else
-                    <a href="#" class="btn btn-light btn-md text-nowrap save-job-btn" data-job-id="{{ $job->id }}">
-                      <span class="icon-heart-o mr-2 text-danger"></span>Lưu công việc
-                    </a>   
-                  @endif             
-                </div>
+                      <a href="#" class="btn btn-light btn-md text-nowrap save-job-btn" data-job-id="{{ $job->id }}">
+                          <span class="icon-heart-o mr-2 text-danger"></span>Lưu công việc
+                      </a>
+                  @endif
+              </div>
                 <div class="col-6">
                   <button type="button" class="btn text-nowrap btn-primary btn-md" data-toggle="modal" data-target="#exampleModalCenter">
                     Nạp đơn ngay
@@ -442,6 +450,36 @@
             error: function(xhr) {
                 if(xhr.status === 401) {
                     alert("Bạn cần đăng nhập để lưu công việc");
+                } else {
+                    alert("Đã xảy ra lỗi, vui lòng thử lại sau");
+                }
+            }
+        });
+    });
+
+    $('.remove-job-btn').on('click', function(e) {
+        e.preventDefault();
+        
+        let job_id = $(this).data('job-id');
+
+        $.ajax({
+            url: "{{ route('favourite.destroy') }}",
+            method: "DELETE",
+            data: {
+                _token: "{{ csrf_token() }}",
+                job_id: job_id
+            },
+            success: function(response) {
+                if(response.status === 'success') {
+                    alert(response.message);
+                    window.location.reload();
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr) {
+                if(xhr.status === 401) {
+                    alert("Bạn cần đăng nhập để bỏ lưu công việc");
                 } else {
                     alert("Đã xảy ra lỗi, vui lòng thử lại sau");
                 }

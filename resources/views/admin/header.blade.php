@@ -1,4 +1,4 @@
-<link rel="icon" type="image/x-icon" href="/temp/images/general/favicon.png" />
+<link rel="icon" type="image/x-icon" href="/temp/assets/images/general/favicon.png" />
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -97,7 +97,7 @@
         height: 500px !important;
     }
 </style>
-<link rel="icon" type="image/x-icon" href="/temp/images/general/favicon.png" />
+<link rel="icon" type="image/x-icon" href="/temp/assets/images/general/favicon.png" />
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
