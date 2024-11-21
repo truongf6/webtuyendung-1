@@ -207,13 +207,22 @@ jQuery(function($) {
 
 	var owlCarouselFunction = function() {
 		$('.single-carousel').owlCarousel({
-	    loop:true,
-	    margin:0,
-	    nav:true,
-	    autoplay: true,
-	    items:4,
-	    nav: false,
-	    smartSpeed: 1000
+			loop:true,
+			margin:0,
+			nav:true,
+			autoplay: true,
+			items:4,
+			nav: false,
+			smartSpeed: 1000
+		});
+		$('.listJob-carousel').owlCarousel({
+			loop:true,
+			margin:0,
+			nav:true,
+			autoplay: true,
+			items:6,
+			nav: false,
+			smartSpeed: 1000
 		});
 
 	}

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function listPost(){
-        $listPosts = Post::where('active', true)->paginate(20);
+        $listPosts = Post::where('active', true)->paginate(9);
         return view('posts.listPost',compact('listPosts'),[
             'title' => 'Danh sách bài viết'
         ]);

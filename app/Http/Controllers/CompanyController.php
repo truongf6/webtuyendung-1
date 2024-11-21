@@ -23,8 +23,9 @@ class CompanyController extends Controller
     {
         $job_categories = Job_Category::all();
         $money = setting::where('key', 'money')->pluck('value')->first();
+        $companies = Company::where('user_id', Auth::user()->id)->get();
 
-        return view('company.postJobPage', compact('job_categories','money'), [
+        return view('company.postJobPage', compact('job_categories','money','companies'), [
             'title' => 'Đăng tin tuyển dụng'
         ]);
     }
@@ -47,22 +48,13 @@ class CompanyController extends Controller
             'job_categories_id-select' => 'required',
             'type' => 'required',
             'position' => 'required',
-            'location' => 'required',
             'salary' => 'required',
-            'description' => 'required',
-            'name' => 'required',
-            'phone_number' => 'required|max:12',
         ], [
             'title.required' => 'Vui lòng nhập tiêu đề công việc.',
             'job_categories_id-select.required' => 'Vui lòng chọn danh mục công việc.',
             'type.required' => 'Vui lòng chọn loại hình công việc.',
-            'description.required' => 'Vui lòng nhập mô tả công việc.',
-            'name.required' => 'Vui lòng nhập tên công ty.',
             'salary.required' => 'Chưa điền thu nhập.',
             'position.required' => 'Vui lòng vị trí tuyển dụng.',
-            'location.required' => 'Vui lòng địa chỉ nơi làm việc.',
-            'phone_number.required' => 'Vui lòng nhập số điện thoại.',
-            'phone_number.max' => 'Số điện thoại không được vượt quá 12 ký tự.',
         ]);
 
         $categoryId = null;
@@ -81,13 +73,28 @@ class CompanyController extends Controller
         $slug = Str::slug($request->input('title'));
 
         $user_id = Auth::user()->id;
-        $company = new Company;
-        $company->user_id = $user_id;
-        $company->name = $request->input('name');
-        $company->phone_number = $request->input('phone_number');
-        $company->description = $request->input('descriptionCompanyContent');
-        $company->website = $request->input('website');
-        $company->save();
+        $company = Company::where('user_id', $user_id)
+        ->where('name', $request->input('name'))
+        ->first();
+        if (!$company) {
+            $this->validate($request, [
+                'location' => 'required',
+                'name' => 'required',
+                'phone_number' => 'required|max:12',
+            ], [
+                'name.required' => 'Vui lòng nhập tên công ty.',
+                'location.required' => 'Vui lòng địa chỉ nơi làm việc.',
+                'phone_number.required' => 'Vui lòng nhập số điện thoại.',
+                'phone_number.max' => 'Số điện thoại không được vượt quá 12 ký tự.',
+            ]);
+            $company = new Company;
+            $company->user_id = $user_id;
+            $company->name = $request->input('name');
+            $company->phone_number = $request->input('phone_number');
+            $company->description = $request->input('descriptionCompanyContent');
+            $company->website = $request->input('website');
+            $company->save();
+        }
 
         // Xử lý ảnh logo của user (tương ứng với ảnh công ty)
         $image = $request->file('thumb-company'); // Lấy file ảnh từ file Upload

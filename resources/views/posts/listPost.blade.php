@@ -24,22 +24,10 @@
           </div>
         @endforeach
       </div>
-      <div class="row pagination-wrap mt-5">
-        
-        <div class="col-md-12 text-center ">
-          <div class="custom-pagination ml-auto">
-            <a href="#" class="prev">Prev</a>
-            <div class="d-inline-block">
-            <a href="#" class="active">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            </div>
-            <a href="#" class="next">Next</a>
-          </div>
-        </div>
-      </div>
-
+      <div class="pagination mt-4 pb-4">
+        {{ $listPosts->links() }}
+    </div>
+      
     </div>
   </section>
 @endsection

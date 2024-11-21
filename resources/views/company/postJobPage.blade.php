@@ -147,30 +147,47 @@
 
             <h3 class="text-black my-5 border-bottom pb-2">Chi tiết Công ty</h3>
             <div class="form-group">
-              <label for="company-name">Tên công ty</label>
-              <input type="text" name="name" class="form-control input-field" data-require="Mời nhập tên công ty" id="company-name" placeholder="Nhập tên công ty">
+              <label for="select-company">Chọn công ty đã tạo</label>
+              <select class="form-control selectpicker" id="select-company" data-live-search="true" title="Chọn công ty cũ">
+                  <option value="">Tạo công ty mới</option>
+                  @foreach($companies as $company)
+                      <option value="{{ $company->id }}" 
+                          data-name="{{ $company->name }}" 
+                          data-phone="{{ $company->phone_number }}" 
+                          data-description="{{ $company->description }}" 
+                          data-website="{{ $company->website }}" 
+                          data-logo="{{ $company->thumb }}">
+                          {{ $company->name }}
+                      </option>
+                  @endforeach
+              </select>
             </div>
-
-            <div class="form-group">
-                <label for="company-phone">Số điện thoại</label>
-                <input type="text" name="phone_number" class="form-control input-field" data-require="Mời nhập số điện thoại" id="company-phone" placeholder="Nhập số điện thoại">
-            </div>
-            
-            <div class="form-group">
-              <label for="company-description">Mô tả công ty</label>
-              <div class="editor descriptionCompanyContent" data-require="Mời nhập mô tả công ty" id="editor-2">
-                <p>Mô tả</p>
+            <div id="new-company-form">
+              <div class="form-group">
+                  <label for="company-name">Tên công ty</label>
+                  <input type="text" name="name" class="form-control input-field" id="company-name" placeholder="Nhập tên công ty">
               </div>
-            </div>
-            <div class="form-group">
-              <label for="company-website">Website</label>
-              <input type="text" name="website" class="form-control"  id="company-website" placeholder="https://">
-            </div>
-
-            <div class="form-group">
-                <label class='form-label' for='file-input-thumb_company'>Logo</label>
-                <input type="file" name="thumb-company" class="file-input" id="file-input-thumb_company" multiple onchange="previewImages(event, 'image-preview-thumb_company')">
-                <div class="image-preview" id="image-preview-thumb_company"></div>
+          
+              <div class="form-group">
+                  <label for="company-phone">Số điện thoại</label>
+                  <input type="text" name="phone_number" class="form-control input-field" id="company-phone" placeholder="Nhập số điện thoại">
+              </div>
+          
+              <div class="form-group">
+                  <label for="company-description">Mô tả công ty</label>
+                  <textarea name="description" class="form-control input-field" id="company-description" placeholder="Nhập mô tả công ty"></textarea>
+              </div>
+          
+              <div class="form-group">
+                  <label for="company-website">Website</label>
+                  <input type="text" name="website" class="form-control" id="company-website" placeholder="https://">
+              </div>
+          
+              <div class="form-group">
+                  <label class='form-label' for='file-input-thumb_company'>Logo</label>
+                  <input type="file" name="thumb-company" class="file-input" id="file-input-thumb_company" multiple>
+                  <div class="image-preview" id="image-preview-thumb_company"></div>
+              </div>
             </div>
             <div class="row align-items-center mb-5">
                 <div class="col-lg-4 ml-auto">
@@ -190,6 +207,34 @@
   </section>
 <script>
     $(document).ready(function(){
+      $('#select-company').on('change', function () {
+          const selectedOption = $(this).find(':selected'); // Lấy option được chọn
+
+          if (selectedOption.val()) {
+              // Điền thông tin công ty đã chọn
+              $('#company-name').val(selectedOption.data('name'));
+              $('#company-phone').val(selectedOption.data('phone'));
+              $('#company-description').val(selectedOption.data('description'));
+              $('#company-website').val(selectedOption.data('website'));
+
+              // Hiển thị logo nếu có
+              const logo = selectedOption.data('logo');
+              if (logo) {
+                  $('#image-preview-thumb_company').html(
+                      `<img src="/temp/images/company/${logo}" class="img-fluid rounded" alt="Logo công ty">`
+                  );
+              }
+          } else {
+              // Xóa thông tin nếu chọn "Tạo công ty mới"
+              $('#company-name').val('');
+              $('#company-phone').val('');
+              $('#company-description').val('');
+              $('#company-website').val('');
+              $('#image-preview-thumb_company').html('');
+          }
+      });
+
+
         $('#addCategory').on('click', function(){
             $('.selectpicker').prop('disabled', true);
             $('.selectpicker').removeClass('input-field');

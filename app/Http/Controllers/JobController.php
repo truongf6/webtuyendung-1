@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use App\Models\Company;
-use App\Models\Application;
 use App\Models\Favourite;
+use App\Models\Application;
 use Illuminate\Support\Str;
+use App\Models\Job_Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -15,7 +17,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 class JobController extends Controller
 {
     use ValidatesRequests;
-
     public function jobList(Request $request)
     {
         $query = Job::query();
@@ -32,30 +33,40 @@ class JobController extends Controller
             });
         }
     
-        // Tìm kiếm theo địa chỉ
+        // Tìm kiếm theo địa chỉ công ty (Company->location)
         if ($request->filled('location')) {
-            $query->where('location', 'LIKE', '%' . $request->location . '%');
+            $query->whereHas('Company', function ($q) use ($request) {
+                $q->where('location', 'LIKE', '%' . $request->location . '%');
+            });
         }
     
         // Tìm kiếm theo danh mục công việc
         if ($request->filled('category')) {
             $query->whereHas('Category', function ($q) use ($request) {
-                $q->where('title', 'LIKE', '%' . $request->category . '%');
+                $q->where('id', $request->category);
             });
         }
     
         // Tìm kiếm theo loại hình công việc
         if ($request->filled('type')) {
-            $query->where('type', 'LIKE', '%' . $request->type . '%');
+            $query->where('type', $request->type);
         }
     
-        $Jobs = $query->orderByDesc("created_at")->paginate(20);
-        $count_job = $query->count();
-    
-        return view('job.jobList', compact('Jobs', 'count_job'), [
+        $Jobs = $query->orderByDesc('created_at')->paginate(10);
+        $count_job = $Jobs->total();
+        $categories = Job_Category::all();
+        $topCompanies = Job::select('company_id', DB::raw('COUNT(*) as job_count'))
+        ->groupBy('company_id')
+        ->orderByDesc('job_count')
+        ->with('company') // Eager load thông tin công ty
+        ->take(8)
+        ->get();
+        return view('job.jobList', compact('Jobs', 'count_job', 'categories','topCompanies'), [
             'title' => 'Danh sách tuyển dụng',
         ]);
     }
+    
+
     
 
     // Xem preview Bài đăng
@@ -89,8 +100,8 @@ class JobController extends Controller
         $hasApplyJob = Application::where('user_id', Auth::id())
             ->where('job_id', $job->id)
             ->first();
-    
-        return view('job.jobDetail', compact('job', 'user', 'company', 'hasApplyJob', 'favourite'), [
+        $job_referencts = Job::where('job_categories_id',$job->job_categories_id)->take(6)->get();
+        return view('job.jobDetail', compact('job', 'user', 'company', 'hasApplyJob', 'favourite','job_referencts'), [
             'title' => $job->title
         ]);
     }

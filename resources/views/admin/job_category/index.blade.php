@@ -51,7 +51,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="createcategoryLabel">Thêm mới Danh mục.</h1>
+                            <h1 class="modal-title fs-5 text-white" id="createcategoryLabel">Thêm mới Danh mục.</h1>
                         </div>
                         <div class="card-body">
                             <div class="error">
@@ -105,7 +105,7 @@
                                     <label class='form-label'
                                            for='basic-default-email'>Danh mục cha</label>
                                     <select name="parent_id" class="form-control" id="parent">
-                                        <option value="">Chọn quyền</option>
+                                        <option value="">Chọn danh mục cha</option>
                                         @foreach($parent_ids as $parent)
                                             <option value="{{ $parent->id }}">{{ $parent->title }}</option>
                                         @endforeach
@@ -152,7 +152,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5 text-wrap" id="deleteModal{{$category->id}}Label">Bạn có chắc chắn xóa Danh mục <b><u>{{$category->title}}</u></b>  không ?</h1>
+                                            <h1 class="modal-title fs-5 text-white text-wrap" id="deleteModal{{$category->id}}Label">Bạn có chắc chắn xóa Danh mục <b><u>{{$category->title}}</u></b>  không ?</h1>
                                         </div>
                                         <div class="modal-footer">
                                             <button class="delete-forever btn btn-danger" data-id="{{ $category->id }}">Xóa</button>
@@ -170,7 +170,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5 text-danger" id="createCategoryLabel"> </h1>
+                                <h1 class="modal-title fs-5 text-white text-danger" id="createCategoryLabel"> </h1>
                             </div>
                             <div class="card-body">
                                 <form method='post' action='' enctype="multipart/form-data" class="editCategoryForm form-edit" id="form_categoryAdmin_update">
@@ -219,7 +219,7 @@
                                         <label class='form-label'
                                                for='basic-default-email'>Danh mục cha</label>
                                         <select name="parent_id" class="form-control" id="edit-parent">
-                                            <option value="">Chọn quyền</option>
+                                            <option value="">Chọn danh mục cha</option>
                                             @foreach($parent_ids as $parent)
                                                 <option value="{{ $parent->id }}">{{ $parent->title }}</option>
                                             @endforeach

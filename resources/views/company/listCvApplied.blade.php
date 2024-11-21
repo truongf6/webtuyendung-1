@@ -46,7 +46,7 @@
                         <td>{{ $application->user->email }}</td>
                         <td>
                             @if ($application->fileCv)
-                                <a class=" font-weight-bold" href="{{ asset("storage/cvs/$application->fileCv") }}" target="_blank">Xem CV</a>
+                                <a class=" font-weight-bold" href="{{ asset("temp/cvs/$application->fileCv") }}" target="_blank">Xem CV</a>
                             @else
                                 Không có
                             @endif

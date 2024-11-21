@@ -26,16 +26,16 @@
   <section class="site-section" id="next-section">
     <div class="container">
       <div class="row">
-        <div class="col-lg-8 blog-content">
+        <div class="col-lg-12 blog-content">
           <h3 class="mb-4">{{$post->Title}}</h3>
-          <div class="post-thumbnils">
+          {{-- <div class="post-thumbnils">
             <img class="w-100" src="/temp/images/post/{{$post->thumb}}" alt="Ảnh của bài viết {{ $post->Title }}">
-        </div>
+        </div> --}}
             <div class="content-post">
                 {!! $post->content !!}
             </div>
         </div>
-        <div class="col-lg-4 sidebar pl-lg-5">
+        {{-- <div class="col-lg-4 sidebar pl-lg-5">
           <div class="sidebar-box">
             <form action="#" class="search-form">
               <div class="form-group">
@@ -67,7 +67,7 @@
             <h3>Đoạn văn</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
           </div>
-        </div>
+        </div> --}}
       </div>
     </div>
   </section>

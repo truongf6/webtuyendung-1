@@ -1,7 +1,7 @@
 <style>
-  .dropdown:hover .dropdown-menu {
+  /* .dropdown:hover .dropdown-menu {
     display: block;
-}
+} */
 
 .dropdown-menu {
     margin-top: 0; /* Để căn chỉnh menu không bị lệch */
@@ -15,13 +15,13 @@
 
         <nav class="mx-auto site-navigation">
           <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-            <li><a href="/" class="nav-link active">Trang chủ</a></li>
-            <li><a href="{{route('about')}}">Giới thiệu</a></li>
-            <li class="">
-              <a href="{{route('jobList')}}">Danh sách công việc</a>
+            <li class="" style="font-size:20px"><a href="/" class="nav-link active" style="padding: 12px !important">Trang chủ</a></li>
+            <li class="" style="font-size:20px"><a href="{{route('about')}}" style="padding: 12px !important">Giới thiệu</a></li>
+            <li class="" style="font-size:20px">
+              <a href="{{route('jobList')}}" style="padding: 12px !important">Danh sách công việc</a>
             </li>
-            <li><a href="{{route('listPost')}}">Bài viết</a></li>
-            <li><a href="{{route('contact')}}">Liên hệ</a></li>
+            <li class="" style="font-size:20px"><a href="{{route('listPost')}}" style="padding: 12px !important">Bài viết</a></li>
+            <li class="" style="font-size:20px"><a href="{{route('contact')}}" style="padding: 12px !important">Liên hệ</a></li>
             @if(Auth::check() && Auth::user()->role_id != 3)
             <li class="d-lg-none"><a href="{{route('postJobPage')}}"><span class="mr-2">+</span> Đăng công việc</a></li>
             @endif
@@ -41,7 +41,7 @@
                   
                   <!-- Modal -->
                   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog" role="document" style="max-width:720px">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="exampleModalLabel">Nạp tiền vào tài khoản - ( Số dư: @if(Auth::user()->money === null) 0đ @else <span class="money">{{ number_format(Auth::user()->money, 0, ',', '.') }} đ</span> @endif )</h5>

@@ -32,7 +32,7 @@
                 <div class="col-lg-12">
                     <table class="table table-hover">
                         <thead>
-                            <tr>
+                            <tr class="text-nowrap">
                                 <th>STT</th>
                                 <th>Tiêu đề công việc</th>
                                 <th>Hình ảnh</th>
@@ -53,13 +53,13 @@
                                     <td>{{ $job->position }}</td>
                                     <td>{{ $job->location ?? '' }}</td>
                                     <td>{{ $job->type }}</td>
-                                    <td class="">
+                                    <td class="text-nowrap">
                                         <a href="{{ route('jobDetail', $job->slug) }}" type="button"
                                             class="btn btn-danger btnDeleteAsk px-2 me-2 py-1 fw-bolder"
                                             data-bs-toggle="modal" data-bs-target="#modalDetail{{ $job->id }}">Chi
                                             tiết</a>
                                         <a href="{{ route('viewJobPageEdit', $job->slug) }}" type="button"
-                                            class="btn btn-danger btnDeleteAsk px-2 me-2 py-1 fw-bolder"
+                                            class="btn btn-warning btnDeleteAsk px-2 me-2 py-1 fw-bolder"
                                             data-bs-toggle="modal"
                                             data-bs-target="#modalDetail{{ $job->id }}">edit</a>
                                             <a href="{{ route('jobApplications', $job->id) }}" class="btn btn-info px-2 py-1">Đơn được nạp</a>

@@ -38,7 +38,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="createuserLabel">Thêm mới người dùng.</h1>
+                            <h1 class="modal-title fs-5 text-white" id="createuserLabel">Thêm mới người dùng.</h1>
                         </div>
                         <div class="card-body">
                             <div class="error">
@@ -128,7 +128,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5 text-wrap" id="deleteModal{{$user->id}}Label">Bạn có chắc chắn xóa người dùng <b><u>{{$user->name}}</u></b>  không ?</h1>
+                                            <h1 class="modal-title fs-5 text-white text-wrap" id="deleteModal{{$user->id}}Label">Bạn có chắc chắn xóa người dùng <b><u>{{$user->name}}</u></b>  không ?</h1>
                                         </div>
                                         <div class="modal-footer">
                                             <button class="delete-forever btn btn-danger" data-id="{{ $user->id }}">Xóa</button>
@@ -146,7 +146,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5 text-danger" id="createUserLabel"> </h1>
+                                <h1 class="modal-title fs-5 text-white text-danger" id="createUserLabel"> </h1>
                             </div>
                             <div class="card-body">
                                 <form method='post' action='' enctype="multipart/form-data" class="editUserForm form-edit" id="form_userAdmin_update">

@@ -159,7 +159,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="deleteModal{{$post->id}}Label">Bạn có chắc chắn xóa bản ghi này vĩnh viễn không ?</h1>
+                                            <h1 class="modal-title fs-5 text-white" id="deleteModal{{$post->id}}Label">Bạn có chắc chắn xóa bản ghi này vĩnh viễn không ?</h1>
                                         </div>
                                         <div class="modal-footer">
                                             <form action="{{route('posts.destroy',['post' => $post])}}" method="post">
@@ -187,7 +187,7 @@
                         <div class="modal-dialog" style="max-width: 1440px">
                             <div class="modal-content">
                                 <div class="modal-header border-bottom">
-                                    <h1 class="modal-title fs-5" id="createPostLabel">Chỉnh sửa bài viết.</h1>
+                                    <h1 class="modal-title fs-5 text-white" id="createPostLabel">Chỉnh sửa bài viết.</h1>
                                 </div>
                                 <div class="nav mt-3 d-flex justify-content-center" id="{{$post->id}}-nav-tab" role="tablist">
                                     <button class="nav-link text-uppercase border-0 bg-white fw-bold active me-3" id="basic-info-{{$post->id}}-tab" data-bs-toggle="tab" data-bs-target="#basic-info-{{$post->id}}" type="button" role="tab" aria-controls="basic-info-{{$post->id}}" aria-selected="true">Thông tin cơ bản</button>

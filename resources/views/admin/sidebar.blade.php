@@ -71,7 +71,7 @@
         </li>
         <li class='menu-item'>
             <a href='{{route('applications.index')}}' class='menu-link'>
-                <i class='menu-icon tf-icons bx bx-news'></i>
+                <i class='menu-icon tf-icons bx bx-street-view'></i>
                 <div data-i18n='Layouts'>Quản lý đơn đã ứng tuyển</div>
             </a>
         </li>
@@ -87,23 +87,9 @@
         </li>
         <li class='menu-item'>
             <a href='{{route('feedbacks.index')}}' class='menu-link'>
-                <i class='menu-icon tf-icons bx bx-news'></i>
+                <i class="menu-icon tf-icons bx bx-comment-detail"></i>
                 <div data-i18n='Layouts'>Quản lý phản hồi</div>
             </a>
-        </li>
-        <li class='menu-item'>
-            <a href='' class='menu-link menu-toggle'>
-                <i class='menu-icon tf-icons bx bx-street-view'></i>
-                <div data-i18n='Layouts'>Quản lý địa chỉ</div>
-            </a>
-            <ul class='menu-sub'>
-                <li class='menu-item'>
-                    <a href='' class='menu-link'>
-                        <div data-i18n='Without menu'>Danh sách địa chỉ</div>
-                    </a>
-                </li>
-
-            </ul>
         </li>
         <li class='menu-item'>
             <a href='{{route('doanhthu.index')}}' class='menu-link'>

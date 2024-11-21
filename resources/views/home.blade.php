@@ -1,6 +1,6 @@
 @extends('layout.layout')
 @section('content')
-<section class="home-section section-hero overlay bg-image" style="background-image: url('/temp/assets/images/hero_1.jpg');" id="home-section">
+<section class="home-section section-hero overlay bg-image" style="background-image: url('/temp/assets/images/hero_1.jpg'); z-index: 999;" id="home-section">
 
   <div class="container">
     <div class="row align-items-center justify-content-center">
@@ -9,47 +9,52 @@
           <h1 class="text-white font-weight-bold">Cách Dễ Nhất Để Đạt Được Công Việc Mơ Ước</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur perferendis.</p>
         </div>
-        <form method="post" class="search-jobs-form">
+        <form method="GET" class="search-jobs-form" action="{{ route('jobList') }}">
           <div class="row mb-5">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-              <input type="text" class="form-control form-control-lg" placeholder="Tiêu đề công việc, Công ty...">
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-              <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Chọn khu vực">
-                <option>Bất kỳ nơi nào</option>
-                <option>San Francisco</option>
-                <option>Palo Alto</option>
-                <option>New York</option>
-                <option>Manhattan</option>
-                <option>Ontario</option>
-                <option>Toronto</option>
-                <option>Kansas</option>
-                <option>Mountain View</option>
-              </select>
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-              <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Chọn loại hình công việc">
-                <option>Bán thời gian</option>
-                <option>Toàn thời gian</option>
-              </select>
-            </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-              <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search">
-                <span class="icon-search icon mr-2"></span>Tìm công việc
-              </button>
-            </div>
+              <!-- Tiêu đề công việc -->
+              <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <input type="text" name="title" class="form-control form-control-lg" placeholder="Tiêu đề công việc" value="{{ request()->title }}">
+              </div>
+      
+              <!-- Tên công ty -->
+              <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <input type="text" name="company" class="form-control form-control-lg" placeholder="Tên công ty" value="{{ request()->company }}">
+              </div>
+      
+              <!-- Địa chỉ -->
+              <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <input type="text" name="location" class="form-control form-control-lg" placeholder="Địa chỉ" value="{{ request()->location }}">
+              </div>
+      
+              <!-- Danh mục công việc -->
+              <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <select class="selectpicker" name="category" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Chọn danh mục">
+                      <option value="">Tất cả danh mục</option>
+                      @foreach($categories as $cate)
+                          <option value="{{ $cate->id }}" {{ request()->category == $cate->id ? 'selected' : '' }}>{{ $cate->title }}</option>
+                      @endforeach
+                  </select>
+              </div>
+      
+              <!-- Loại hình công việc -->
+              <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <select class="selectpicker" name="type" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Chọn loại hình công việc">
+                      <option value="">Tất cả loại hình</option>
+                      <option value="Part Time" {{ request()->type == 'Part Time' ? 'selected' : '' }}>Part Time</option>
+                      <option value="Full Time" {{ request()->type == 'Full Time' ? 'selected' : '' }}>Full Time</option>
+                      <option value="Freelance" {{ request()->type == 'Freelance' ? 'selected' : '' }}>Freelance</option>
+                  </select>
+              </div>
+      
+              <!-- Nút tìm kiếm -->
+              <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                  <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search">
+                      <span class="icon-search icon mr-2"></span>Tìm kiếm
+                  </button>
+              </div>
           </div>
-          <div class="row">
-            <div class="col-md-12 popular-keywords">
-              <h3>Từ Khóa Nổi Bật:</h3>
-              <ul class="keywords list-unstyled m-0 p-0">
-                <li><a href="#" class="">UI Designer</a></li>
-                <li><a href="#" class="">Python</a></li>
-                <li><a href="#" class="">Developer</a></li>
-              </ul>
-            </div>
-          </div>
-        </form>
+      </form>
+      
       </div>
     </div>
   </div>
@@ -119,11 +124,11 @@
         @foreach($Jobs as $job)
        <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
         <a href="{{ route('jobDetail', $job->slug) }}"></a>
-        <div class="job-listing-logo">
+        <div class="job-listing-logo text-center d-flex align-items-center justify-content-center" style="width:150px; height:150px">
             <img src="{{ asset("temp/images/company/" . $job->Company->thumb) }}" alt="Image" class="img-fluid">
         </div>
 
-        <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+        <div class="job-listing-about d-flex align-items-center py-2 d-sm-flex custom-width w-100 justify-content-between mx-4">
           <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
             <h2>{{$job->title}}</h2>
             <strong>{{$job->Company->name}}</strong>
@@ -161,7 +166,7 @@
 </section>
 
   
-  <section class="site-section py-4">
+  <section class="site-section">
     <div class="container">
 
       <div class="row align-items-center">
@@ -185,22 +190,8 @@
   </section>
 
 
-  <section class="bg-light py-5 testimony-full">
-      
-    <h1 class="text-center font-weight-bold my-4">Các bài viết nỏi bật</h1>
-    <div class="owl-carousel single-carousel">
-        @foreach($listPosts as $item)
-            <div class="p-4">
-                <a href="{{ route('detailPost', $item->slug) }}"><img src="{{ asset("temp/images/post/" . $item->thumb) }}" alt="Hình ảnh bài viết" class="img-fluid rounded mb-4"></a>
-                <h3><a href="{{ route('detailPost', $item->slug) }}" class="text-black">{{$item->Title}}</a></h3>
-                <div>{{$item->created_at}} <span class="mx-2">|</span> <a href="#">2 Bình luận</a></div>
-            </div>
-        @endforeach
-    </div>
 
-</section>
-
-  <section class="pt-5 bg-image overlay-primary fixed overlay" style="background-image: url('/temp/assets/images/hero_1.jpg');">
+  <section class="pt-5 bg-image overlay-primary fixed overlay " style="background-image: url('/temp/assets/images/hero_1.jpg');">
     <div class="container">
       <div class="row">
         <div class="col-md-6 align-self-center text-center text-md-left mb-5 mb-md-0">
@@ -218,4 +209,18 @@
     </div>
   </section>
   
+  <section class="bg-light testimony-full  site-section">
+      
+    <h1 class="text-center font-weight-bold my-4">Các bài viết nổi bật</h1>
+    <div class="owl-carousel single-carousel">
+        @foreach($listPosts as $item)
+            <div class="p-4">
+                <a href="{{ route('detailPost', $item->slug) }}"><img src="{{ asset("temp/images/post/" . $item->thumb) }}" alt="Hình ảnh bài viết" class="img-fluid rounded m-0 mb-2"></a>
+                <h3><a href="{{ route('detailPost', $item->slug) }}" class="text-black">{{$item->Title}}</a></h3>
+                <div>{{$item->created_at}} <span class="mx-2">|</span> <a href="#">2 Bình luận</a></div>
+            </div>
+        @endforeach
+    </div>
+
+</section>
 @endsection
