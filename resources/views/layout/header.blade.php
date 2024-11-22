@@ -14,21 +14,46 @@
         <div class="site-logo col-6"><a href="/">Web tuyển dụng</a></div>
 
         <nav class="mx-auto site-navigation">
-          <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-            <li class="" style="font-size:20px"><a href="/" class="nav-link active" style="padding: 12px !important">Trang chủ</a></li>
-            <li class="" style="font-size:20px"><a href="{{route('about')}}" style="padding: 12px !important">Giới thiệu</a></li>
-            <li class="" style="font-size:20px">
+          <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0 font-weight-bold">
+            <li class="" style="font-size:17px"><a href="/" class="nav-link active" style="padding: 12px !important">Trang chủ</a></li>
+            <li class="" style="font-size:17px"><a href="{{route('about')}}" style="padding: 12px !important">Giới thiệu</a></li>
+            <li class="" style="font-size:17px">
               <a href="{{route('jobList')}}" style="padding: 12px !important">Danh sách công việc</a>
             </li>
-            <li class="" style="font-size:20px"><a href="{{route('listPost')}}" style="padding: 12px !important">Bài viết</a></li>
-            <li class="" style="font-size:20px"><a href="{{route('contact')}}" style="padding: 12px !important">Liên hệ</a></li>
+            <li class="" style="font-size:17px"><a href="{{route('listPost')}}" style="padding: 12px !important">Bài viết</a></li>
+            <li class="" style="font-size:17px"><a href="{{route('contact')}}" style="padding: 12px !important">Liên hệ</a></li>
             @if(Auth::check() && Auth::user()->role_id != 3)
             <li class="d-lg-none"><a href="{{route('postJobPage')}}"><span class="mr-2">+</span> Đăng công việc</a></li>
             @endif
             <li class="d-lg-none"><a href="{{route('showLogin')}}">Đăng nhập</a></li>
           </ul>
         </nav>
-        
+        <!-- Modal Thông báo -->
+        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content text-dark">
+              <div class="modal-header">
+                <h5 class="modal-title" id="infoModalLabel">Thông báo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                @if($newAppliedCv)
+                  @foreach($newAppliedCv as $item)
+                  <a href="{{ route('jobApplications', $item->job_id) }}" class="text-dark">
+                    <i class="font-weight-bold">{{$item->created_at}}</i>
+                    <p class="border-bottom pb-3">Người dùng <b><u>{{ $item->user->name }}</u></b> đã ứng tuyển công việc <b><u>{{ $item->job->title }}</u></b> trên website.</p>
+                  </a>
+                  @endforeach
+                @endif
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="right-cta-menu text-right d-flex align-items-center col-6">
           <div class="ml-auto d-flex align-items-center">
               @if(Auth::check())
@@ -88,13 +113,17 @@
                 @else
                   <a href="#" class="btn btn-primary border-width-2 d-none d-lg-inline-block mr-3 dropdown-toggle"
                       id="personalMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="badge badge-danger rounded-circle position-absolute d-flex align-items-center justify-content-center" style="right:5%; top:-20%; width:25px; font-size:16px">{{$count_newAppliedCv}}</span>
                       {{Auth::user()->name}} - @if(Auth::user()->money === null) 0đ @else <span class="money">{{ number_format(Auth::user()->money, 0, ',', '.') }} đ</span> @endif
                     </a>
                 @endif
                   <div class="dropdown-menu text-center" aria-labelledby="personalMenu">
                       <a class="dropdown-item" href="{{route('profile')}}">Thông tin cá nhân</a>
+
+ 
                       <a class="dropdown-item" href="{{route('changePassword')}}">Đổi mật khẩu</a>
                         @if(Auth::user()->role_id != 3)
+                        <button type="button" class="btn dropdown-item d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#infoModal">Thông báo<span class="badge ml-2 badge-danger rounded-circle d-flex align-items-center justify-content-center" style="width:25px ;font-size:16px">{{$count_newAppliedCv}}</span></button>
                         <a class="dropdown-item" href="{{route('viewJobPage')}}">Công việc đã Đăng</a>
                         @else
                         <a class="dropdown-item" href="{{route('CvApplied')}}">Công việc đã ứng tuyển</a>

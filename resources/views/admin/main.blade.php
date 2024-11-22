@@ -5,9 +5,9 @@
 ==============================================================
 
 * Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
-* Created by: ThemeSelection
+* Created by: Biện Đan Trường
 * License: You must have a valid license purchased in order to legally use the theme for your project.
-* Copyright ThemeSelection (https://themeselection.com)
+* Copyright Biện Đan Trường (https://themeselection.com)
 
 =========================================================
  -->
@@ -85,7 +85,7 @@
                                             </div>
                                             <div class="flex-grow-1">
                                                 <span class="fw-semibold d-block"></span>
-                                                <small class="text-muted">CHưa có</small>
+                                                <small class="text-muted">@if(Auth::check()) {{Auth::user()->name}} @else Chưa có @endif</small>
                                             </div>
                                         </div>
                                     </a>
@@ -118,7 +118,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <form action="" method="post" class="logout">
+                                    <form action="{{route('logout')}}" method="post" class="logout">
                                         @csrf
                                         <button type="submit" class="dropdown-item fw-bold">
                                             <i class="lni lni-enter"></i>

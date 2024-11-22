@@ -111,19 +111,19 @@
                             <div class="form-group d-block col-4">
                               <label for="inputFullname" class="col-form-label">Tên đầy đủ</label>
                               <div class="">
-                                <input type="text" data-require="Vui lòng nhập tên đầy đủ!" value="{{$job->User->name}}" class="form-control input-field" name="name" id="inputFullname" placeholder="Fullname">
+                                <input type="text" data-require="Vui lòng nhập tên đầy đủ!" value="{{Auth::user()->name}}" class="form-control input-field" name="name" id="inputFullname" placeholder="Fullname">
                               </div>
                             </div>
                             <div class="form-group d-block col-4">
                               <label for="inputPhoneNumber" class="col-form-label">Số điện thoại</label>
                               <div class="">
-                                <input type="text" data-require="Vui lòng nhập số điện thoại!" value="{{$job->User->phone_number}}" class="form-control input-field" name="phone_number" id="inputPhoneNumber" placeholder="PhoneNumber">
+                                <input type="text" data-require="Vui lòng nhập số điện thoại!" value="{{Auth::user()->phone_number}}" class="form-control input-field" name="phone_number" id="inputPhoneNumber" placeholder="PhoneNumber">
                               </div>
                             </div>
                             <div class="form-group d-block col-4">
                               <label for="inputEmail" class="col-form-label">Email</label>
                               <div class="">
-                                <input type="email" disabled value="{{$job->User->email}}" class="form-control input-field" name="email" id="inputEmail" placeholder="Email">
+                                <input type="email" disabled value="{{Auth::user()->email}}" class="form-control input-field" name="email" id="inputEmail" placeholder="Email">
                               </div>
                             </div>
                           </div>
@@ -151,7 +151,7 @@
               </div>
             @endif
           @else
-              @if($job->user_id == Auth::user()->id)
+              @if(Auth::check() && $job->user_id == Auth::user()->id)
                 <div class="col-6">
                   <a href="{{ route('viewJobPageEdit', $job->slug) }}" class="btn btn-block btn-light btn-md">Sửa</a>
                 </div>

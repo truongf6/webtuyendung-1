@@ -24,7 +24,6 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . Auth::user()->id,
             'phone_number' => 'nullable|string|max:15',
-            'thumb' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048', // Kiểm tra ảnh
         ]);
 
         // Lấy người dùng hiện tại

@@ -271,7 +271,7 @@
                         href='https://themeselection.com'
                         target='_blank'
                         class='footer-link fw-bolder'
-                    >ThemeSelection</a>
+                    >Biện Đan Trường</a>
                 </div>
                 <div>
                     <a

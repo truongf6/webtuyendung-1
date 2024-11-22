@@ -62,16 +62,16 @@
                                 @endif
                             @endif
                         </td>
-                        <td>
+                        <td class="">
                             @if($application->status === null)
 
-                                <button class="btn btn-success btn-sm btnApprove" data-id="{{ $application->id }}">Duyệt</button>
-                                <button class="btn btn-danger btn-sm btnReject" data-id="{{ $application->id }}">Hủy</button>                       
+                                <button class="btn btn-success btn-sm btnApprove font-weight-bold" data-id="{{ $application->id }}">Duyệt</button>
+                                <button class="btn btn-danger btn-sm btnReject font-weight-bold" data-id="{{ $application->id }}">Hủy</button>                       
                             @else
                                 @if ($application->status === 0)
-                                    <button class="btn btn-success btn-sm btnApprove" data-id="{{ $application->id }}">Duyệt lại</button>
+                                    <button class="btn btn-success btn-sm btnApprove font-weight-bold" data-id="{{ $application->id }}">Duyệt lại</button>
                                 @elseif ($application->status === 1)
-                                <button class="btn btn-success btn-sm btnApprove" data-id="{{ $application->id }}">Bỏ duyệt</button>
+                                <button class="btn btn-danger btn-sm btnReject font-weight-bold" data-id="{{ $application->id }}">Hủy</button>                       
                                 @endif
                             @endif
                         </td>
