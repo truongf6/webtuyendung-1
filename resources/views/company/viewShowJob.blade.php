@@ -46,9 +46,9 @@
                             @foreach ($Jobs as $job)
                                 <tr data-id="{{ $job->id }}">
                                     <td> {{ $loop->iteration }}</td>
-                                    <td>{{ $job->title }}</td>
+                                    <td>{{ $job->title }}</td> 
                                     <td><img src="{{ asset("temp/images/job/$job->thumb") }}"
-                                            alt="{{ $job->title }}" srcset="{{ $job->title }}" width="90px"
+                                            alt="{{ $job->title }}" width="90px"
                                             height="90px"></td>
                                     <td>{{ $job->position }}</td>
                                     <td>{{ $job->location ?? '' }}</td>

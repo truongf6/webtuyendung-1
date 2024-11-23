@@ -23,31 +23,31 @@
                             <input class="form-control shadow-none" type="text" name="search_poster"
                                 placeholder="Tìm theo tên người đăng" value="{{ request()->search_poster }}">
                         </div>
-            
+
                         <!-- Tìm kiếm theo tên công ty -->
                         <div class="col-lg-4 col-sm-6 col-12 mb-3">
                             <input class="form-control shadow-none" type="text" name="search_company"
                                 placeholder="Tìm theo tên công ty" value="{{ request()->search_company }}">
                         </div>
-            
+
                         <!-- Tìm kiếm theo tiêu đề công việc -->
                         <div class="col-lg-4 col-sm-6 col-12 mb-3">
                             <input class="form-control shadow-none" type="text" name="search_title"
                                 placeholder="Tìm theo tiêu đề công việc" value="{{ request()->search_title }}">
                         </div>
-            
+
                         <!-- Tìm kiếm theo vị trí -->
                         <div class="col-lg-4 col-sm-6 col-12 mb-3">
                             <input class="form-control shadow-none" type="text" name="search_position"
                                 placeholder="Tìm theo vị trí" value="{{ request()->search_position }}">
                         </div>
-            
+
                         <!-- Tìm kiếm theo địa chỉ -->
                         <div class="col-lg-4 col-sm-6 col-12 mb-3">
                             <input class="form-control shadow-none" type="text" name="search_location"
                                 placeholder="Tìm theo địa chỉ" value="{{ request()->search_location }}">
                         </div>
-            
+
                         <!-- Tìm kiếm theo kiểu làm việc -->
                         <div class="col-lg-4 col-sm-6 col-12 mb-3">
                             <select class="form-control shadow-none" name="search_type">
@@ -57,13 +57,13 @@
                                 <option value="Freelance" {{ request()->search_type == 'Freelance' ? 'selected' : '' }}>Freelance</option>
                             </select>
                         </div>
-            
+
                         <!-- Tìm kiếm theo thu nhập -->
                         <div class="col-lg-4 col-sm-6 col-12 mb-3">
                             <input class="form-control shadow-none" type="text" name="search_salary"
                                 placeholder="Tìm theo thu nhập" value="{{ request()->search_salary }}">
                         </div>
-            
+
                         <!-- Nút tìm kiếm và xóa lọc -->
                         <div class="col-lg-4 col-sm-6 col-12 mb-3">
                             <div class="text-center text-nowrap">
@@ -116,7 +116,7 @@
                                     <td>{{ $job->type }}</td>
                                     <td>{{ $job->salary }}</td>
                                     <td>{{ $job->created_at }}</td>
-                                    <td>{{ $job->Company->name }}</td>
+                                    <td>{{ $job->Company->name ?? " " }}</td>
                                     <td>
                                         <a href="{{ route('jobDetail', $job->slug) }}" class="btn btn-info px-2 py-1 text-dark fw-bold" target="_blank">Chi tiết</a>
                                     </td>
