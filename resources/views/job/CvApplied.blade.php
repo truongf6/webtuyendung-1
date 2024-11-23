@@ -43,7 +43,7 @@
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
-                        <tbody class="table-border-bottom-0 text-nowrap">
+                        <tbody class="table-border-bottom-0">
                             @foreach ($applications as $application)
                                 <tr data-id="{{ $application->Job->id }}">
                                     <td> {{ $loop->iteration }}</td>
@@ -75,7 +75,7 @@
                                     @endif --}}
                                     <td class="">
                                         <a href="{{ route('jobDetail', $application->Job->slug) }}" type="button"
-                                            class="btn btn-info btnDeleteAsk px-2 me-2 py-1 fw-bolder"
+                                            class="btn btn-info btnDeleteAsk px-2 me-2 py-1 fw-bolder text-nowrap"
                                             data-bs-toggle="modal" data-bs-target="#modalDetail{{ $application->Job->id }}">Chi
                                             tiết
                                         </a>

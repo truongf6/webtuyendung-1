@@ -4,6 +4,10 @@
     .cke_notifications_area{
         display: none !important;
     }
+    .desc p{
+        height: 200px;
+        overflow: hidden;
+    }
 </style>
     <div class="container-fluid flex-grow-1 container-p-y">
         <h3 class="fw-bold text-primary py-3 mb-4">{{$title}}</h3>
@@ -127,7 +131,7 @@
                                 <img width="100" src="/temp/images/post/{{$post->thumb}}" alt="{{ $post->title }}'s Avatar">
                             </td>
                             <td style="white-space: initial">{{$post->Title}}</td>
-                            <td style="white-space: initial">{!! $post->description !!}</td>
+                            <td class="desc" style="white-space: initial">{!! $post->description !!}</td>
                             <td>
                                 @if($post->active == 1)
                                     <i class='bx bxs-circle text-success'></i>

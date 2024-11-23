@@ -7,7 +7,7 @@
       <div class="col-md-12">
         <div class="mb-5 text-center">
           <h1 class="text-white font-weight-bold">Cách Dễ Nhất Để Đạt Được Công Việc Mơ Ước</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur perferendis.</p>
+          <p>Nơi tập trung hàng nghìn cơ hội việc làm, tạo sự kết nối giữa nhà tuyển dụng và ứng viên.</p>
         </div>
         <form method="GET" class="search-jobs-form" action="{{ route('jobList') }}">
           <div class="row mb-5">
@@ -15,17 +15,17 @@
               <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
                   <input type="text" name="title" class="form-control form-control-lg" placeholder="Tiêu đề công việc" value="{{ request()->title }}">
               </div>
-      
+
               <!-- Tên công ty -->
               <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
                   <input type="text" name="company" class="form-control form-control-lg" placeholder="Tên công ty" value="{{ request()->company }}">
               </div>
-      
+
               <!-- Địa chỉ -->
               <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
                   <input type="text" name="location" class="form-control form-control-lg" placeholder="Địa chỉ" value="{{ request()->location }}">
               </div>
-      
+
               <!-- Danh mục công việc -->
               <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
                   <select class="selectpicker" name="category" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Chọn danh mục">
@@ -35,7 +35,7 @@
                       @endforeach
                   </select>
               </div>
-      
+
               <!-- Loại hình công việc -->
               <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
                   <select class="selectpicker" name="type" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Chọn loại hình công việc">
@@ -45,7 +45,7 @@
                       <option value="Freelance" {{ request()->type == 'Freelance' ? 'selected' : '' }}>Freelance</option>
                   </select>
               </div>
-      
+
               <!-- Nút tìm kiếm -->
               <div class="col-12 col-sm-6 mt-3 col-md-6 col-lg-3 mb-4 mb-lg-0">
                   <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search">
@@ -54,18 +54,18 @@
               </div>
           </div>
       </form>
-      
+
       </div>
     </div>
   </div>
-  
+
 
     <a href="#next" class="scroll-button smoothscroll">
       <span class=" icon-keyboard_arrow_down"></span>
     </a>
 
   </section>
-  
+
   <section class="py-5 bg-image overlay-primary fixed overlay" id="next" style="background-image: url('/temp/assets/images/hero_1.jpg');">
     <div class="container">
       <div class="row mb-5 justify-content-center">
@@ -104,12 +104,12 @@
           <span class="caption">Công ty</span>
         </div>
 
-          
+
       </div>
     </div>
   </section>
 
-  
+
 
   <section class="site-section">
     <div class="container">
@@ -119,7 +119,7 @@
           <h2 class="section-title mb-2">Công việc mới nhất</h2>
         </div>
       </div>
-      
+
       <ul class="job-listings mb-5">
         @foreach($Jobs as $job)
        <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
@@ -144,7 +144,7 @@
             @endif
           </div>
         </div>
-        
+
       </li>
        @endforeach
       </ul>
@@ -165,7 +165,7 @@
     </div>
 </section>
 
-  
+
   <section class="site-section">
     <div class="container">
 
@@ -177,14 +177,14 @@
               <p class="lead">Mang đến giải pháp hiệu quả, hỗ trợ doanh nghiệp phát triển bền vững và đạt được mục tiêu tuyển dụng dễ dàng.</p>
             </div>
           </div>
-          
+
         </div>
         @foreach($company_hads as $company_had)
           <div class="col-6 col-lg-3 col-md-6 text-center mb-3">
             <img src="/temp/images/company/{{$company_had->thumb}}" alt="Image" class="img-fluid logo-1">
           </div>
         @endforeach
-        
+
       </div>
     </div>
   </section>
@@ -208,9 +208,9 @@
       </div>
     </div>
   </section>
-  
+
   <section class="bg-light testimony-full  site-section">
-      
+
     <h1 class="text-center font-weight-bold my-4">Các bài viết nổi bật</h1>
     <div class="owl-carousel single-carousel">
         @foreach($listPosts as $item)

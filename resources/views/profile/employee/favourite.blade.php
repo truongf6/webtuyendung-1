@@ -42,7 +42,7 @@
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
-                        <tbody class="table-border-bottom-0 text-nowrap">
+                        <tbody class="table-border-bottom-0">
                             @foreach ($favourites as $favourite)
                                 <tr data-id="{{ $favourite->Job->id }}">
                                     <td> {{ $loop->iteration }}</td>
@@ -56,7 +56,7 @@
                                     <td>{{ $favourite->Job->type }}</td>
                                     <td class="">
                                         <a href="{{ route('jobDetail', $favourite->Job->slug) }}" type="button"
-                                            class="btn btn-info btnDeleteAsk px-2 me-2 py-1 fw-bolder"
+                                            class="btn btn-info btnDeleteAsk px-2 me-2 py-1 fw-bolder text-nowrap"
                                             data-bs-toggle="modal" data-bs-target="#modalDetail{{ $favourite->Job->id }}">Chi
                                             tiết
                                         </a>
@@ -79,7 +79,7 @@
     <script>
         $('.remove-job-btn').on('click', function(e) {
             e.preventDefault();
-            
+
             let job_id = $(this).data('job-id');
 
             $.ajax({

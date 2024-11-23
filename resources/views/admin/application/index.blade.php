@@ -42,7 +42,7 @@
                 </div>
             </div>
         </form>
-        
+
 
         <!-- Bảng danh sách đơn ứng tuyển -->
         <div class="card mt-4">
@@ -73,7 +73,7 @@
 
                                 <!-- Ảnh người ứng tuyển -->
                                 <td>
-                                    <img width="40" height="40" src="/temp/images/avatar/{{$application->user->thumb}}">
+                                    <img width="40" height="40" src="/temp/images/avatar/{{$application->User->thumb}}">
                                 </td>
                                 <!-- Tên người ứng tuyển -->
                                 <td>{{ $application->user->name }}</td>
